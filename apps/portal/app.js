@@ -1,140 +1,221 @@
-// Powerteam Passport Portal Client Logic
-const API_BASE = "http://localhost:3001";
-const DEMO_CUSTOMER_ID = "CUST-DEMO-001";
-
-const catalogMock = [
+// Powerteam Passport Portal & Sovereign Web3 Experience
+const catalogItems = [
   {
     sku: "CEO-SUMMIT-2026-FTL",
     title: "CEO Success Summit — Fort Lauderdale",
+    date: "Aug 31, 2026 • 12:00 PM – 3:00 PM",
+    venue: "Le Méridien Dania Beach Hotel",
     creditPrice: 250,
     cashPrice: 250,
-    inventory: 100,
-    redeemableUntil: "2026-08-30T23:59:59-04:00",
-    refundPolicyId: "EVENT_STANDARD_V1",
-    pilotNotice: "Pilot redemption subject to confirmed event fulfillment."
-  }
-];
-
-let activityLogs = [
-  {
-    timestamp: "2026-08-28 16:00:00",
-    type: "CREDIT_PURCHASE",
-    ref: "STRIPE-PI-88990",
-    delta: "+2,500 Credits",
-    hash: "0x4a9b...71c2"
+    inventory: 18,
+    tag: "LIVE IN-PERSON",
+    description: "Executive scaling keynotes, VIP networking luncheon, and venture structuring masterclass with Bill Walsh."
   },
   {
-    timestamp: "2026-08-28 16:05:00",
-    type: "PASSPORT_MINT",
-    ref: "PTI-2026-000001",
-    delta: "Founder Tier",
-    hash: "0x91df...08aa"
+    sku: "DIGITAL-SUCCESS-2026-SEP",
+    title: "Digital Success Summit",
+    date: "Sep 7, 2026 • Full Day Stream",
+    venue: "Virtual Live Broadcast & AI Breakouts",
+    creditPrice: 99,
+    cashPrice: 99,
+    inventory: 850,
+    tag: "GLOBAL LIVESTREAM",
+    description: "Cutting-edge digital marketing, automated sales funnels, and AI agent automation for high-growth founders."
+  },
+  {
+    sku: "RAINMAKER-SUMMIT-2026-ORL",
+    title: "Rainmaker Business Summit — Orlando",
+    date: "Sep 18–20, 2026 • 3-Day Intensive",
+    venue: "Orlando Convention Center",
+    creditPrice: 495,
+    cashPrice: 495,
+    inventory: 45,
+    tag: "3-DAY IMMERSIVE",
+    description: "The flagship 3-day business transformation summit. Dealmaking, capital formation, and partnership masterminds."
+  },
+  {
+    sku: "ICON-SPEAKER-2026-ORL",
+    title: "Icon Speaker Accelerator Program",
+    date: "Sep 23, 2026 • Stage Masterclass",
+    venue: "Powerteam Mastery Studio & Stage",
+    creditPrice: 1500,
+    cashPrice: 1500,
+    inventory: 8,
+    tag: "STAGE CERTIFICATION",
+    description: "Get booked, keynote training, stage presence mastery, and direct promoter syndication credential."
   }
 ];
 
-function switchTab(tabId) {
-  document.querySelectorAll(".nav-item").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.tab === tabId);
-  });
-  document.querySelectorAll(".tab-pane").forEach(pane => {
-    pane.classList.toggle("active", pane.id === `tab-${tabId}`);
-  });
+let userState = {
+  walletConnected: true,
+  walletAddress: "0x4E57...Fa13",
+  passportId: "PTI-2026-000001",
+  tier: "Founder Pass",
+  creditBalance: 2500,
+  isSBTValid: true,
+};
 
-  const titles = {
-    home: "Member Dashboard",
-    explore: "Explore Service Catalog",
-    passport: "My Digital Passport",
-    activity: "Activity & Receipts",
-    support: "Support & Compliance Policy"
-  };
-  document.getElementById("page-title").innerText = titles[tabId] || "Member Dashboard";
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
 }
 
-document.querySelectorAll(".nav-item").forEach(btn => {
-  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
-});
+function updateUI() {
+  document.getElementById("card-credit-val").innerText = `${userState.creditBalance.toLocaleString()} PTI`;
+  document.getElementById("vault-display-bal").innerHTML = `${userState.creditBalance.toLocaleString()} <span class="vault-unit">CREDITS</span>`;
+  document.getElementById("card-member-id").innerText = userState.passportId;
+}
 
 function renderCatalog() {
-  const container = document.getElementById("catalog-list");
+  const container = document.getElementById("catalog-grid-dynamic");
   if (!container) return;
   container.innerHTML = "";
 
-  catalogMock.forEach(item => {
+  catalogItems.forEach(item => {
     const card = document.createElement("div");
-    card.className = "catalog-card";
+    card.className = "catalog-card-luxe";
     card.innerHTML = `
-      <h3>${item.title}</h3>
-      <p style="font-size: 0.85rem; color: #94a3b8;">${item.pilotNotice}</p>
-      <div class="catalog-meta">
-        <div>
-          <span style="font-size: 0.75rem; color: #94a3b8; display: block;">REDEMPTION PRICE</span>
-          <span class="price-tag">${item.creditPrice} Credits</span>
+      <div>
+        <div class="catalog-card-header">
+          <span class="cat-tag">${item.tag}</span>
+          <span style="font-size: 0.75rem; color: #94a3b8;">SKU: ${item.sku}</span>
         </div>
-        <div>
-          <span style="font-size: 0.75rem; color: #94a3b8; display: block;">INVENTORY</span>
-          <span style="font-weight: 600;">${item.inventory} Seats</span>
-        </div>
+        <h3>${item.title}</h3>
+        <div class="venue-line">📍 ${item.venue}</div>
+        <div class="venue-line" style="color: #60a5fa; font-weight: 500;">📅 ${item.date}</div>
+        <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin-bottom: 1.5rem;">${item.description}</p>
       </div>
-      <button class="btn btn-primary" style="width: 100%;" onclick="redeemCatalogItem('${item.sku}', ${item.creditPrice})">
-        Redeem with PTI Credits
-      </button>
+
+      <div>
+        <div class="price-strip">
+          <div>
+            <span style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 600; display: block;">Redemption Cost</span>
+            <span class="cost-credits">${item.creditPrice} PTI Credits</span>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.7rem; color: #94a3b8; display: block;">SEATS REMAINING</span>
+            <span class="seats-left">${item.inventory} Available</span>
+          </div>
+        </div>
+
+        <button class="btn btn-gold btn-full shadow-gold" onclick="redeemSummitItem('${item.sku}', ${item.creditPrice}, '${item.title}')">
+          Redeem with PTI Credits (${item.creditPrice})
+        </button>
+      </div>
     `;
     container.appendChild(card);
   });
 }
 
-function renderActivity() {
-  const tbody = document.getElementById("activity-table-body");
-  if (!tbody) return;
-  tbody.innerHTML = "";
-
-  activityLogs.forEach(log => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${log.timestamp}</td>
-      <td><strong>${log.type}</strong></td>
-      <td>${log.ref}</td>
-      <td style="color: #10b981;">${log.delta}</td>
-      <td><code>${log.hash}</code></td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-async function redeemCatalogItem(sku, cost) {
-  const conf = confirm(`Redeem ${cost} PTI Credits for ${sku}?`);
-  if (!conf) return;
-
-  const currentBalEl = document.getElementById("home-credit-bal");
-  const current = parseInt(currentBalEl.innerText.replace(/[^0-9]/g, "")) || 2500;
-
-  if (current < cost) {
-    alert("Insufficient credit balance!");
+function redeemSummitItem(sku, creditCost, title) {
+  if (userState.creditBalance < creditCost) {
+    alert(`Insufficient Credit Balance!\n\nYou have ${userState.creditBalance} credits available. ${title} requires ${creditCost} credits.\n\nClick '+ Top Up Credits' to add credits via Stripe or Crypto.`);
     return;
   }
 
-  const newBal = current - cost;
-  currentBalEl.innerHTML = `${newBal.toLocaleString()} <span class="unit">Credits</span>`;
+  const confirmMsg = `Confirm Redemption:\n\nEvent: ${title}\nSKU: ${sku}\nCost: ${creditCost} PTI Credits ($${creditCost} USD Value)\n\nUpon confirmation, 1 ticket entitlement will be created and recorded on your dual-state audit ledger.`;
+  if (!confirm(confirmMsg)) return;
 
-  activityLogs.unshift({
-    timestamp: new Date().toISOString().replace("T", " ").substring(0, 19),
-    type: "CREDIT_REDEMPTION",
-    ref: sku,
-    delta: `-${cost} Credits`,
-    hash: "0x" + Math.random().toString(16).substring(2, 10) + "...proof"
-  });
+  userState.creditBalance -= creditCost;
+  updateUI();
 
-  renderActivity();
-  alert(`✅ Successfully redeemed! Ticket entitlement created for ${sku}.`);
-  switchTab("activity");
+  alert(`🎉 SUCCESSFUL REDEMPTION!\n\nYour VIP seat for "${title}" has been confirmed.\nTicket ID: TKT-${Math.random().toString(16).substring(2, 10).toUpperCase()}\n\nPresent your Digital QR Passport at the venue registration desk for immediate check-in.`);
 }
 
-function triggerRecoveryModal() {
-  alert("Initiating Account Recovery Workflow:\n\n1. Identity verification challenge sent to primary email.\n2. Upon confirmation, the 2-of-3 Safe multisig will revoke the compromised credential and reissue a replacement.\n\nSupport Ticket #REC-8840 opened.");
+function purchasePassportModal() {
+  const method = prompt("Select Activation Payment Method:\n1. Credit/Debit Card (Stripe USD)\n2. Apple Pay / Google Pay\n3. USDC / Crypto (Solana / EVM / XRPL)\n\nEnter 1, 2, or 3:", "1");
+  if (!method) return;
+
+  alert("Processing settled transaction through secure gateway...\n\nPayment settled! 2,500 PTI Service Credits added and Founder Soulbound Credential verified.");
+  userState.creditBalance += 2500;
+  updateUI();
 }
 
-// Initial render
+function openTopUpModal() {
+  const amount = prompt("Enter amount of PTI Credits to purchase ($1.00 USD per Credit):", "500");
+  const num = parseInt(amount);
+  if (!num || num <= 0) return;
+
+  alert(`Processing Stripe sandbox checkout for $${num}.00 USD...\n\nSettled! +${num} PTI Credits added to your vault balance.`);
+  userState.creditBalance += num;
+  updateUI();
+}
+
+function openLedgerHistoryModal() {
+  alert("📜 DUAL-STATE CRYPTOGRAPHIC LEDGER AUDIT:\n\n• Order #ORD-88912: +2,500 Credits (Stripe Settled)\n• Hash: 0x4E574939D460d284B5D990646D4aeaEF2D49Fa13\n• Status: RECONCILED CLEAN (0.00% Variance)\n• Safe Multisig Timelock: Active");
+}
+
+function showFullQRModal() {
+  const randToken = "CHK-ROT-" + Math.random().toString(16).substring(2, 14);
+  document.getElementById("qr-token-text").innerText = randToken;
+  document.getElementById("modal-qr").classList.add("active");
+}
+function closeQRModal() {
+  document.getElementById("modal-qr").classList.remove("active");
+}
+
+function openConciergeModal() {
+  document.getElementById("modal-concierge").classList.add("active");
+}
+function closeConciergeModal() {
+  document.getElementById("modal-concierge").classList.remove("active");
+}
+
+function sendConciergeMessage() {
+  const input = document.getElementById("concierge-input");
+  const text = input.value.trim();
+  if (!text) return;
+
+  const chatArea = document.getElementById("chat-messages");
+
+  // User bubble
+  const userB = document.createElement("div");
+  userB.className = "chat-bubble user";
+  userB.innerText = text;
+  chatArea.appendChild(userB);
+
+  input.value = "";
+
+  // AI response simulation
+  setTimeout(() => {
+    const aiB = document.createElement("div");
+    aiB.className = "chat-bubble ai";
+
+    const lower = text.toLowerCase();
+    if (lower.includes("ceo") || lower.includes("dania") || lower.includes("fort lauderdale")) {
+      aiB.innerText = "The CEO Success Summit in Fort Lauderdale is scheduled for August 31, 2026 at Le Méridien Dania Beach (12:00 PM – 3:00 PM). It requires 250 PTI Credits. You currently have " + userState.creditBalance + " credits available. Would you like me to guide your 1-click redemption?";
+    } else if (lower.includes("balance") || lower.includes("credit")) {
+      aiB.innerText = "Your active credit balance is " + userState.creditBalance + " PTI Credits ($" + userState.creditBalance + ".00 USD value). All credits apply 1:1 toward eligible summits and coaching programs.";
+    } else if (lower.includes("speaker") || lower.includes("icon")) {
+      aiB.innerText = "The Icon Speaker Accelerator Program in Orlando (Sep 23, 2026) offers full stage keynote training and speaker certification credentials for 1,500 PTI Credits.";
+    } else {
+      aiB.innerText = "As your Powerteam Concierge, I can assist with registering for the CEO Success Summit (Aug 31), Digital Summit (Sep 7), or Rainmaker Mastermind (Sep 18-20). What experience would you like to explore?";
+    }
+
+    chatArea.appendChild(aiB);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }, 400);
+}
+
+function toggleWalletConnect() {
+  alert(`Connected Web3 Passport:\n\nWallet: 0x4E574939D460d284B5D990646D4aeaEF2D49Fa13\nCredential: Founder SBT (Non-transferable)\nNetwork: Polygon / EVM Safe Multisig Anchor`);
+}
+
+// 3D Card mouse parallax effect
 document.addEventListener("DOMContentLoaded", () => {
   renderCatalog();
-  renderActivity();
+  updateUI();
+
+  const card = document.getElementById("passport-card");
+  if (card) {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `translateY(-8px) rotateX(${-y / 15}deg) rotateY(${x / 15}deg)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "translateY(0) rotateX(0) rotateY(0)";
+    });
+  }
 });

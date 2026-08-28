@@ -1,0 +1,12 @@
+name = "powert-portal"
+compatibility_date = "2026-08-28"
+pages_build_output_dir = "apps/portal"
+
+[vars]
+ENVIRONMENT = "production"
+API_BASE_URL = "https://powert-api.unykorn.ai"
+PILOT_RELEASE = "v0.1.0-passport-pilot"
+
+[routes]
+pattern = "powert.unykorn.ai/*"
+zone_name = "unykorn.ai"

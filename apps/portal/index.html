@@ -3,187 +3,358 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Powerteam Passport Portal — Pilot</title>
+  <title>Powerteam Passport — Executive Web3 Event & Membership Infrastructure</title>
+  <meta name="description" content="Powerteam International Web3 Passport & Credit System. Access CEO Success Summits, Rainmaker Masterminds, and certified speaker programs.">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <div class="app-container">
-    <!-- Navigation Sidebar -->
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="logo-badge">PTI</div>
-        <div>
-          <h2>Powerteam</h2>
-          <span class="subtext">Passport Pilot</span>
+<body class="theme-dark">
+  <!-- Background Glow & Grid Overlay -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Header Navigation -->
+  <header class="navbar-container">
+    <div class="navbar-wrapper">
+      <div class="brand-group">
+        <div class="brand-logo-hex">
+          <span class="gold-gradient-text">PTI</span>
+        </div>
+        <div class="brand-titles">
+          <div class="brand-name">POWERTEAM <span class="gold-accent">INTERNATIONAL</span></div>
+          <div class="brand-sub">Sovereign Web3 Access • powert.unykorn.ai</div>
         </div>
       </div>
 
-      <nav class="nav-menu">
-        <button class="nav-item active" data-tab="home">
-          <span class="nav-icon">🏠</span> Home
-        </button>
-        <button class="nav-item" data-tab="explore">
-          <span class="nav-icon">🧭</span> Explore Catalog
-        </button>
-        <button class="nav-item" data-tab="passport">
-          <span class="nav-icon">🪪</span> My Passport
-        </button>
-        <button class="nav-item" data-tab="activity">
-          <span class="nav-icon">📜</span> Activity & Logs
-        </button>
-        <button class="nav-item" data-tab="support">
-          <span class="nav-icon">🛡️</span> Support & Policy
-        </button>
+      <nav class="nav-links">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#passport-section" class="nav-link">Digital Passport</a>
+        <a href="#catalog-section" class="nav-link">Summits & Events</a>
+        <a href="#media-section" class="nav-link">Media & Keynotes</a>
+        <a href="#credits-section" class="nav-link">Credit Vault</a>
       </nav>
 
-      <div class="pilot-badge-box">
-        <span class="dot"></span>
-        <span>Pilot v0.1.0 Beta</span>
+      <div class="nav-actions">
+        <button class="btn btn-glass" id="btn-concierge" onclick="openConciergeModal()">
+          <span class="ai-sparkle">✨</span> AI Concierge
+        </button>
+        <button class="btn btn-gold" id="btn-connect-wallet" onclick="toggleWalletConnect()">
+          <span id="wallet-btn-text">Connect Passport</span>
+        </button>
       </div>
-    </aside>
+    </div>
+  </header>
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-      <!-- Header -->
-      <header class="top-header">
-        <div class="page-title-area">
-          <h1 id="page-title">Member Dashboard</h1>
-          <p id="page-desc">Manage your Powerteam Passport, prepaid credits, and upcoming summits.</p>
+  <!-- Hero Section with Background Video Integration -->
+  <section id="hero" class="hero-section">
+    <div class="video-container">
+      <video autoplay muted loop playsinline class="hero-video">
+        <source src="assets/miami_flamingos.mp4" type="video/mp4">
+        <source src="assets/video_hero.mp4" type="video/mp4">
+      </video>
+      <div class="video-scrim"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-pill">
+        <span class="live-pulse"></span>
+        <span>2026–2027 NATIONAL SUMMIT CALENDAR • LIVE ON-CHAIN ACCESS</span>
+      </div>
+
+      <h1 class="hero-title">
+        THE SOVEREIGN <br>
+        <span class="gold-gradient-text">EXECUTIVE PASSPORT</span>
+      </h1>
+
+      <p class="hero-description">
+        Tokenized real-world access to Powerteam International's flagship business summits, private mastermind cohorts, and certified speaker stages. Built for scale, backed by real deliverable services.
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="btn btn-gold btn-large shadow-gold" onclick="scrollToSection('passport-section')">
+          Claim Founder Passport — $2,500
+        </button>
+        <button class="btn btn-glass btn-large" onclick="scrollToSection('catalog-section')">
+          Explore Active Summits (4 Live)
+        </button>
+      </div>
+
+      <!-- Quick Ticker Stats -->
+      <div class="hero-stats-strip">
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Contractual Utility</div>
         </div>
-        <div class="member-chip">
-          <span class="member-tier-tag" id="header-tier">Founder Tier</span>
-          <span class="member-email" id="header-email">member@example.com</span>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+          <div class="stat-number">$1.00 USD</div>
+          <div class="stat-label">Fixed Credit Peg</div>
         </div>
-      </header>
-
-      <!-- Section: Home -->
-      <section id="tab-home" class="tab-pane active">
-        <div class="metrics-grid">
-          <div class="metric-card gold-card">
-            <span class="metric-label">Available Credit Balance</span>
-            <div class="metric-val" id="home-credit-bal">2,500 <span class="unit">Credits</span></div>
-            <span class="metric-sub">$1.00 USD equivalent value per credit</span>
-          </div>
-
-          <div class="metric-card">
-            <span class="metric-label">Passport Status</span>
-            <div class="metric-val status-active" id="home-passport-status">ACTIVE</div>
-            <span class="metric-sub" id="home-passport-expiry">Valid through Aug 28, 2027</span>
-          </div>
-
-          <div class="metric-card">
-            <span class="metric-label">Next Eligible Pilot Event</span>
-            <div class="metric-val event-name">CEO Success Summit</div>
-            <span class="metric-sub">Fort Lauderdale • Aug 30–31, 2026</span>
-          </div>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+          <div class="stat-number">100 VIP</div>
+          <div class="stat-label">Beta Cohort Cap</div>
         </div>
-
-        <div class="action-banner">
-          <div class="banner-text">
-            <h3>Redeem Your VIP Seat for CEO Success Summit</h3>
-            <p>Use 250 PTI Credits for full access including keynotes, VIP networking, and session materials.</p>
-          </div>
-          <button class="btn btn-primary" onclick="switchTab('explore')">View Catalog & Redeem</button>
+        <div class="stat-divider"></div>
+        <div class="stat-box">
+          <div class="stat-number">EVM / Safe</div>
+          <div class="stat-label">Multisig Secured</div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <!-- Section: Explore Catalog -->
-      <section id="tab-explore" class="tab-pane">
-        <div class="section-header">
-          <h2>Active Pilot Service Catalog</h2>
-          <p>Redeem your fixed-value credits for approved 2026 event inventory.</p>
-        </div>
-        <div class="catalog-grid" id="catalog-list">
-          <!-- Populated by app.js -->
-        </div>
-      </section>
+  <!-- 3D Holographic Passport Section -->
+  <section id="passport-section" class="section-container">
+    <div class="section-badge">MEMBERSHIP CREDENTIAL</div>
+    <h2 class="section-title">Your Non-Transferable <span class="gold-gradient-text">Digital Badge</span></h2>
+    <p class="section-subtitle">
+      Zero public PII on-chain. Cryptographically verified tier entitlements, VIP lounge fast-tracks, and permanent achievement proofs.
+    </p>
 
-      <!-- Section: My Passport -->
-      <section id="tab-passport" class="tab-pane">
-        <div class="passport-container">
-          <div class="digital-passport-card">
-            <div class="pass-header">
-              <div class="pass-logo">POWERTEAM PASSPORT</div>
-              <div class="pass-tier" id="pass-card-tier">FOUNDER PASS</div>
-            </div>
-            <div class="pass-body">
-              <div class="pass-row">
+    <div class="passport-showcase-grid">
+      <!-- 3D Card Display -->
+      <div class="passport-card-wrapper">
+        <div class="card-3d" id="passport-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-top">
+                <div class="card-logo-box">
+                  <div class="logo-circle">PTI</div>
+                  <div>
+                    <div class="card-sys-name">POWERTEAM PASSPORT</div>
+                    <div class="card-sub-name">UNYKORN SOVEREIGN WEB3</div>
+                  </div>
+                </div>
+                <div class="tier-pill-gold" id="card-tier-label">FOUNDER PASS</div>
+              </div>
+
+              <div class="card-chip-graphic">
+                <div class="sim-chip"></div>
+                <div class="hologram-seal">VERIFIED SBT</div>
+              </div>
+
+              <div class="card-details-grid">
                 <div>
-                  <span class="pass-lbl">CREDENTIAL ID</span>
-                  <span class="pass-val" id="pass-card-id">PTI-2026-000001</span>
+                  <div class="detail-label">MEMBER CREDENTIAL ID</div>
+                  <div class="detail-value text-mono" id="card-member-id">PTI-2026-000001</div>
                 </div>
                 <div>
-                  <span class="pass-lbl">STATUS</span>
-                  <span class="pass-val text-green" id="pass-card-status">ACTIVE</span>
+                  <div class="detail-label">CREDIT BALANCE</div>
+                  <div class="detail-value gold-text" id="card-credit-val">2,500 PTI</div>
+                </div>
+                <div>
+                  <div class="detail-label">STATUS</div>
+                  <div class="detail-value text-green">● ACTIVE</div>
+                </div>
+                <div>
+                  <div class="detail-label">VIP DISCOUNT</div>
+                  <div class="detail-value">10% LIFETIME</div>
                 </div>
               </div>
-              <div class="pass-row">
-                <div>
-                  <span class="pass-lbl">DISCOUNT BENEFIT</span>
-                  <span class="pass-val">10% Lifetime</span>
+
+              <div class="card-bottom">
+                <div class="qr-preview-box" onclick="showFullQRModal()">
+                  <div class="qr-sim-matrix"></div>
+                  <span>SCAN FOR CHECK-IN</span>
                 </div>
-                <div>
-                  <span class="pass-lbl">AI CONCIERGE</span>
-                  <span class="pass-val">ENABLED</span>
-                </div>
+                <div class="card-auth-hash text-mono">0x4E57...Fa13</div>
               </div>
             </div>
-            <div class="pass-qr-box">
-              <div class="qr-mock">[ QR CODE CHECK-IN PROOF ]</div>
-              <span class="qr-sub">Scan at event registration desk for attendance badge</span>
-            </div>
-          </div>
-
-          <div class="recovery-box">
-            <h3>Credential & Account Recovery</h3>
-            <p>If you lose access to your primary wallet, our 2-of-3 Safe multisig administrative workflow can revoke and reissue your non-transferable credential.</p>
-            <button class="btn btn-outline" onclick="triggerRecoveryModal()">Initiate Account Recovery</button>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Section: Activity & Logs -->
-      <section id="tab-activity" class="tab-pane">
-        <div class="section-header">
-          <h2>Member Activity & Ledger History</h2>
-          <p>Immutable record of credit issuances, catalog redemptions, and event check-ins.</p>
-        </div>
-        <div class="table-container">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Timestamp</th>
-                <th>Activity Type</th>
-                <th>SKU / Reference</th>
-                <th>Credit Delta</th>
-                <th>Receipt Hash</th>
-              </tr>
-            </thead>
-            <tbody id="activity-table-body">
-              <!-- Populated by app.js -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Section: Support & Policy -->
-      <section id="tab-support" class="tab-pane">
-        <div class="support-card">
-          <h2>Pilot Terms & Consumer Notice</h2>
-          <blockquote class="policy-quote">
-            “PTI Credits are prepaid credits for eligible Powerteam products and events. They are not cash, a bank account, a stablecoin, or an investment. They cannot be transferred or redeemed for cash during this pilot.”
-          </blockquote>
-          <p>All redemption items are subject to capacity, organizer confirmation, and published refund policies.</p>
-          <div class="contact-box">
-            <h3>Need Assistance?</h3>
-            <p>Contact the pilot concierge team at <code>support@powert.io</code></p>
+      <!-- Passport Entitlement Benefits -->
+      <div class="benefits-panel">
+        <h3 class="panel-heading">Included Founder Tier Privileges</h3>
+        <div class="benefit-item">
+          <div class="benefit-icon">🎟️</div>
+          <div>
+            <div class="benefit-title">2,500 Fixed PTI Service Credits</div>
+            <div class="benefit-desc">Redeemable 1:1 for live summits, coaching hours, vendor booths, and media stages.</div>
           </div>
         </div>
-      </section>
-    </main>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">👑</div>
+          <div>
+            <div class="benefit-title">VIP Seating & Keynote Access</div>
+            <div class="benefit-desc">Priority front-row seating at all 2026 CEO Success Summits and Rainmaker events.</div>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">🤖</div>
+          <div>
+            <div class="benefit-title">24/7 AI Business Concierge</div>
+            <div class="benefit-desc">Scoped intelligent assistant for speaker booking, event navigation, and credit redemption.</div>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">🛡️</div>
+          <div>
+            <div class="benefit-title">2-of-3 Safe Multisig Account Recovery</div>
+            <div class="benefit-desc">Lost device or key? Enterprise multisig recovery restores your credentials and balance safely.</div>
+          </div>
+        </div>
+
+        <div class="cta-box-glass">
+          <button class="btn btn-gold btn-full shadow-gold" onclick="purchasePassportModal()">
+            Activate Founder Passport ($2,500 USD / Stripe or Crypto)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Event Catalog & Instant Credit Redemption -->
+  <section id="catalog-section" class="section-container bg-darker">
+    <div class="section-badge">ACTIVE CALENDAR</div>
+    <h2 class="section-title">Eligible <span class="gold-gradient-text">Summit Inventory</span></h2>
+    <p class="section-subtitle">
+      Confirmed 2026 events available for instant 1:1 PTI Credit redemption.
+    </p>
+
+    <div class="catalog-cards-grid" id="catalog-grid-dynamic">
+      <!-- Cards dynamically populated by app.js -->
+    </div>
+  </section>
+
+  <!-- Media & Executive Keynote Video Showcase -->
+  <section id="media-section" class="section-container">
+    <div class="section-badge">EXECUTIVE MEDIA</div>
+    <h2 class="section-title">The Powerteam <span class="gold-gradient-text">Experience</span></h2>
+    <p class="section-subtitle">
+      World-class masterminds, billionaire panels, and high-impact stage production across Miami, Orlando, and Las Vegas.
+    </p>
+
+    <div class="media-showcase-grid">
+      <div class="video-card-luxe">
+        <video controls playsinline class="media-player" poster="assets/hero_bg.jpg">
+          <source src="assets/video_hero.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <h4>CEO Success Summit Highlight Reel</h4>
+          <p>Keynotes with Bill Walsh, business scaling mechanics, and VIP networking.</p>
+        </div>
+      </div>
+
+      <div class="video-card-luxe">
+        <video controls playsinline class="media-player">
+          <source src="assets/miami_flamingos.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <h4>Miami Mastermind & Rainmaker Retreat</h4>
+          <p>Private high-net-worth mastermind session on venture structuring and institutional partnerships.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Credit Vault & Ledger Proofs -->
+  <section id="credits-section" class="section-container bg-darker">
+    <div class="section-badge">CLOSED-LOOP LEDGER</div>
+    <h2 class="section-title">PTI Credit <span class="gold-gradient-text">Vault & Balances</span></h2>
+    <p class="section-subtitle">
+      Prepaid service credits pegged at $1.00 USD. Every redemption is verified on our dual-state cryptographic audit ledger.
+    </p>
+
+    <div class="vault-panel-grid">
+      <div class="vault-metrics-card">
+        <div class="vault-head">Your Active Balance</div>
+        <div class="vault-big-num" id="vault-display-bal">2,500 <span class="vault-unit">CREDITS</span></div>
+        <div class="vault-sub">$2,500.00 USD Contractual Service Value</div>
+
+        <div class="vault-actions-row">
+          <button class="btn btn-gold" onclick="openTopUpModal()">+ Top Up Credits</button>
+          <button class="btn btn-outline" onclick="openLedgerHistoryModal()">View Audit Receipts</button>
+        </div>
+      </div>
+
+      <div class="vault-info-card">
+        <h4>Prepaid Closed-Loop Policy</h4>
+        <p class="policy-text">
+          “PTI Credits are contractual prepaid service credits for eligible Powerteam International events, courses, and booth packages. They are not cash, deposits, stablecoins, or investments.”
+        </p>
+        <div class="audit-check-pill">
+          <span class="shield-icon">🛡️</span>
+          <span>Dual-State Cryptographic Ledger Verified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Concierge Modal -->
+  <div class="modal-overlay" id="modal-concierge">
+    <div class="modal-card modal-chat">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="ai-sparkle">✨</span>
+          <h3>Powerteam AI Concierge</h3>
+        </div>
+        <button class="btn-close" onclick="closeConciergeModal()">✕</button>
+      </div>
+      <div class="chat-messages-area" id="chat-messages">
+        <div class="chat-bubble ai">
+          Hello! I am your Powerteam Executive Concierge. I can check your Passport status, calculate available credit balances, and assist with VIP seat reservations for the upcoming CEO Success Summits. How may I assist you today?
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="concierge-input" placeholder="Ask about events, seat upgrades, or credit redemption..." onkeydown="if(event.key==='Enter') sendConciergeMessage()">
+        <button class="btn btn-gold" onclick="sendConciergeMessage()">Send</button>
+      </div>
+    </div>
   </div>
+
+  <!-- QR Check-In Modal -->
+  <div class="modal-overlay" id="modal-qr">
+    <div class="modal-card modal-qr-box">
+      <div class="modal-header">
+        <h3>Rotating QR Check-In Badge</h3>
+        <button class="btn-close" onclick="closeQRModal()">✕</button>
+      </div>
+      <div class="qr-display-container">
+        <div class="qr-canvas-mock" id="qr-mock-code">
+          <div class="qr-pattern"></div>
+        </div>
+        <div class="qr-token-label text-mono" id="qr-token-text">CHK-ROT-4a9b71c299e8</div>
+        <p class="qr-timer-text">Valid for 15 minutes • Updates automatically</p>
+      </div>
+      <button class="btn btn-outline btn-full" onclick="closeQRModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-container">
+    <div class="footer-wrapper">
+      <div class="footer-col">
+        <div class="brand-name">POWERTEAM <span class="gold-accent">INTERNATIONAL</span></div>
+        <p class="footer-tagline">
+          The sovereign Web3 event, education, and credential infrastructure powering national business masterminds.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h5>Direct Links</h5>
+        <a href="#passport-section">Founder Passport</a>
+        <a href="#catalog-section">Summit Calendar</a>
+        <a href="#credits-section">Credit Ledger</a>
+      </div>
+      <div class="footer-col">
+        <h5>Governance & Legal</h5>
+        <a href="javascript:void(0)" onclick="alert('Closed-loop prepaid service terms: 1 Credit = $1 USD against published catalog items. Non-transferable.')">Prepaid Credit Policy</a>
+        <a href="javascript:void(0)" onclick="alert('Privacy Guarantee: Zero customer PII or raw identity data is stored on public blockchains.')">Zero-PII Matrix</a>
+        <a href="javascript:void(0)" onclick="alert('Security Policy: Emergency pause and multisig recovery enforced.')">Security & Safe Multisig</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Powerteam International & Unykorn Systems (powert.unykorn.ai). All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>
