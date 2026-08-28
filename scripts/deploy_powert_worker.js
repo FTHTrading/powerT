@@ -41,6 +41,12 @@ export default {
       '/assets/sharon_lechter.jpg': { file: 'sharon_lechter.jpg', type: 'image/jpeg' },
       '/assets/forbes_riley.jpg': { file: 'forbes_riley.jpg', type: 'image/jpeg' },
       '/assets/austin_walsh.jpg': { file: 'austin_walsh.jpg', type: 'image/jpeg' },
+      '/assets/book_the_obvious.jpg': { file: 'book_the_obvious.jpg', type: 'image/jpeg' },
+      '/assets/book_act_now.jpg': { file: 'book_act_now.jpg', type: 'image/jpeg' },
+      '/assets/book_chicken_soup.jpg': { file: 'book_chicken_soup.jpg', type: 'image/jpeg' },
+      '/assets/book_eat_that_frog.jpg': { file: 'book_eat_that_frog.jpg', type: 'image/jpeg' },
+      '/assets/book_sharon_lechter.jpg': { file: 'book_sharon_lechter.jpg', type: 'image/jpeg' },
+      '/assets/book_pitch_perfection.jpg': { file: 'book_pitch_perfection.jpg', type: 'image/jpeg' },
       '/assets/unykorn_logo.png': { file: 'unykorn_logo.png', type: 'image/png' },
       '/assets/fth_logo.png': { file: 'fth_logo.png', type: 'image/png' }
     };
