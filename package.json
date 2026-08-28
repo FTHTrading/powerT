@@ -1,0 +1,25 @@
+{
+  "name": "powert",
+  "version": "1.0.0",
+  "description": "Powerteam International Enterprise RWA, Soulbound Passport & Regulated SPV Revenue Note Architecture",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile"
+  },
+  "keywords": [
+    "rwa",
+    "tokenization",
+    "powerteam",
+    "bill-walsh",
+    "spv",
+    "erc-1400",
+    "soulbound-token"
+  ],
+  "author": "FTHTrading",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0"
+  }
+}
