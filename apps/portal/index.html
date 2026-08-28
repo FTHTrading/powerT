@@ -3,14 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Powerteam Passport — Executive Member Access, Events & Credentials</title>
-  <meta name="description" content="Powerteam Passport. A modern member experience for Powerteam events, coaching, education, and professional achievement.">
+  <title>Powerteam Passport — Interactive Sandbox Demonstration</title>
+  <meta name="description" content="Private sandbox demonstration illustrating a configurable member experience for Powerteam-style events, coaching, and credentials.">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="theme-dark">
+  <!-- Top Persistent Sandbox Banner -->
+  <div class="sandbox-top-banner">
+    <div class="sandbox-banner-content">
+      <strong>PRIVATE SANDBOX DEMONSTRATION</strong> — This interactive prototype illustrates a possible Unykorn-powered member experience for Powerteam-style events, coaching, education, and media. No Powerteam product, ticket sale, credit redemption, custody arrangement, speaker agreement, or investment offering is active through this site.
+    </div>
+  </div>
+
   <!-- Ambient Lighting & Tech Grid Overlay -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
@@ -25,7 +32,7 @@
         </div>
         <div class="brand-titles">
           <div class="brand-name">POWERTEAM <span class="gold-accent">PASSPORT</span></div>
-          <div class="brand-sub">Secure Member Access • powert.unykorn.ai</div>
+          <div class="brand-sub">Interactive Sandbox Demo • powert.unykorn.ai</div>
         </div>
       </div>
 
@@ -33,19 +40,19 @@
         <a href="#hero" class="nav-link active">Home</a>
         <a href="#passport-section" class="nav-link">Passport</a>
         <a href="#speakers-section" class="nav-link">Speakers</a>
-        <a href="#technology-convergence" class="nav-link">Convergence</a>
+        <a href="#capabilities-section" class="nav-link">Capabilities</a>
         <a href="#schedule-section" class="nav-link">Schedule</a>
         <a href="#books-section" class="nav-link">Books & Media</a>
         <a href="#web3-diff-section" class="nav-link">Comparison</a>
-        <a href="#credits-section" class="nav-link">Credit Program</a>
+        <a href="#credits-section" class="nav-link">Credit Model</a>
       </nav>
 
       <div class="nav-actions">
         <button class="btn btn-glass" id="btn-concierge" onclick="openConciergeModal()">
           AI Concierge
         </button>
-        <button class="btn btn-gold" id="btn-connect-wallet" onclick="openWaitlistModal('Pilot Access')">
-          <span>Request Pilot Access</span>
+        <button class="btn btn-gold" id="btn-connect-wallet" onclick="openWaitlistModal('Pilot Configuration')">
+          <span>Discuss a Pilot</span>
         </button>
       </div>
     </div>
@@ -64,7 +71,7 @@
     <div class="hero-content">
       <div class="hero-pill">
         <span class="live-pulse"></span>
-        <span>2026–2027 NATIONAL SUMMIT CALENDAR • DIGITAL MEMBER ACCESS</span>
+        <span>STATUS: INTERACTIVE CONCEPT DEMO • BUILT FROM REUSABLE PLATFORM COMPONENTS</span>
       </div>
 
       <h1 class="hero-title">
@@ -73,38 +80,38 @@
       </h1>
 
       <p class="hero-description">
-        A modern member experience for Powerteam events, coaching, education, and professional achievement. Secure access • Prepaid service credits • Verified participation.
+        A modern member experience demonstration for Powerteam-style events, coaching, education, and professional achievement. Configurable access • Prepaid service credits • Verified participation.
       </p>
 
       <div class="hero-cta-group">
-        <button class="btn btn-gold btn-large shadow-gold" onclick="openWaitlistModal('Pilot Access')">
-          Request Pilot Access
+        <button class="btn btn-gold btn-large shadow-gold" onclick="scrollToSection('passport-section')">
+          Explore the Demonstration
         </button>
-        <button class="btn btn-glass btn-large" onclick="openWaitlistModal('Private Demo')">
-          Request a Private Demo
+        <button class="btn btn-glass btn-large" onclick="openWaitlistModal('Pilot Configuration')">
+          Discuss a Pilot Configuration
         </button>
       </div>
 
       <!-- Metric Ticker -->
       <div class="hero-stats-strip">
         <div class="stat-box">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Contractual Utility</div>
+          <div class="stat-number">Prototype</div>
+          <div class="stat-label">Sandbox Mode</div>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
-          <div class="stat-number">1 PTI = $1 USD</div>
-          <div class="stat-label">Published Service Value</div>
+          <div class="stat-number">Configurable</div>
+          <div class="stat-label">Service Credit Model</div>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
-          <div class="stat-number">BitGo Custody</div>
-          <div class="stat-label">MPC Cold Storage</div>
+          <div class="stat-number">Simulated</div>
+          <div class="stat-label">Event Check-In</div>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-box">
-          <div class="stat-number">Atomic Rails</div>
-          <div class="stat-label">Verified SBT Badges</div>
+          <div class="stat-number">Turnkey</div>
+          <div class="stat-label">Tested Templates</div>
         </div>
       </div>
     </div>
@@ -112,10 +119,10 @@
 
   <!-- 3D Holographic Passport Section -->
   <section id="passport-section" class="section-container">
-    <div class="section-badge">MEMBERSHIP CREDENTIAL</div>
-    <h2 class="section-title">Your Verified <span class="gold-gradient-text">Digital Badge</span></h2>
+    <div class="section-badge">DEMO DATA — NOT A LIVE MEMBER ACCOUNT</div>
+    <h2 class="section-title">Simulated <span class="gold-gradient-text">Digital Badge</span></h2>
     <p class="section-subtitle">
-      Privacy-first member credentialing. Verified tier entitlements, check-in badges, and digital participation proofs.
+      Demonstration of privacy-first member credentialing. Illustrative tier entitlements, check-in badges, and digital participation proofs.
     </p>
 
     <div class="passport-showcase-grid">
@@ -129,15 +136,15 @@
                   <div class="logo-circle">PTI</div>
                   <div>
                     <div class="card-sys-name">POWERTEAM PASSPORT</div>
-                    <div class="card-sub-name">MEMBER ACCESS PORTAL</div>
+                    <div class="card-sub-name">DEMO MEMBER ACCESS</div>
                   </div>
                 </div>
-                <div class="tier-pill-gold" id="card-tier-label">PILOT PREVIEW</div>
+                <div class="tier-pill-gold" id="card-tier-label">SANDBOX PREVIEW</div>
               </div>
 
               <div class="card-chip-graphic">
                 <div class="sim-chip"></div>
-                <div class="hologram-seal">PROTOTYPE BADGE</div>
+                <div class="hologram-seal">SIMULATED BADGE</div>
               </div>
 
               <div class="card-details-grid">
@@ -146,25 +153,25 @@
                   <div class="detail-value text-mono" id="card-member-id">PTI-DEMO-000001</div>
                 </div>
                 <div>
-                  <div class="detail-label">CREDIT BALANCE</div>
-                  <div class="detail-value gold-text" id="card-credit-val">2,500 PTI (Demo)</div>
+                  <div class="detail-label">SIMULATED BALANCE</div>
+                  <div class="detail-value gold-text" id="card-credit-val">2,500 Credits (Demo)</div>
                 </div>
                 <div>
                   <div class="detail-label">STATUS</div>
-                  <div class="detail-value text-green">• PILOT PREVIEW</div>
+                  <div class="detail-value text-green">• SANDBOX DEMO</div>
                 </div>
                 <div>
-                  <div class="detail-label">MEMBER DISCOUNT</div>
-                  <div class="detail-value">PROPOSED BENEFIT</div>
+                  <div class="detail-label">MEMBER BENEFIT</div>
+                  <div class="detail-value">ILLUSTRATIVE TIER</div>
                 </div>
               </div>
 
               <div class="card-bottom">
                 <div class="qr-preview-box" onclick="showFullQRModal()">
                   <div class="qr-sim-matrix"></div>
-                  <span>DEMO CHECK-IN QR</span>
+                  <span>DEMO QR — NOT VALID FOR ENTRY</span>
                 </div>
-                <div class="card-auth-hash text-mono">Demo Record</div>
+                <div class="card-auth-hash text-mono">Demo Simulation</div>
               </div>
             </div>
           </div>
@@ -173,28 +180,28 @@
 
       <!-- Passport Entitlement Benefits -->
       <div class="benefits-panel">
-        <h3 class="panel-heading">Proposed Member Benefits</h3>
+        <h3 class="panel-heading">Demonstrated Member Capabilities</h3>
         <div class="benefit-item">
           <div class="benefit-bullet">•</div>
           <div>
-            <div class="benefit-title">Prepaid Service Credits</div>
-            <div class="benefit-desc">May be applied toward eligible workshops, coaching sessions, and educational materials.</div>
+            <div class="benefit-title">Prepaid Service Credit Ledger</div>
+            <div class="benefit-desc">Illustrates how approved workshops, coaching sessions, and educational materials could be managed through structured credits.</div>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-bullet">•</div>
           <div>
-            <div class="benefit-title">Priority Seating & Event Fast-Track</div>
-            <div class="benefit-desc">Expedited check-in and preferred access for approved national summits.</div>
+            <div class="benefit-title">Simulated Event Fast-Track</div>
+            <div class="benefit-desc">Demonstrates an authenticated digital check-in pattern for venue registration desks.</div>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-bullet">•</div>
           <div>
-            <div class="benefit-title">Educational Resource Vault</div>
-            <div class="benefit-desc">Member access to approved digital playbooks, training modules, and keynote recordings.</div>
+            <div class="benefit-title">Educational Resource Library</div>
+            <div class="benefit-desc">Shows how approved digital playbooks, training modules, and keynote recordings can be organized in one portal.</div>
           </div>
         </div>
 
@@ -202,13 +209,13 @@
           <div class="benefit-bullet">•</div>
           <div>
             <div class="benefit-title">24/7 AI Member Concierge</div>
-            <div class="benefit-desc">Intelligent assistant for session navigation, credit lookups, and schedule guidance.</div>
+            <div class="benefit-desc">Scoped intelligent assistant prototype for schedule discovery, FAQs, and navigation.</div>
           </div>
         </div>
 
         <div class="cta-box-glass">
-          <button class="btn btn-gold btn-full shadow-gold" onclick="openWaitlistModal('Pilot Access')">
-            Join the Pilot Waitlist (Invitation Only)
+          <button class="btn btn-gold btn-full shadow-gold" onclick="openWaitlistModal('Pilot Configuration')">
+            Discuss a Pilot Configuration
           </button>
         </div>
       </div>
@@ -217,10 +224,10 @@
 
   <!-- World-Class Speaker & Faculty Roster -->
   <section id="speakers-section" class="section-container bg-darker">
-    <div class="section-badge">FEATURED FACULTY & KEYNOTES</div>
-    <h2 class="section-title">World-Class Mentors & <span class="gold-gradient-text">Stage Authorities</span></h2>
+    <div class="section-badge">ILLUSTRATIVE FACULTY PROFILE</div>
+    <h2 class="section-title">Speaker & <span class="gold-gradient-text">Program Architecture</span></h2>
     <p class="section-subtitle">
-      Sovereign credentialing and automated speaker royalty splits engineered for world-renowned platform speakers.
+      Names and visual references are shown solely for architectural simulation. Inclusion does not represent an active partnership or live commercial agreement.
     </p>
 
     <div class="speakers-grid" id="speakers-grid-container">
@@ -228,63 +235,63 @@
     </div>
   </section>
 
-  <!-- Technological Convergence: How AI, Wallets, Blockchain & BitGo Work as One -->
-  <section id="technology-convergence" class="section-container">
-    <div class="section-badge">TECHNOLOGICAL CONVERGENCE</div>
-    <h2 class="section-title">How AI, Wallets, Blockchain & Custody <span class="gold-gradient-text">Work as One</span></h2>
+  <!-- Configurable Platform Capabilities -->
+  <section id="capabilities-section" class="section-container">
+    <div class="section-badge">CONFIGURABLE PLATFORM CAPABILITIES</div>
+    <h2 class="section-title">Modular Architecture <span class="gold-gradient-text">Ready to Configure</span></h2>
     <p class="section-subtitle">
-      A unified operational topology eliminating counterparty risk, automating stage revenue splits, and streamlining high-ticket masterminds.
+      Unykorn can combine member experiences, event operations, verified credentials, payment integrations, operational reporting, and AI assistance into an approved deployment. Each capability is configured to the client’s policies, contracts, technology stack, and operating requirements.
     </p>
 
     <div class="convergence-grid">
-      <!-- 1. AI Agents -->
+      <!-- 1. Member Experience -->
       <div class="convergence-card">
-        <div class="conv-icon-box bg-indigo-glow">AI</div>
-        <h4>1. Autonomous AI Concierge</h4>
+        <div class="conv-icon-box bg-indigo-glow">UX</div>
+        <h4>1. Member Experience</h4>
         <p>
-          Model Context Protocol (MCP) agents handle 24/7 attendee inquiries, recommend personalized mastermind schedules, and verify prepaid service credit balances.
+          Branded client portal, member account access, Passport credential display, and structured program discovery customized to the organization's identity.
         </p>
-        <div class="conv-tag">Model Context Protocol • 24/7 Routing</div>
+        <div class="conv-tag">Branded Portal • Account Access • Tier Display</div>
       </div>
 
-      <!-- 2. Atomic / Web3 Wallets -->
+      <!-- 2. Event Operations -->
       <div class="convergence-card">
-        <div class="conv-icon-box bg-cyan-glow">ID</div>
-        <h4>2. Atomic & Web3 Wallets</h4>
+        <div class="conv-icon-box bg-cyan-glow">OPS</div>
+        <h4>2. Event Operations</h4>
         <p>
-          Self-custodial Atomic, XRPL, and Base wallets securely hold non-transferable Soulbound Passports (SBT). Dynamic 15-minute rotating QR codes eliminate ticket fraud and unauthorized duplication.
+          Authenticated check-in concepts, dynamic security tokens for registration desks, duplicate-entry prevention, and real-time attendance logs.
         </p>
-        <div class="conv-tag">Account Abstraction • 15-Min Rotating QR</div>
+        <div class="conv-tag">Authenticated Check-in • Staff Scanner • Audit Log</div>
       </div>
 
-      <!-- 3. Blockchain Utility Rails -->
+      <!-- 3. Program Operations -->
       <div class="convergence-card">
-        <div class="conv-icon-box bg-emerald-glow">TX</div>
-        <h4>3. Blockchain Utility Rails</h4>
+        <div class="conv-icon-box bg-emerald-glow">CAT</div>
+        <h4>3. Program Operations</h4>
         <p>
-          Non-custodial smart rails execute deterministic stage splits (e.g. 50% event organizer, 40% keynote speaker, 10% tech rails) and maintain a verifiable SHA-256 ledger with zero accounting variance.
+          Approved service catalog, coaching and course entitlements, member activity history, and structured credit redemption workflows.
         </p>
-        <div class="conv-tag">Smart Splits • Zero-Variance Ledger</div>
+        <div class="conv-tag">Approved Catalog • Entitlements • Service Usage</div>
       </div>
 
-      <!-- 4. BitGo Enterprise Custody -->
+      <!-- 4. Operational Intelligence -->
       <div class="convergence-card">
-        <div class="conv-icon-box bg-amber-glow">SEC</div>
-        <h4>4. BitGo Qualified Custody</h4>
+        <div class="conv-icon-box bg-amber-glow">DATA</div>
+        <h4>4. Operational Intelligence</h4>
         <p>
-          High-ticket institutional proceeds route directly into BitGo Enterprise multi-signature MPC cold storage sub-accounts with segregated multisig governance, eliminating exchange counterparty risk.
+          Scoped AI concierge assistance, daily finance and attendance reconciliation, exception tracking, and administrative approval workflows.
         </p>
-        <div class="conv-tag">MPC Cold Storage • Segregated Custody</div>
+        <div class="conv-tag">Concierge AI • Reconciliation • Approval Routing</div>
       </div>
     </div>
   </section>
 
   <!-- 2026-2027 National Summit Schedule -->
   <section id="schedule-section" class="section-container bg-darker">
-    <div class="section-badge">PROPOSED EVENT SCHEDULE</div>
-    <h2 class="section-title">2026–2027 <span class="gold-gradient-text">Summit Calendar</span></h2>
+    <div class="section-badge">ILLUSTRATIVE PROGRAM CONFIGURATION</div>
+    <h2 class="section-title">Illustrative <span class="gold-gradient-text">Event Schedule</span></h2>
     <p class="section-subtitle">
-      Proposed event dates. Exact dates, venue capacities, and redemption terms are subject to final confirmation.
+      Program names and dates are displayed solely to demonstrate how a client-approved schedule could appear. Availability, pricing, capacity, and redemption are not active through this demonstration.
     </p>
 
     <div class="catalog-cards-grid" id="catalog-grid-dynamic">
@@ -294,10 +301,10 @@
 
   <!-- Bestselling Books & Media Vault -->
   <section id="books-section" class="section-container">
-    <div class="section-badge">EDUCATIONAL PLAYBOOKS</div>
+    <div class="section-badge">EDUCATIONAL PLAYBOOK DEMONSTRATION</div>
     <h2 class="section-title">Bestselling Books & <span class="gold-gradient-text">Resource Vault</span></h2>
     <p class="section-subtitle">
-      Executive playbooks, business masterclasses, and bestsellers referenced across the curriculum.
+      Demonstration of how client-approved publications, training materials, and masterclasses could be token-gated or distributed in a modern portal.
     </p>
 
     <div class="books-grid" id="books-grid-container">
@@ -307,10 +314,10 @@
 
   <!-- YouTube Keynote Theater & Video Masterclasses -->
   <section id="media-section" class="section-container bg-darker">
-    <div class="section-badge">EXECUTIVE MEDIA THEATER</div>
-    <h2 class="section-title">Stage Keynotes & <span class="gold-gradient-text">Masterclass Video Reels</span></h2>
+    <div class="section-badge">MEDIA THEATER DEMO</div>
+    <h2 class="section-title">Stage Keynotes & <span class="gold-gradient-text">Video Showcase</span></h2>
     <p class="section-subtitle">
-      Selected keynote presentations, venture discussions, and mastermind summaries.
+      Sample media gallery illustrating public keynote embeds and event highlight reels.
     </p>
 
     <div class="media-showcase-grid">
@@ -409,30 +416,30 @@
 
   <!-- Prepaid Access & Member Credit Program -->
   <section id="credits-section" class="section-container bg-darker">
-    <div class="section-badge">MEMBER CREDIT PROGRAM</div>
-    <h2 class="section-title">Prepaid Service <span class="gold-gradient-text">Credits</span></h2>
+    <div class="section-badge">SIMULATED SERVICE CREDIT MODEL</div>
+    <h2 class="section-title">Prepaid Service <span class="gold-gradient-text">Credit Framework</span></h2>
     <p class="section-subtitle">
-      Eligible members may receive prepaid service credits for selected, approved Powerteam services. Available services, pricing, terms, refund eligibility, and availability are confirmed before purchase.
+      Illustrates how a client could offer structured prepaid service credits for approved offerings. Available services, pricing, refund terms, and availability would be determined prior to any live deployment.
     </p>
     <p class="credit-disclaimer-sub">
-      Credits are not cash, deposits, stablecoins, investment products, or transferable assets. One PTI Credit may be applied as one U.S. dollar toward eligible catalog services, subject to current published terms.
+      Credits displayed in this demonstration are not cash, deposits, stablecoins, investment products, or transferable assets. This section represents an operational ledger prototype.
     </p>
 
     <div class="pricing-tiers-grid">
       <!-- Member Tier -->
       <div class="pricing-card">
         <div class="tier-head">
-          <span class="tier-tag">PILOT STAGE</span>
+          <span class="tier-tag">CONCEPT TIER</span>
           <h3>Member Tier</h3>
-          <p class="tier-desc">Foundational access to approved workshops</p>
-          <div class="price-val">Pilot Stage</div>
-          <span class="price-sub">Terms confirmed upon invitation</span>
+          <p class="tier-desc">Illustrative foundational workshop access</p>
+          <div class="price-val">Concept Stage</div>
+          <span class="price-sub">Configured upon approved pilot</span>
         </div>
         <ul class="tier-features">
-          <li>• Proposed 2,500 PTI Service Credits</li>
-          <li>• Workshop & digital training admission</li>
-          <li>• Member Digital Passport credential</li>
-          <li>• Rotating check-in security badge</li>
+          <li>• Illustrative 2,500 PTI Service Credits</li>
+          <li>• Workshop & digital training admission concept</li>
+          <li>• Member Digital Passport credential prototype</li>
+          <li>• Simulated check-in security badge</li>
           <li>• 24/7 AI Concierge navigation</li>
         </ul>
         <button disabled class="btn btn-glass btn-full" style="opacity: 0.6; cursor: not-allowed;">
@@ -442,44 +449,44 @@
 
       <!-- Executive Tier -->
       <div class="pricing-card featured-tier">
-        <div class="featured-ribbon">PROPOSED</div>
+        <div class="featured-ribbon">ILLUSTRATIVE</div>
         <div class="tier-head">
-          <span class="tier-tag">PROPOSED PILOT</span>
+          <span class="tier-tag">CONCEPT TIER</span>
           <h3>Executive Tier</h3>
-          <p class="tier-desc">Multi-session summit & coaching access</p>
-          <div class="price-val">Pilot Stage</div>
-          <span class="price-sub">Terms confirmed upon invitation</span>
+          <p class="tier-desc">Multi-session summit & coaching access concept</p>
+          <div class="price-val">Concept Stage</div>
+          <span class="price-sub">Configured upon approved pilot</span>
         </div>
         <ul class="tier-features">
-          <li>• Proposed 5,000 PTI Service Credits</li>
-          <li>• Priority summit seating allocations</li>
-          <li>• Access to networking sessions</li>
-          <li>• Digital library & course access</li>
+          <li>• Illustrative 5,000 PTI Service Credits</li>
+          <li>• Summit seating allocation prototype</li>
+          <li>• Networking session access concept</li>
+          <li>• Digital library & course access model</li>
           <li>• Scoped concierge support</li>
         </ul>
-        <button class="btn btn-gold btn-full shadow-gold" onclick="openWaitlistModal('Executive Tier')">
-          Join Pilot Waitlist
+        <button class="btn btn-gold btn-full shadow-gold" onclick="openWaitlistModal('Executive Tier Pilot')">
+          Discuss a Pilot Configuration
         </button>
       </div>
 
       <!-- Enterprise Tier -->
       <div class="pricing-card">
         <div class="tier-head">
-          <span class="tier-tag">ORGANIZATIONAL</span>
+          <span class="tier-tag">CONCEPT TIER</span>
           <h3>Enterprise Tier</h3>
-          <p class="tier-desc">Comprehensive organization access</p>
-          <div class="price-val">Pilot Stage</div>
-          <span class="price-sub">Terms confirmed upon invitation</span>
+          <p class="tier-desc">Comprehensive organization access concept</p>
+          <div class="price-val">Concept Stage</div>
+          <span class="price-sub">Configured upon approved pilot</span>
         </div>
         <ul class="tier-features">
-          <li>• Custom enterprise credit allocation</li>
-          <li>• Executive strategy session access</li>
-          <li>• Corporate team access credentials</li>
-          <li>• White-label enterprise deployment options</li>
-          <li>• Dedicated account support</li>
+          <li>• Custom enterprise credit allocation model</li>
+          <li>• Executive strategy session concept</li>
+          <li>• Corporate team access credential prototype</li>
+          <li>• White-label deployment architecture</li>
+          <li>• Dedicated operational reporting</li>
         </ul>
-        <button class="btn btn-outline btn-full" onclick="openWaitlistModal('Enterprise Tier')">
-          Request Private Demo
+        <button class="btn btn-outline btn-full" onclick="openWaitlistModal('Enterprise Pilot')">
+          Discuss a Pilot Configuration
         </button>
       </div>
     </div>
@@ -492,18 +499,18 @@
         <div class="vault-sub">Representative Value for Demonstration Purposes</div>
 
         <div class="vault-actions-row">
-          <button class="btn btn-gold" onclick="openWaitlistModal('Credit Program')">Join Credit Pilot</button>
+          <button class="btn btn-gold" onclick="openWaitlistModal('Pilot Consultation')">Discuss a Pilot</button>
           <button class="btn btn-outline" onclick="openActivityModal()">View Activity Records</button>
         </div>
       </div>
 
       <div class="vault-info-card">
-        <h4>Prepaid Service Credit Policy</h4>
+        <h4>Prepaid Service Credit Policy (Demonstration)</h4>
         <p class="policy-text">
-          “PTI Credits are contractual prepaid service credits for eligible Powerteam International events, courses, and educational packages. They are not cash, deposits, stablecoins, or investments.”
+          “In a live deployment, credits would represent contractual prepaid service credits for eligible client events and courses. They are not cash, deposits, stablecoins, or investments.”
         </p>
         <div class="audit-check-pill">
-          <span>Transaction Records & Audit Controls in Development</span>
+          <span>Demonstration Ledger & Reconciliation Framework</span>
         </div>
       </div>
     </div>
@@ -514,13 +521,13 @@
     <div class="modal-card">
       <div class="modal-header">
         <div class="modal-title-box">
-          <h3 id="waitlist-title">Join the Pilot Waitlist</h3>
+          <h3 id="waitlist-title">Discuss a Pilot Configuration</h3>
         </div>
         <button class="btn-close" onclick="closeWaitlistModal()">✕</button>
       </div>
       <div style="padding: 1.5rem;">
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5;">
-          Powerteam Passport is currently in private preview. Register your interest to receive pilot updates, confirmed event dates, and early access invitations.
+          Powerteam Passport is currently a private sandbox demonstration. Contact our team to discuss configuring a pilot around your organization's approved programs, terms, and branding.
         </p>
         <form onsubmit="submitWaitlistForm(event)" style="display: flex; flex-direction: column; gap: 1rem;">
           <div>
@@ -533,7 +540,7 @@
           </div>
           <div>
             <label style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 0.3rem;">Organization / Interest Area</label>
-            <input type="text" id="waitlist-org" placeholder="Company or Event Interest" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
+            <input type="text" id="waitlist-org" placeholder="Company or Program Area" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); border-radius: 8px; color: #fff;">
           </div>
           <button type="submit" class="btn btn-gold btn-full shadow-gold" style="margin-top: 0.5rem;">
             Submit Request
@@ -548,17 +555,17 @@
     <div class="modal-card modal-chat">
       <div class="modal-header">
         <div class="modal-title-box">
-          <h3>Powerteam AI Concierge (Demo)</h3>
+          <h3>Powerteam AI Concierge (Demo Prototype)</h3>
         </div>
         <button class="btn-close" onclick="closeConciergeModal()">✕</button>
       </div>
       <div class="chat-messages-area" id="chat-messages">
         <div class="chat-bubble ai">
-          Hello. I am the Powerteam Member Concierge prototype. I can answer questions regarding proposed summit schedules, faculty bios, educational playbooks, and pilot program terms. How may I assist you today?
+          Hello. I am the Powerteam Member Concierge prototype. I can answer questions regarding how this sandbox demonstrates configurable schedules, faculty profiles, educational playbooks, and pilot configurations. How may I assist you today?
         </div>
       </div>
       <div class="chat-input-row">
-        <input type="text" id="concierge-input" placeholder="Ask about events, speakers, books, or pilot access..." onkeydown="if(event.key==='Enter') sendConciergeMessage()">
+        <input type="text" id="concierge-input" placeholder="Ask about the demo capabilities, schedule concepts, or pilot setup..." onkeydown="if(event.key==='Enter') sendConciergeMessage()">
         <button class="btn btn-gold" onclick="sendConciergeMessage()">Send</button>
       </div>
     </div>
@@ -576,7 +583,7 @@
           <div class="qr-pattern"></div>
         </div>
         <div class="qr-token-label text-mono" id="qr-token-text">DEMO-CHK-4a9b71c299e8</div>
-        <p class="qr-timer-text">Demonstration only • Updates periodically</p>
+        <p class="qr-timer-text">DEMO QR — NOT VALID FOR EVENT ENTRY</p>
       </div>
       <button class="btn btn-outline btn-full" onclick="closeQRModal()">Close</button>
     </div>
@@ -588,28 +595,28 @@
       <div class="footer-col">
         <div class="brand-name">POWERTEAM <span class="gold-accent">PASSPORT</span></div>
         <p class="footer-tagline">
-          Powerteam Passport is a proposed member-access and service-credit experience.
+          Powerteam Passport is a private sandbox demonstration created by Unykorn.
         </p>
         <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.5;">
-          Prototype / pilot status. Features, events, prices, eligibility, and availability are subject to approval and published program terms.
+          Prototype / sandbox status. Features, events, prices, eligibility, and availability are illustrative concepts subject to client authorization and published program terms.
         </p>
       </div>
       <div class="footer-col">
         <h5>Navigation</h5>
         <a href="#passport-section">Member Passport</a>
         <a href="#speakers-section">Keynote Faculty</a>
-        <a href="#technology-convergence">Convergence</a>
+        <a href="#capabilities-section">Capabilities</a>
         <a href="#schedule-section">Summit Schedule</a>
         <a href="#books-section">Bestseller Books</a>
-        <a href="#credits-section">Credit Program</a>
+        <a href="#credits-section">Credit Model</a>
       </div>
       <div class="footer-col">
-        <h5>Program Disclosures</h5>
+        <h5>Sandbox Disclosures</h5>
         <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.6rem;">
-          PTI Credits, if offered, are prepaid service credits for eligible services only. They are not cash, deposits, stablecoins, investments, or transferable assets.
+          No live commercial product, event ticketing, credit redemption, custody arrangement, speaker agreement, or investment offering is active through this site.
         </p>
         <p style="font-size: 0.75rem; color: #64748b;">
-          Preview Experience — No public purchase or cash redemption available online.
+          Private Demonstration — Configured from reusable Unykorn platform components.
         </p>
       </div>
     </div>
