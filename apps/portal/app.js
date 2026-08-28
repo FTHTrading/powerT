@@ -86,6 +86,15 @@ const booksList = [
     status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   },
   {
+    title: "America First: The Entrepreneurial Blueprint",
+    author: "Bill Walsh",
+    category: "scaling",
+    image: "assets/book_america_first.jpg",
+    desc: "The legendary playbook announced on stage at the White House—proving that visionary ideas and audience pre-orders build empires before writing starts.",
+    web3Utility: "Token-Gated Mastermind Cohort & Presidential Edition Access",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
+  },
+  {
     title: "Act Now: Turn Ideas into Millions",
     author: "Kevin Harrington",
     category: "marketing",
