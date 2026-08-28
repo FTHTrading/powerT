@@ -1,0 +1,17 @@
+version: "1.0"
+jurisdiction_policy:
+  consumer_passport:
+    status: "CLOSED_LOOP_SERVICE_PILOT"
+    eligible_countries:
+      - "US"
+      - "CA"
+      - "GB"
+    sanctioned_prohibited:
+      - "CU"
+      - "IR"
+      - "KP"
+      - "SY"
+      - "RU"
+  spv_security_note_pilot:
+    status: "PROTOTYPE_NOT_ACTIVE"
+    notice: "Restricted to qualified accredited investors under Reg D / Reg S only following formal offering memorandum execution."

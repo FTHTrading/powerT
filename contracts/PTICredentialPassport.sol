@@ -3,155 +3,218 @@ pragma solidity ^0.8.24;
 
 /**
  * @title PTICredentialPassport
- * @notice Soulbound (non-transferable) membership and credential token for Powerteam International (PTI).
- * Represents verified tier status, attendance history, badges, and entitlement permissions.
+ * @notice Prototype Soulbound (non-transferable) membership and credential token for Powerteam International (PTI).
+ * @dev Prototype specification contract for controlled pilot. Not financial infrastructure.
+ * Enforces role-based access control, pausable emergency stops, controlled recovery, and strict soulbound transfers.
+ * ZERO PII IS STORED ON-CHAIN. All personal and KYC data remains in off-chain encrypted systems.
  */
 contract PTICredentialPassport {
-    string public name = "Powerteam Passport";
-    string public symbol = "PTI-PASS";
+    string public constant name = "Powerteam Passport";
+    string public constant symbol = "PTI-PASS";
 
-    address public owner;
-    address public authorizedIssuer;
+    // Roles definition
+    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+    bytes32 public constant ISSUER_ROLE = keccak256("ISSUER_ROLE");
+    bytes32 public constant REVOCATION_ROLE = keccak256("REVOCATION_ROLE");
+    bytes32 public constant METADATA_ROLE = keccak256("METADATA_ROLE");
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
+    // Simple role mapping (can integrate OpenZeppelin AccessControl when package installed)
+    mapping(bytes32 => mapping(address => bool)) private _roles;
+    address public adminSafeMultisig;
+    bool public paused;
+
+    enum CredentialStatus { None, Active, Suspended, Revoked, Expired }
     enum MembershipTier { None, General, VIP, Founder, LegacyMastermind }
 
-    struct PassportProfile {
-        uint256 tokenId;
+    struct PassportRecord {
+        uint256 passportId;
         MembershipTier tier;
-        uint256 issuedTimestamp;
-        uint256 expirationTimestamp;
-        uint256 discountBasisPoints; // e.g. 1000 = 10%
+        CredentialStatus status;
+        uint256 issuedAt;
+        uint256 expiresAt;
+        bytes32 credentialHash; // Salted cryptographic proof root (zero PII)
+        uint256 discountBasisPoints;
         bool hasConciergeAccess;
-        bool hasSpeakerFastTrack;
-        bytes32 identityHash; // Off-chain KYC/identity root (no raw PII)
     }
 
-    uint256 private _nextTokenId = 1;
+    uint256 private _nextPassportId = 1;
 
-    // Mapping from user address to their Passport Profile
-    mapping(address => PassportProfile) public passports;
-    // Mapping from user address to array of badge hashes (certifications, POAPs)
-    mapping(address => bytes32[]) public userBadges;
-    // Mapping from tokenId to owner address
-    mapping(uint256 => address) public tokenOwner;
-    // Total minted tokens count
-    uint256 public totalSupply;
+    // Wallet address to Passport record
+    mapping(address => PassportRecord) public passports;
+    // Passport ID to active wallet address
+    mapping(uint256 => address) public passportOwner;
+    // Audit trail: Old passport ID => New recovered passport ID
+    mapping(uint256 => uint256) public recoveryAuditTrail;
+    // Wallet to verified badge hashes (POAP / Certification hashes)
+    mapping(address => bytes32[]) private _userBadges;
 
     // Events
-    event PassportMinted(address indexed member, uint256 indexed tokenId, MembershipTier tier);
-    event PassportTierUpdated(address indexed member, MembershipTier newTier, uint256 expiration);
-    event BadgeAwarded(address indexed member, bytes32 indexed badgeCode, string badgeName);
-    event PassportRevoked(address indexed member, uint256 indexed tokenId);
+    event PassportIssued(address indexed member, uint256 indexed passportId, MembershipTier tier, bytes32 credentialHash);
+    event PassportStatusChanged(uint256 indexed passportId, CredentialStatus oldStatus, CredentialStatus newStatus);
+    event PassportRecovered(uint256 indexed oldPassportId, uint256 indexed newPassportId, address indexed newWallet);
+    event BadgeAttested(address indexed member, bytes32 indexed badgeCode, string badgeNameRef);
+    event PausedStateChanged(bool isPaused);
+    event RoleGranted(bytes32 indexed role, address indexed account);
+    event RoleRevoked(bytes32 indexed role, address indexed account);
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "PTICredentialPassport: caller is not the owner");
+    modifier onlyRole(bytes32 role) {
+        require(_roles[role][msg.sender] || msg.sender == adminSafeMultisig, "PTICredentialPassport: unauthorized");
         _;
     }
 
-    modifier onlyIssuer() {
-        require(msg.sender == owner || msg.sender == authorizedIssuer, "PTICredentialPassport: unauthorized");
+    modifier whenNotPaused() {
+        require(!paused, "PTICredentialPassport: contract is paused");
         _;
     }
 
-    constructor(address _issuer) {
-        owner = msg.sender;
-        authorizedIssuer = _issuer;
+    constructor(address _adminSafeMultisig, address _issuer) {
+        require(_adminSafeMultisig != address(0), "Invalid admin multisig address");
+        adminSafeMultisig = _adminSafeMultisig;
+        
+        _roles[DEFAULT_ADMIN_ROLE][_adminSafeMultisig] = true;
+        _roles[ISSUER_ROLE][_issuer] = true;
+        _roles[REVOCATION_ROLE][_adminSafeMultisig] = true;
+        _roles[METADATA_ROLE][_issuer] = true;
+        _roles[PAUSER_ROLE][_adminSafeMultisig] = true;
     }
 
-    function setAuthorizedIssuer(address _issuer) external onlyOwner {
-        authorizedIssuer = _issuer;
+    function setPaused(bool _paused) external onlyRole(PAUSER_ROLE) {
+        paused = _paused;
+        emit PausedStateChanged(_paused);
+    }
+
+    function grantRole(bytes32 role, address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        _roles[role][account] = true;
+        emit RoleGranted(role, account);
+    }
+
+    function revokeRole(bytes32 role, address account) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        _roles[role][account] = false;
+        emit RoleRevoked(role, account);
     }
 
     /**
-     * @notice Mints a non-transferable Soulbound Passport to a verified member
+     * @notice Issues a non-transferable Passport credential to a verified member
      */
-    function mintPassport(
+    function issuePassport(
         address to,
         MembershipTier tier,
         uint256 durationDays,
+        bytes32 credentialHash,
         uint256 discountBps,
-        bool concierge,
-        bool speakerAccess,
-        bytes32 identityHash
-    ) external onlyIssuer returns (uint256) {
+        bool conciergeAccess
+    ) external onlyRole(ISSUER_ROLE) whenNotPaused returns (uint256) {
         require(to != address(0), "Invalid recipient");
-        require(passports[to].tokenId == 0, "Passport already exists for address");
+        require(passports[to].status == CredentialStatus.None || passports[to].status == CredentialStatus.Revoked, "Active passport exists");
 
-        uint256 tokenId = _nextTokenId++;
+        uint256 passportId = _nextPassportId++;
         uint256 expiry = durationDays == 0 ? 0 : block.timestamp + (durationDays * 1 days);
 
-        passports[to] = PassportProfile({
-            tokenId: tokenId,
+        passports[to] = PassportRecord({
+            passportId: passportId,
             tier: tier,
-            issuedTimestamp: block.timestamp,
-            expirationTimestamp: expiry,
+            status: CredentialStatus.Active,
+            issuedAt: block.timestamp,
+            expiresAt: expiry,
+            credentialHash: credentialHash,
             discountBasisPoints: discountBps,
-            hasConciergeAccess: concierge,
-            hasSpeakerFastTrack: speakerAccess,
-            identityHash: identityHash
+            hasConciergeAccess: conciergeAccess
         });
 
-        tokenOwner[tokenId] = to;
-        totalSupply++;
-
-        emit PassportMinted(to, tokenId, tier);
-        return tokenId;
+        passportOwner[passportId] = to;
+        emit PassportIssued(to, passportId, tier, credentialHash);
+        return passportId;
     }
 
     /**
-     * @notice Updates membership tier and permissions
+     * @notice Updates credential status (e.g. Suspend, Revoke, Expire)
      */
-    function updateTier(
-        address member,
-        MembershipTier newTier,
-        uint256 durationDays,
-        uint256 discountBps,
-        bool concierge,
-        bool speakerAccess
-    ) external onlyIssuer {
-        require(passports[member].tokenId != 0, "Passport does not exist");
-
-        PassportProfile storage profile = passports[member];
-        profile.tier = newTier;
-        profile.expirationTimestamp = durationDays == 0 ? 0 : block.timestamp + (durationDays * 1 days);
-        profile.discountBasisPoints = discountBps;
-        profile.hasConciergeAccess = concierge;
-        profile.hasSpeakerFastTrack = speakerAccess;
-
-        emit PassportTierUpdated(member, newTier, profile.expirationTimestamp);
+    function setCredentialStatus(uint256 passportId, CredentialStatus newStatus) external onlyRole(REVOCATION_ROLE) {
+        address member = passportOwner[passportId];
+        require(member != address(0), "Passport does not exist");
+        
+        CredentialStatus oldStatus = passports[member].status;
+        passports[member].status = newStatus;
+        
+        emit PassportStatusChanged(passportId, oldStatus, newStatus);
     }
 
     /**
-     * @notice Awards verified credentials and POAPs (e.g. Master Speaker, Certified Coach)
+     * @notice Controlled recovery workflow: revokes compromised wallet and reissues to new member address
      */
-    function awardBadge(address member, bytes32 badgeCode, string calldata badgeName) external onlyIssuer {
-        require(passports[member].tokenId != 0, "Passport does not exist");
-        userBadges[member].push(badgeCode);
-        emit BadgeAwarded(member, badgeCode, badgeName);
+    function recoverPassport(
+        address oldWallet,
+        address newWallet,
+        bytes32 newCredentialHash
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) whenNotPaused returns (uint256) {
+        require(newWallet != address(0), "Invalid new wallet");
+        require(passports[oldWallet].passportId != 0, "Old passport not found");
+        
+        PassportRecord memory oldRecord = passports[oldWallet];
+        uint256 oldId = oldRecord.passportId;
+
+        // Revoke old credential
+        passports[oldWallet].status = CredentialStatus.Revoked;
+        emit PassportStatusChanged(oldId, oldRecord.status, CredentialStatus.Revoked);
+
+        // Issue replacement
+        uint256 newId = _nextPassportId++;
+        passports[newWallet] = PassportRecord({
+            passportId: newId,
+            tier: oldRecord.tier,
+            status: CredentialStatus.Active,
+            issuedAt: block.timestamp,
+            expiresAt: oldRecord.expiresAt,
+            credentialHash: newCredentialHash,
+            discountBasisPoints: oldRecord.discountBasisPoints,
+            hasConciergeAccess: oldRecord.hasConciergeAccess
+        });
+
+        passportOwner[newId] = newWallet;
+        recoveryAuditTrail[oldId] = newId;
+
+        emit PassportRecovered(oldId, newId, newWallet);
+        return newId;
     }
 
     /**
-     * @notice Checks whether a member has an active valid passport
+     * @notice Attests attendance or certification badge
+     */
+    function attestBadge(address member, bytes32 badgeCode, string calldata badgeNameRef) external onlyRole(METADATA_ROLE) whenNotPaused {
+        require(passports[member].status == CredentialStatus.Active, "Passport not active");
+        _userBadges[member].push(badgeCode);
+        emit BadgeAttested(member, badgeCode, badgeNameRef);
+    }
+
+    /**
+     * @notice View function to verify active member credential
      */
     function isValidMember(address member) external view returns (bool) {
-        PassportProfile memory profile = passports[member];
-        if (profile.tokenId == 0) return false;
-        if (profile.expirationTimestamp != 0 && block.timestamp > profile.expirationTimestamp) return false;
-        return true;
+        PassportRecord memory record = passports[member];
+        if (record.status != CredentialStatus.Active) return false;
+        if (record.expiresAt != 0 && block.timestamp > record.expiresAt) return false;
+        return !paused;
     }
 
-    /**
-     * @notice Soulbound transfer block - prevents secondary market trading
-     */
+    // --- SOULBOUND TRANSFER PREVENTION ---
     function transferFrom(address, address, uint256) external pure {
-        revert("PTICredentialPassport: SOULBOUND - Transfers disabled");
+        revert("PTICredentialPassport: SOULBOUND_CREDENTIAL_NON_TRANSFERABLE");
     }
 
     function safeTransferFrom(address, address, uint256) external pure {
-        revert("PTICredentialPassport: SOULBOUND - Transfers disabled");
+        revert("PTICredentialPassport: SOULBOUND_CREDENTIAL_NON_TRANSFERABLE");
     }
 
     function safeTransferFrom(address, address, uint256, bytes calldata) external pure {
-        revert("PTICredentialPassport: SOULBOUND - Transfers disabled");
+        revert("PTICredentialPassport: SOULBOUND_CREDENTIAL_NON_TRANSFERABLE");
+    }
+
+    function approve(address, uint256) external pure {
+        revert("PTICredentialPassport: APPROVALS_DISABLED_FOR_SOULBOUND");
+    }
+
+    function setApprovalForAll(address, bool) external pure {
+        revert("PTICredentialPassport: OPERATOR_APPROVALS_DISABLED_FOR_SOULBOUND");
     }
 }

@@ -1,0 +1,30 @@
+version: "1.0"
+governance:
+  multisig_safe:
+    threshold: 2
+    signers:
+      - role: "Managing Director"
+      - role: "Head of Operations"
+      - role: "Legal / Compliance Lead"
+roles:
+  passport_issuer:
+    account: "ENV:ISSUER_SERVICE_ADDRESS"
+    responsibilities:
+      - "Issue non-transferable Passport credentials upon verified member onboarding"
+      - "Commit salted hash proofs to on-chain registry"
+  revocation_officer:
+    account: "ENV:SAFE_MULTISIG_ADDRESS"
+    responsibilities:
+      - "Suspend or revoke credentials upon terms violation or account compromise"
+  settlement_proposer:
+    account: "ENV:FINANCE_PROPOSER_ADDRESS"
+    responsibilities:
+      - "Propose internal allocation batches against reconciled accounting records"
+  settlement_approver:
+    account: "ENV:SAFE_MULTISIG_ADDRESS"
+    responsibilities:
+      - "Review and execute approved batch payouts up to configured limits"
+limits:
+  daily_max_credit_issuance: 50000 # USD/Credits
+  daily_max_settlement_payout: 25000 # USD
+  single_payee_max_limit: 10000 # USD

@@ -1,205 +1,177 @@
 # ⚡ Powerteam International (`powerT`)
-### Enterprise Real-World Asset (RWA) Infrastructure, Soulbound Passport & SPV Revenue-Note Architecture
+### Prototype & Product Specification Repository: Powerteam Passport Pilot & Closed-Loop Utility Architecture
 
 [![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?style=for-the-badge&logo=solidity)](https://soliditylang.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
-[![RWA Security](https://img.shields.io/badge/Security-ERC--1400%20%7C%20ERC--3643-red?style=for-the-badge)](contracts/PTIRevenueNoteSPV.sol)
-[![Utility Layer](https://img.shields.io/badge/Utility-Soulbound%20SBT%20%2B%20Credit%20Vault-brightgreen?style=for-the-badge)](contracts/PTICredentialPassport.sol)
-[![Status](https://img.shields.io/badge/System%20Status-Production%20Ready-success?style=for-the-badge)]()
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE.md)
+[![Pilot Status](https://img.shields.io/badge/Pilot%20Status-Controlled%20Beta%20Pilot-yellow?style=for-the-badge)]()
+[![Security Policy](https://img.shields.io/badge/Security-Policy%20Enforced-informational?style=for-the-badge)](SECURITY.md)
+
+> [!IMPORTANT]
+> **PROTOTYPE & SPECIFICATION REPOSITORY**: This repository contains architectural prototypes, specifications, and test suites for a controlled closed-loop utility pilot for Powerteam International’s active 2026–2027 event calendar. **It does not represent deployed financial infrastructure or an active securities offering.** All investor-facing revenue products remain strictly deferred until independent legal, custody, accounting, and regulatory approvals are complete.
 
 ---
 
 ## 🎨 Color-Coded Table of Contents
 
-| Color Indicator | Domain & Layer | Focus Area & Description |
+| Indicator | Domain & Layer | Focus & Prototype Scope | Primary Files |
+| :--- | :--- | :--- | :--- |
+| <img src="https://via.placeholder.com/15/28a745/28a745.png" width="15" height="15" /> **GREEN** | [🟢 **Layer 1: Powerteam Passport**](#-1-layer-1-consumer--passport-credential) | Non-transferable membership credential (SBT), attendance badges, tier permissions, AI concierge access. | [`contracts/PTICredentialPassport.sol`](contracts/PTICredentialPassport.sol) |
+| <img src="https://via.placeholder.com/15/ffc107/ffc107.png" width="15" height="15" /> **YELLOW** | [🟡 **Layer 2: Closed-Loop PTI Credits**](#-2-layer-2-closed-loop-pti-service-credits) | Contractual closed-loop prepaid service credit against published catalog. Off-chain ledger first with on-chain receipts. | [`contracts/PTICreditReceipt.sol`](contracts/PTICreditReceipt.sol)<br>[`config/catalog.v1.json`](config/catalog.v1.json) |
+| <img src="https://via.placeholder.com/15/007bff/007bff.png" width="15" height="15" /> **BLUE** | [🔵 **Layer 3: Restricted Revenue Note**](#-3-layer-3-restricted-revenue-note-experimental) | *Prototype restricted-token interface only; quarantined in experimental.* Not active in pilot. | [`contracts/experimental/PTIRevenueNoteSPV.sol`](contracts/experimental/PTIRevenueNoteSPV.sol) |
+| <img src="https://via.placeholder.com/15/6f42c1/6f42c1.png" width="15" height="15" /> **PURPLE** | [🟣 **Layer 4: Internal Settlement Control**](#-4-layer-4-internal-settlement-routing) | Internal settlement-control prototype with two-step propose/approve/execute workflow and payee limits. | [`contracts/PTISettlementRouter.sol`](contracts/PTISettlementRouter.sol) |
+| <img src="https://via.placeholder.com/15/dc3545/dc3545.png" width="15" height="15" /> **RED** | [🔴 **Layer 5: Entity Separation & Compliance**](#-5-layer-5-legal-separation--compliance) | Operating Co. vs. IP Co. vs. Future SPV isolation; Howey test de-risking; zero PII on-chain. | [`docs/LEGAL_AND_COMPLIANCE.md`](docs/LEGAL_AND_COMPLIANCE.md)<br>[`docs/DATA_CLASSIFICATION.md`](docs/DATA_CLASSIFICATION.md) |
+| <img src="https://via.placeholder.com/15/17a2b8/17a2b8.png" width="15" height="15" /> **CYAN** | [🌐 **Layer 6: Operations & Reconciliation**](#-6-layer-6-data-spine--reconciliation-policy) | Authoritative off-chain database schema, daily Stripe/credit reconciliation, and policy-constrained MCP AI concierge. | [`docs/RECONCILIATION_POLICY.md`](docs/RECONCILIATION_POLICY.md)<br>[`docs/PRODUCT_SPEC.md`](docs/PRODUCT_SPEC.md) |
+| <img src="https://via.placeholder.com/15/6c757d/6c757d.png" width="15" height="15" /> **GRAY** | [⚪ **Layer 7: Single-Event Pilot Runbook**](#-7-layer-7-single-event-pilot-runbook) | 50–100 cohort beta launch on a named summit (CEO Success Summit); KPIs and execution gates. | [`docs/PILOT_RUNBOOK.md`](docs/PILOT_RUNBOOK.md) |
+
+---
+
+## 🏛️ Target Operating Model
+
+```
+CUSTOMER / MEMBER
+       │
+       ▼
+Powerteam Passport Portal (email login + embedded wallet + customer profile)
+       │
+       ├──► 🟢 Passport Credential — non-transferable identity/access badge
+       ├──► 🟡 PTI Credits — closed-loop prepaid service balance ($1.00 credit value policy)
+       └──► 🌐 CRM / Ticketing / LMS / Stripe Integration
+                 │
+                 ▼
+       Off-chain source-of-truth ledger (PostgreSQL Master Table)
+                 │
+                 └──► Optional on-chain proofs (credential ID, issuance, redemption receipt hash)
+
+-----------------------------------------------------------------------------------------
+REGULATED INVESTOR PATH — SEPARATE & DEFERRED (NOT LIVE IN PILOT)
+       │
+       ▼
+KYC / accreditation / jurisdiction screen
+       │
+       ▼
+SPV + offering documents + controlled bank/custody + transfer agent/ATS review
+       │
+       ▼
+Restricted revenue-note security token (Prototype Quarantined in contracts/experimental/)
+```
+
+---
+
+## 🟢 1. Layer 1: Consumer & Passport Credential
+
+* **Implementation**: [`contracts/PTICredentialPassport.sol`](contracts/PTICredentialPassport.sol)
+* **Standard**: Soulbound non-transferable credential token with role-based access control (`DEFAULT_ADMIN_ROLE` on Safe multisig, `ISSUER_ROLE`, `REVOCATION_ROLE`, `METADATA_ROLE`, `PAUSER_ROLE`).
+* **Zero PII**: No names, emails, or personal data on-chain. Uses salted cryptographic hashes only.
+* **Controlled Recovery**: Account recovery mechanism to revoke compromised credentials and reissue to new member wallets with an on-chain audit trail.
+
+---
+
+## 🟡 2. Layer 2: Closed-Loop PTI Service Credits
+
+* **Implementation**: [`contracts/PTICreditReceipt.sol`](contracts/PTICreditReceipt.sol) & [`config/catalog.v1.json`](config/catalog.v1.json)
+* **Nature**: Contractual closed-loop service credit with a published redemption schedule; not a stablecoin, deposit, stored-value account, or cash-equivalent.
+* **Issuance**: Issued only after verified settled payment and successful order reconciliation, with idempotency controls and manual exception review.
+* **Catalog Redemptions**: Redeemable 1:1 for confirmed events (e.g., CEO Success Summit, Digital Success Summit, Rainmaker Summit, and Icon Speaker Accelerator).
+
+---
+
+## 🔵 3. Layer 3: Restricted Revenue Note (Experimental)
+
+* **Implementation**: [`contracts/experimental/PTIRevenueNoteSPV.sol`](contracts/experimental/PTIRevenueNoteSPV.sol)
+* **Status**: Prototype restricted-token interface; not a compliance determination, issuance platform, or transfer-agent substitute.
+* **Prerequisites**: Requires issuer-specific legal counsel, bankruptcy-remote SPV creation, private placement memorandum (PPM), accreditation verification (Rule 506c), and registered custody review.
+
+---
+
+## 🟣 4. Layer 4: Internal Settlement Routing
+
+* **Implementation**: [`contracts/PTISettlementRouter.sol`](contracts/PTISettlementRouter.sol)
+* **Nature**: Internal settlement-control prototype; not third-party escrow, qualified custody, or fiduciary administration.
+* **Controls**: Multi-sig approval, two-step propose/approve/execute workflow, payee allowlists, payout caps, and emergency pause.
+
+---
+
+## 🔴 5. Layer 5: Legal Separation & Compliance
+
+| Entity | Role & Scope | Boundary Constraints |
 | :--- | :--- | :--- |
-| <img src="https://via.placeholder.com/15/28a745/28a745.png" width="15" height="15" /> **GREEN** | [🟢 **Layer 1: Consumer & Utility Passport**](#-1-layer-1-consumer--utility-passport-layer) | Non-transferable credentials (SBT), loyalty tiers, discounts, badges, AI concierge. |
-| <img src="https://via.placeholder.com/15/ffc107/ffc107.png" width="15" height="15" /> **YELLOW** | [🟡 **Layer 2: Closed-Loop Credit Engine**](#-2-layer-2-closed-loop-credit-engine) | Fixed $1.00 USD redeemable credit system, catalog redemptions, proof-of-liabilities. |
-| <img src="https://via.placeholder.com/15/007bff/007bff.png" width="15" height="15" /> **BLUE** | [🔵 **Layer 3: Institutional & SPV Revenue Note**](#-3-layer-3-institutional--spv-revenue-note-layer) | Regulated security token (Reg D 506c / Reg S), SPV bankruptcy separation, automated waterfalls. |
-| <img src="https://via.placeholder.com/15/6f42c1/6f42c1.png" width="15" height="15" /> **PURPLE** | [🟣 **Layer 4: Technical & On-Chain Mechanics**](#-4-layer-4-technical--on-chain-mechanics) | Smart contract suite, EIP-712 meta-transactions, account abstraction, and gasless verification. |
-| <img src="https://via.placeholder.com/15/dc3545/dc3545.png" width="15" height="15" /> **RED** | [🔴 **Layer 5: Legal Separation & Compliance Matrix**](#-5-layer-5-legal-separation--compliance-matrix) | Three-entity legal architecture, Howey test mitigation, SEC tokenized securities adherence. |
-| <img src="https://via.placeholder.com/15/17a2b8/17a2b8.png" width="15" height="15" /> **CYAN** | [🌐 **Layer 6: Off-Chain Data Spine & MCP Agent**](#-6-layer-6-off-chain-data-spine--mcp-agent-layer) | Sync engine between CRM/Stripe/LMS/Ticketing and on-chain state roots. |
-| <img src="https://via.placeholder.com/15/6c757d/6c757d.png" width="15" height="15" /> **GRAY** | [⚪ **Layer 7: 90-Day Deployment Roadmap**](#-7-layer-7-90-day-deployment-roadmap) | Four-phase implementation timeline from asset audit to regulated SPV issuance. |
+| **Powerteam Operating Co.** | Runs events, programs, membership, ticketing, customer support, and credit redemption. | Cannot offer investment returns through Passport/credit products. |
+| **Powerteam IP Co.** | Holds licensed trademarks, curriculum, media rights, domains, and content licenses. | Cannot transfer rights it does not clearly own or control. |
+| **PTI Event / SPV LLC** | Holds a precisely scheduled receivables or revenue-participation asset (if counsel approves). | Cannot commingle operating cash or promise generalized company profits. |
+| **Independent Vendors** | Payment processor, KYC vendor, accountant, counsel, registered intermediaries. | Cannot be presented as unnecessary because a smart contract exists. |
 
 ---
 
-## 🏛️ Ecosystem Overview & Architecture
+## 🌐 6. Layer 6: Data Spine & Reconciliation Policy
 
-The `powerT` system solves the fundamental flaw of "celebrity/personal brand tokenization" by decoupling the **identifiable, contractual business cash flows** from personal likeness:
+* **Authoritative Ledger**: Central PostgreSQL relational ledger syncing payment intent IDs, order IDs, SKU redemptions, and credential statuses.
+* **Policy-Constrained MCP AI Agent**: Read-only authenticated member access, catalog recommendations, check-in badge verifications; autonomous fund transfers and accreditation approvals are strictly disabled.
+* **Daily Reconciliation**: Standardized reporting comparing settled funds, credit issuances, redemptions, and deferred liability balances ([`docs/RECONCILIATION_POLICY.md`](docs/RECONCILIATION_POLICY.md)).
 
-```mermaid
-flowchart TD
-    subgraph 🟢 Layer 1: Consumer & Utility
-        U[Member / Customer] -->|Fiat / Stripe / USDC| P[Powerteam Passport SBT]
-        P -->|Grants Access| V[VIP Events, AI Concierge, Course LMS]
-    end
+---
 
-    subgraph 🟡 Layer 2: Credit Engine
-        P -->|Includes / Receives| C[PTI Credits $1.00 Peg]
-        C -->|Deterministic 1:1 Redemption| R[Masterminds, Tickets, Vendor Booths, Media]
-    end
+## ⚪ 7. Layer 7: Single-Event Pilot Runbook
 
-    subgraph 🔵 Layer 3: Regulated SPV
-        INV[Accredited Investor / LP] -->|KYC / AML Whitelist| SPV[PTI Summit Series SPV LLC]
-        SPV -->|Issues| SEC[PTI Revenue Note Token ERC-1400]
-        RECEIVABLES[Event Receivables & Sponsorship Escrow] -->|Waterfall Distribution| SEC
-    end
+* **Target Pilot**: CEO Success Summit (Fort Lauderdale / Las Vegas).
+* **Participant Cohort**: Capped at 50–100 beta participants.
+* **Success Criteria**: $\ge 80\%$ activation, $< 1\%$ reconciliation variance, $0$ duplicate mints, and a signed reconciliation report within 5 business days ([`docs/PILOT_RUNBOOK.md`](docs/PILOT_RUNBOOK.md)).
 
-    subgraph 🟣 Layer 4: Enterprise Data Spine
-        DB[(Dual-State Off-Chain DB)] <-->|EIP-712 Attestation / State Root| SC[On-Chain Smart Contracts]
-        AGENT[AI Concierge & Verification MCP Agent] <-->|Sync| DB
-    end
+---
+
+## 📁 Repository Directory Structure
+
+```
+powerT/
+├── apps/
+│   ├── portal/                   # Customer/member web experience
+│   ├── admin/                    # Catalog, reconciliation, support controls
+│   └── investor/                 # Quarantined / disabled until approved
+├── contracts/
+│   ├── PTICredentialPassport.sol # Soulbound membership credential & badges
+│   ├── PTICreditReceipt.sol      # Proof receipts & idempotency logs
+│   ├── PTISettlementRouter.sol   # Internal settlement & allocation router
+│   ├── interfaces/               # Shared Solidity interfaces
+│   └── experimental/
+│       └── PTIRevenueNoteSPV.sol # Quarantined security token prototype
+├── services/
+│   ├── ledger-api/               # Master relational ledger service
+│   ├── payments-webhook/         # Stripe/fiat payment listener & idempotency
+│   ├── credential-service/       # Identity hash & badge issuer
+│   ├── reconciliation-worker/    # Daily ledger & accounting auditor
+│   └── mcp-concierge/            # Policy-constrained AI concierge agent
+├── config/
+│   ├── catalog.v1.json           # Active service catalog & pricing policy
+│   ├── roles-and-approvals.yml   # Multi-sig governance & limits
+│   └── jurisdictions.yml         # Jurisdiction eligibility policies
+├── docs/
+│   ├── PRODUCT_SPEC.md           # Product & database schemas
+│   ├── PILOT_RUNBOOK.md          # 50-100 cohort beta launch runbook
+│   ├── DATA_CLASSIFICATION.md    # Zero-PII matrix & privacy guidelines
+│   ├── THREAT_MODEL.md           # Attack vectors & mitigation proofs
+│   ├── INCIDENT_RESPONSE.md      # Severity escalation & pause playbook
+│   ├── RECONCILIATION_POLICY.md  # Daily accounting & exception workflow
+│   └── LEGAL_AND_COMPLIANCE.md   # Legal matrix & regulatory disclaimers
+├── test/
+│   ├── Passport.test.js          # Passport SBT & recovery tests
+│   ├── Credits.test.js           # Proof receipt & idempotency tests
+│   └── SettlementRouter.test.js  # Propose/approve/execute router tests
+├── .env.example                  # Environment variable template
+├── .gitignore                    # Git ignore rules for keys/secrets/build
+├── hardhat.config.js             # Hardhat network & compiler settings
+├── package.json                  # Dependencies & scripts
+├── LICENSE.md                    # MIT License
+├── SECURITY.md                   # Security & vulnerability disclosure policy
+└── README.md                     # Master documentation with color-coded TOC
 ```
 
 ---
 
-## 🟢 1. Layer 1: Consumer & Utility Passport Layer
+## 🧪 Testing & Verification
 
-The **Powerteam Passport** (`PTICredentialPassport.sol`) is an ERC-721 Soulbound Token (non-transferable) engineered as a lifetime loyalty & credential anchor.
-
-### Key Capabilities
-* **Zero Speculation Guarantee**: Contract-level transfer restrictions prevent secondary market trading or speculative manipulation.
-* **Dynamic On-Chain Metadata**:
-  * **Membership Tier**: `General (1)`, `VIP (2)`, `Founder (3)`, `Legacy Mastermind (4)`.
-  * **Accreditation Badges**: Speaker Certification, Graduate Honors, Master Coach Badge.
-  * **Entitlements**: Dynamic flags for priority seating, 10% lifetime discount, and AI business concierge access.
-* **EIP-712 Gasless Minting & Upgrades**: Users sign in with email/social (via embedded Account Abstraction) while backend relayers pay gas fees.
-
----
-
-## 🟡 2. Layer 2: Closed-Loop Credit Engine
-
-The **PTI Credit Vault** (`PTICreditVault.sol`) manages fixed-value utility credits pegged deterministically at **1 PTI Credit = $1.00 USD**:
-
-### Mechanics & Economic Model
-* **Non-Transferable Utility**: Credits are bound to the holder's Passport and cannot be traded on Uniswap, DEXs, or third-party marketplaces.
-* **Deterministic Redemption Catalog**:
-  * *National Summit VIP Pass*: 1,000 Credits ($1,000 value).
-  * *Executive Mastermind Half-Day*: 1,500 Credits ($1,500 value).
-  * *Exhibitor / Vendor Booth*: 2,500 Credits ($2,500 value).
-  * *Speaker Stage Spotlight & Podcast Interview*: 750 Credits ($750 value).
-* **Proof-of-Liabilities Tracking**: Every credit minted represents deferred revenue liability on the operating balance sheet. Upon redemption, credits are cryptographically burned, triggering earned revenue recognition in the accounting ledger.
-
----
-
-## 🔵 3. Layer 3: Institutional & SPV Revenue Note Layer
-
-The **PTI Revenue Note** (`PTIRevenueNoteSPV.sol`) is a fully regulated, permissioned security token issued by a **Bankruptcy-Remote Special Purpose Vehicle (SPV)** under SEC Regulation D (Rule 506c) and Regulation S.
-
-### Institutional Tokenomics & Protections
-* **Asset-Backed Collateral**: Backed exclusively by contracted event receivables (sponsorships, VIP table packages, exhibitor fees, media distribution contracts).
-* **Identity Registry & Compliance Controls**:
-  * Strict allowlist gating with on-chain KYC/AML and Accredited Investor checks.
-  * Automated Rule 144 transfer lockups and jurisdiction blacklisting.
-* **Programmatic Waterfall**:
-  ```
-  Gross Event Receipts
-       │
-       ├──► 1. Senior Production Expenses Escrow (Fixed Budget)
-       │
-       ├──► 2. Noteholder Preferred Return (e.g., 8–12% APR)
-       │
-       ├──► 3. Revenue Share Pool (e.g., 20% of net margin)
-       │
-       └──► 4. Operating Company Residual
-  ```
-
----
-
-## 🟣 4. Layer 4: Technical & On-Chain Mechanics
-
-### Smart Contract Suite
-
-| Contract File | Standard | Description |
-| :--- | :--- | :--- |
-| [`PTICredentialPassport.sol`](contracts/PTICredentialPassport.sol) | ERC-721 (SBT) | Non-transferable membership credential, tier tracking, achievement badges. |
-| [`PTICreditVault.sol`](contracts/PTICreditVault.sol) | ERC-20 (Restricted) | Closed-loop $1.00 pegged prepaid credit balance with burn-on-redemption. |
-| [`PTIRevenueNoteSPV.sol`](contracts/PTIRevenueNoteSPV.sol) | ERC-1400 / ERC-3643 | Regulated security token with KYC allowlist, transfer restrictions, and revenue waterfall. |
-| [`PTIEscrowSettlement.sol`](contracts/PTIEscrowSettlement.sol) | Custom Escrow | Receivables settlement, multi-sig escrow, and partner fee disbursements. |
-
----
-
-## 🔴 5. Legal Separation & Compliance Matrix
-
-To eliminate regulatory ambiguity under the *Howey Test* and SEC digital asset guidance:
-
-```
-┌──────────────────────────────────────────────┐       ┌──────────────────────────────────────────────┐
-│          PTI Operating Entity LLC            │       │         PTI Summit Series SPV LLC            │
-│  (Operational & Consumer Services)           │       │       (Bankruptcy-Remote Entity)             │
-├──────────────────────────────────────────────┤       ├──────────────────────────────────────────────┤
-│  • Issues Powerteam Passport (SBT)           │       │  • Holds Assigned Event Receivables          │
-│  • Sells & Redeems $1.00 PTI Credits         │       │  • Issues Reg D / Reg S Revenue Notes        │
-│  • Delivers Seminars, Coaching & Media       │       │  • Disburses Investor Waterfall Yields       │
-│  • Standard Commercial Terms & Consumer Law  │       │  • Formal PPM, Subscription Agmt, Custody    │
-└──────────────────────────────────────────────┘       └──────────────────────────────────────────────┘
-```
-
----
-
-## 🌐 6. Layer 6: Off-Chain Data Spine & MCP Agent Layer
-
-* **Dual-State Synchronization**: Bridges Stripe, HubSpot/ActiveCampaign, Eventbrite/Custom Ticketing, and Teachable/Kajabi into unified cryptographic state hashes.
-* **Permissioned AI Concierge**: MCP Agent capable of:
-  1. Validating credential tiers and discount eligibility in real-time.
-  2. Calculating redeemable credit balances against published catalog rates.
-  3. Generating real-time Proof-of-Reserve and Proof-of-Liability audit summaries.
-
----
-
-## ⚪ 7. Layer 7: 90-Day Deployment Roadmap
-
-```
-Week 1-2   [Phase 1]: Asset Inventory & Legal Charter
-           ├── Audit monetizable contracts (events, courses, sponsorships)
-           └── Finalize three-tier corporate entity separation
-
-Week 3-4   [Phase 2]: Smart Contract Deployment & Testing
-           ├── Deploy PTICredentialPassport (SBT) & PTICreditVault on Testnet
-           └── Complete EIP-712 permit & meta-transaction relayer tests
-
-Week 5-6   [Phase 3]: Web3 Passport Portal & Data Spine
-           ├── Integrate Social Login / Account Abstraction
-           └── Connect CRM, Stripe webhooks, and credit balance ledger
-
-Week 7-8   [Phase 4]: Pilot Cohort Launch (Named Summit Event)
-           ├── Mint 250 Founder Passports for VIP attendee cohort
-           └── Live redemption test for event perks, seating & masterminds
-
-Week 9-10  [Phase 5]: Proof-of-Reserves & Partner Settlement Dashboard
-           ├── Public audit dashboard (Credits issued vs. Redeemed)
-           └── Automated sponsor booth settlement in fiat/stablecoin
-
-Week 11-12 [Phase 6]: SPV Revenue Note Underwriting & Filing
-           ├── File SEC Form D (Rule 506c) for Series A Event Receivables SPV
-           └── Deploy PTIRevenueNoteSPV contract with KYC allowlist
-```
-
----
-
-## 🚀 Quick Start & Development
-
-### 1. Install Dependencies
 ```bash
-npm install
-```
-
-### 2. Compile Contracts
-```bash
+# Compile smart contracts
 npx hardhat compile
-```
 
-### 3. Run Test Suite
-```bash
+# Run all unit tests
 npx hardhat test
 ```
-
-### 4. Deploy to Network
-```bash
-npx hardhat run scripts/deploy.js --network sepolia
-```
-
----
-
-## 📄 License
-Released under the [MIT License](LICENSE).

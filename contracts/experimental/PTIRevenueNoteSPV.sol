@@ -1,26 +1,27 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-/**
- * @title PTIRevenueNoteSPV
- * @notice Regulated tokenized debt/revenue note issued by PTI Summit Series SPV LLC (Bankruptcy-Remote SPV).
- * Implements permissioned ERC-1400 / ERC-3643 compliance controls:
- * - On-chain KYC/AML & Accreditation allowlist registry.
- * - Enforceable Rule 144 transfer lockups and jurisdiction checks.
- * - Programmatic revenue distribution waterfall from contracted event receivables.
- */
+/// @notice EXPERIMENTAL RESTRICTED-SECURITY TOKEN PROTOTYPE.
+/// @dev NOT FOR DEPLOYMENT, SALE, TRANSFER, OR SOLICITATION.
+/// @dev Requires issuer-specific legal, regulatory, custody, investor-record,
+/// transfer-restriction, and operational approval before any production use.
+///
+/// THIS IS A PROTOTYPE RESTRICTED-TOKEN INTERFACE; NOT A COMPLIANCE DETERMINATION,
+/// ISSUANCE PLATFORM, OR TRANSFER-AGENT SUBSTITUTE.
+/// Reg D (506c) and Reg S are potential offering pathways requiring issuer-specific
+/// securities counsel, offering documentation, investor eligibility controls, and jurisdictional review.
+
 contract PTIRevenueNoteSPV {
-    string public name = "PTI Summit Series Revenue Note";
-    string public symbol = "PTI-NOTE";
+    string public constant name = "PTI Summit Series Revenue Note (Prototype)";
+    string public constant symbol = "PTI-NOTE-PROTO";
     uint8 public constant decimals = 18;
 
     address public owner;
     address public complianceOfficer;
 
     uint256 public totalSupply;
-    uint256 public constant MAX_ISSUANCE = 10_000_000 * 10**18; // $10,000,000 Note Cap
+    uint256 public constant MAX_ISSUANCE = 10_000_000 * 10**18;
 
-    // Investor KYC & Accreditation Status
     struct InvestorKYC {
         bool isAccredited;
         bool isKYCPassed;
@@ -30,16 +31,11 @@ contract PTIRevenueNoteSPV {
 
     mapping(address => uint256) public balanceOf;
     mapping(address => InvestorKYC) public identityRegistry;
-
-    // Programmatic Waterfall Tracking
     uint256 public totalRevenueDistributed;
-    mapping(address => uint256) public investorPayouts;
 
     event InvestorKYCUpdated(address indexed investor, bool accredited, bool kycPassed, uint256 lockup);
     event NotesIssued(address indexed investor, uint256 amount);
     event RevenueDistributed(uint256 totalAmount, uint256 timestamp);
-    event RevenueClaimed(address indexed investor, uint256 amount);
-    event TransferRestricted(address from, address to, string reason);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "PTIRevenueNoteSPV: caller is not the owner");
@@ -56,13 +52,6 @@ contract PTIRevenueNoteSPV {
         complianceOfficer = _complianceOfficer;
     }
 
-    function setComplianceOfficer(address _compliance) external onlyOwner {
-        complianceOfficer = _compliance;
-    }
-
-    /**
-     * @notice Registers or updates KYC & lockup permissions for an accredited investor
-     */
     function setInvestorKYC(
         address investor,
         bool accredited,
@@ -83,9 +72,6 @@ contract PTIRevenueNoteSPV {
         emit InvestorKYCUpdated(investor, accredited, kycPassed, lockup);
     }
 
-    /**
-     * @notice Issues notes to verified accredited investors under Reg D / Reg S
-     */
     function issueNotes(address investor, uint256 amount) external onlyCompliance {
         InvestorKYC memory kyc = identityRegistry[investor];
         require(kyc.isKYCPassed && kyc.isAccredited, "Investor must be KYC verified and accredited");
@@ -98,9 +84,6 @@ contract PTIRevenueNoteSPV {
         emit NotesIssued(investor, amount);
     }
 
-    /**
-     * @notice Checks transferability under SEC Rule 144 and KYC allowlists
-     */
     function canTransfer(address from, address to, uint256 amount) public view returns (bool, string memory) {
         if (balanceOf[from] < amount) return (false, "Insufficient balance");
         
@@ -115,9 +98,6 @@ contract PTIRevenueNoteSPV {
         return (true, "Valid");
     }
 
-    /**
-     * @notice Transfer with compliance verification
-     */
     function transfer(address to, uint256 amount) external returns (bool) {
         (bool allowed, string memory reason) = canTransfer(msg.sender, to, amount);
         require(allowed, reason);
@@ -128,9 +108,6 @@ contract PTIRevenueNoteSPV {
         return true;
     }
 
-    /**
-     * @notice Distributes gross event receipts through SPV waterfall to noteholders
-     */
     function depositRevenueDistribution() external payable onlyOwner {
         require(msg.value > 0, "No distribution amount provided");
         require(totalSupply > 0, "No notes issued");

@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0",
+  "currency": "PTI_CREDIT",
+  "creditValuePolicy": "1 credit applies as $1.00 toward eligible catalog items under published terms",
+  "items": [
+    {
+      "sku": "CEO-SUMMIT-2026-FTL",
+      "title": "CEO Success Summit — Fort Lauderdale",
+      "creditPrice": 250,
+      "cashPrice": 250,
+      "inventory": 100,
+      "redeemableUntil": "2026-08-30T23:59:59-04:00",
+      "refundPolicyId": "EVENT_STANDARD_V1"
+    },
+    {
+      "sku": "DIGITAL-SUCCESS-2026-SEP",
+      "title": "Digital Success Summit — September",
+      "creditPrice": 99,
+      "cashPrice": 99,
+      "inventory": 1000,
+      "redeemableUntil": "2026-09-06T23:59:59-04:00",
+      "refundPolicyId": "DIGITAL_STANDARD_V1"
+    },
+    {
+      "sku": "RAINMAKER-SUMMIT-2026",
+      "title": "Rainmaker Business Summit — General Admission",
+      "creditPrice": 495,
+      "cashPrice": 495,
+      "inventory": 250,
+      "redeemableUntil": "2026-10-15T23:59:59-04:00",
+      "refundPolicyId": "EVENT_STANDARD_V1"
+    },
+    {
+      "sku": "ICON-SPEAKER-PROGRAM-2026",
+      "title": "Icon Speaker Accelerator — Cohort Access",
+      "creditPrice": 1500,
+      "cashPrice": 1500,
+      "inventory": 30,
+      "redeemableUntil": "2026-11-01T23:59:59-04:00",
+      "refundPolicyId": "TRAINING_COHORT_V1"
+    }
+  ]
+}
