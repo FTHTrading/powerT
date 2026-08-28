@@ -1,9 +1,9 @@
-# Executive Pitch Deck & Strategic Brief: Unykorn × Kevin Harrington
+# Executive Pitch Deck: Unykorn × Kevin Harrington
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════════════════════════════════╗
 ║                                 UNYKORN ENTERPRISE RAILS                                            ║
-║                 Institutional Tokenization • Sovereign Web3 Passports • Deal Syndication             ║
+║                 Enterprise BD Infrastructure • Sovereign Web3 Passports • Deal Syndication           ║
 ║                                                                                                      ║
 ║                            PREPARED EXCLUSIVELY FOR: KEVIN HARRINGTON                                ║
 ║                                  BOARD OF ADVISORS PROPOSAL                                          ║
@@ -12,103 +12,103 @@
 
 ---
 
-## Slide 1: Title & Executive Hook
+### Slide 1: Title & Executive Hook
 
-### **The Future of Asset Settlement & Event Access is Sovereign**
+**The Turnkey Rails for Sovereign Web3 Access & Enterprise Syndication**
 
-*How Unykorn converts multi-million-dollar real-world portfolios and high-ticket event ecosystems into automated, compliant Web3 cash-flow rails.*
+*How Unykorn converts high-ticket masterminds, business development pipelines, and enterprise deals into automated, non-custodial software rails.*
 
 * **Presented By:** Kevan Burns | Founder & CEO, Unykorn
 * **Target Engagement:** Strategic Board of Advisors & Deal Syndication Partner
-* **Live Production Proof:** `powert.unykorn.ai` & `xrplloans.unykorn.org/platform/`
+* **Live Production Proof:** `bd.unykorn.ai` & `powert.unykorn.ai`
 
 ---
 
-## Slide 2: The "Tease" (The Billion-Dollar Bottleneck)
+### Slide 2: The "Tease" (The Enterprise Scaling Bottleneck)
 
-* **Legacy High-Ticket Commerce & Event Ticketing Are Leaking Millions:**
-  * Massive intermediary fees (15–25% lost to ticketing portals, merchant brokers, and opaque booking engines).
-  * High chargeback risk, ticket fraud, and zero real-time visibility into post-event secondary transactions.
-  * Multi-step institutional asset lending (RWA, credit lines, gold-backed facilities) is bogged down in manual, week-long settlement loops.
+* **Legacy High-Ticket Commerce & Partner Deal Flow Are Leaking Millions:**
+  * 15–25% lost to intermediary ticketing portals, event brokers, and opaque processing fees.
+  * Partner onboarding, capital syndication, and client verification take weeks of disjointed manual workflows.
+  * Zero automated tracking for secondary member transactions, lifetime VIP tiers, and post-event commerce.
 
-* **The Solution:** Non-custodial, high-throughput smart contract rails where access credentials, prepaid credit pools, and institutional settlement happen instantly on-chain without balance-sheet liability.
+* **The Solution:** Non-custodial, high-throughput software rails where verified access credentials, prepaid member credit pools, and automated enterprise business development happen instantly on-chain without custodial risk or balance-sheet liability.
 
 ---
 
-## Slide 3: The "Please" (What We Have Already Built)
+### Slide 3: The "Please" (Live Client & Enterprise Systems We Deployed)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                    UNYKORN ARCHITECTURE STACK                                    │
 ├────────────────────────────────┬────────────────────────────────┬────────────────────────────────┤
-│    SOVEREIGN WEB3 PASSPORTS    │    XRPL & MULTI-CHAIN RAILS    │   24/7 AUTONOMOUS AI SUITE     │
-│   (Live: powert.unykorn.ai)    │ (Live: xrplloans.unykorn.org)  │   (MCP Concierge & Agents)     │
+│   SOVEREIGN EVENT PASSPORTS    │   ENTERPRISE BD & DEAL RAILS   │    24/7 AUTONOMOUS AI SUITE    │
+│   (Live: powert.unykorn.ai)    │      (Live: bd.unykorn.ai)     │    (MCP Concierge & Agents)    │
 ├────────────────────────────────┼────────────────────────────────┼────────────────────────────────┤
-│ • 3D Holographic Soulbound Pass │ • Multi-Chain Lending Engines  │ • Autonomous conversational AI │
-│ • Salted Rotating Dynamic QR   │ • Instant Non-Custodial Settl. │ • Real-time booking & routing  │
+│ • 3D Holographic Soulbound Pass │ • Turnkey Partner Deal Engine  │ • Autonomous conversational AI │
+│ • Salted Rotating Dynamic QR   │ • Client Portals & Syndication │ • Real-time booking & routing  │
 │ • Stripe Fiat ↔ On-Chain Pool  │ • Zero Custody / Software Only │ • Biophysical Zero-Knowledge   │
 │ • Zero-PII Attendance Proofs   │ • Enterprise Compliance Guard  │ • Production GCP / Cloudflare  │
 └────────────────────────────────┴────────────────────────────────┴────────────────────────────────┘
 ```
 
-1. **`powert.unykorn.ai` (Live Showcase):**
-   * Complete executive portal with 4K video reel backdrops, interactive 3D holographic Founder Passports, and live credit allocation.
-   * Frictionless onramps: high-net-worth attendees swipe Stripe or crypto, instantly minting a non-transferable Soulbound credential with rolling 15-minute verification tokens.
+1. **`bd.unykorn.ai` (Enterprise Business Development Engine):**
+   * Institutional client onboarding, executive deal pipelines, and partner verification portal.
+   * Centralized command infrastructure allowing partners to integrate and scale bespoke Web3 architectures instantly.
 
-2. **`xrplloans.unykorn.org` (Institutional Platform):**
-   * Institutional-grade lending rails leveraging XRPL and multi-chain settlement layers (Base, Solana, Stellar, ERC-3643).
-   * Regulatory-safe posture: pure technology software provider (zero custodial overhead).
-
----
-
-## Slide 4: Real-World Demonstration — Powerteam Mastermind Ecosystem
-
-* **Turnkey Enterprise Deployment:** Built and hardened for the national 2026–2027 CEO Summit and Rainmaker calendar (Ft. Lauderdale, Orlando, Miami).
-* **Frictionless Executive Checkout:** Allows event organizers to package $2,500 to $25,000 VIP mastermind passes into prepaid credit lots with lifetime recurring perks.
-* **Anti-Scalping & Zero-Fraud Gate:** Gate-staff scanning portal validates attendees via opaque cryptographic hashes without exposing user personal data or wallet balances.
+2. **`powert.unykorn.ai` (Live Client Deployment):**
+   * Built for the national CEO Summit and Rainmaker calendar.
+   * 4K video reel backdrops, interactive 3D holographic Founder Passports, automated Stripe checkout, and rotating 15-minute verification tokens for friction-free gate check-ins.
 
 ---
 
-## Slide 5: The "Seize" (The Harrington Multiplier)
+### Slide 4: Real-World Demonstration — Powerteam Mastermind Ecosystem
 
-*Why this is the perfect marriage between Shark Tank distribution power and Unykorn technical rails:*
+* **Turnkey Enterprise Deployment:** Live production portal supporting multi-city CEO summits (Ft. Lauderdale, Orlando, Miami).
+* **Frictionless Executive Checkout:** Organizers package $2,500 to $25,000 VIP mastermind passes into prepaid credit lots with lifetime recurring perks.
+* **Anti-Scalping & Zero-Fraud Gate:** Event staff validate attendees via opaque cryptographic tokens without exposing customer private data or wallet balances.
+
+---
+
+### Slide 5: The "Seize" (The Harrington Multiplier)
+
+*How Harrington’s distribution engine scales across Unykorn’s production software:*
 
 ```
 [ Kevin Harrington's Network ] ────► High-Volume Enterprise Deals, PE Portfolios & Live Summits
                                             │
                                             ▼
-[ Unykorn Infrastructure Rails ] ──► Instant Web3 Tokenization, Passports & Automated Settlement
+[ Unykorn Infrastructure Rails ] ──► bd.unykorn.ai Deal Ingestion & powert.unykorn.ai Access Gates
                                             │
                                             ▼
-[ Revenue Realization ] ───────────► High-Margin SaaS Licensing + Rail Volume Fees (B2B)
+[ Revenue Realization ] ───────────► High-Margin Enterprise SaaS Licensing + Volume-Based Fees
 ```
 
-1. **Deal Routing & Syndication:** Harrington routes portfolio companies, national summits, mastermind events, and asset owners directly into Unykorn software rails.
+1. **Deal Routing & Syndication:** Harrington routes portfolio companies, national summits, mastermind events, and retail ventures directly into Unykorn software rails.
 2. **Co-Branded Enterprise Deployments:** Launching bespoke "Shark Tank / Harrington Edition" access passports and enterprise syndication hubs.
-3. **Turnkey Scalability:** Unykorn handles all development, smart contract deployment, cloud infrastructure, and security validation. Harrington brings the distribution engine.
+3. **Turnkey Scalability:** Unykorn handles all development, cloud infrastructure, smart contract rails, and security validation. Harrington powers the distribution engine.
 
 ---
 
-## Slide 6: Proposed Advisory Terms & Alignment
+### Slide 6: Proposed Advisory Terms & Alignment
 
 * **Board Role:** Strategic Advisor — Enterprise Distribution & Capital Syndication.
-* **Advisory Vesting:** Milestone-gated equity units tied directly to closed enterprise integrations and verified volume thresholds.
+* **Advisory Vesting:** Milestone-gated equity units tied directly to closed partner integrations and verified transaction volume.
 * **Commercial Split:** Transparent revenue share on direct enterprise pipelines and technology licensing originating from Harrington’s network.
 * **Governance:** Quarterly strategic deal reviews and joint executive announcements.
 
 ---
 
-## Executive Conversation Script for the Weekend Meeting
+### Tailored Meeting Narrative
 
-> *"Kevin, when we connected in Buckhead, we spoke about scaling real-world assets and automating distribution. I didn't want to just talk theory—I had my team deploy our live production stack so you can see exactly how we execute.*
+> *"Kevin, when we connected in Buckhead, we spoke about scaling real-world ventures and automating distribution. I wanted to show you live execution rather than just theory.*
 > 
-> *Look at `powert.unykorn.ai` and `xrplloans.unykorn.org`. We've built the sovereign infrastructure that turns high-ticket masterminds, enterprise credit, and institutional settlement into frictionless, on-chain cash flow rails with automated AI concierge and zero-PII security.*
+> *Take a look at `bd.unykorn.ai` and `powert.unykorn.ai`. We have engineered turnkey enterprise business development platforms and sovereign Web3 access rails that turn high-ticket masterminds, partner syndication, and client onboarding into frictionless, non-custodial software systems.*
 > 
-> *You have the deal flow, the retail/PE network, and the distribution machine. We have the hardened software rails that require zero custody risk. By bringing you onto our Board of Advisors with milestone-vested equity, every large-scale deal we syndicate through these rails becomes an immediate high-margin win for both sides. Let's look at the live platform on my tablet and map out our first pilot."*
+> *You have the deal flow, the retail/PE network, and the distribution machine. We build the hardened software rails that make executing those deals seamless. By bringing you onto our Board of Advisors with milestone-vested equity, every large-scale enterprise or mastermind deal we route through these rails becomes a high-margin win for both sides. Let's pull up both portals on my tablet and map out the first pilot."*
 
 ---
 
-### Recommended Weekend Meeting Materials
+### Tablet Demo Setup
 
-* **Live Demo Devices:** Open both `https://powert.unykorn.ai` and `https://xrplloans.unykorn.org/platform/` on your tablet.
-* **Physical Leave-Behind:** Print this 6-slide executive brief on premium cardstock or export it as a clean PDF summary.
+* **Tab 1:** `https://bd.unykorn.ai/` (Showcase enterprise business development and partner routing)
+* **Tab 2:** `https://powert.unykorn.ai/` (Showcase 3D holographic passport, live video background, and credit checkout)
