@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Whitepaper: BitGo Enterprise Custody & Liquidity | Unykorn Enterprise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #060913;
+      --bg-card: #0d1326;
+      --gold: #3b82f6;
+      --gold-light: #93c5fd;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: rgba(59, 130, 246, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      padding: 3rem 1.5rem;
+    }
+    .paper-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3.5rem;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .meta-line {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .exec-quote {
+      background: rgba(59, 130, 246, 0.08);
+      border-left: 4px solid var(--gold);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 10px 10px 0;
+      margin: 2rem 0;
+      font-style: italic;
+      color: #dbeafe;
+      font-size: 1.05rem;
+    }
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      margin: 2.5rem 0 1rem;
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      padding-bottom: 0.5rem;
+    }
+    p { margin-bottom: 1.25rem; color: #cbd5e1; font-size: 0.95rem; }
+    ul { margin: 1rem 0 1.5rem 1.5rem; }
+    li { margin-bottom: 0.6rem; color: #cbd5e1; font-size: 0.95rem; }
+    .print-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .btn-print {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      color: #000;
+      border: none;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+    .btn-back {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    @media print {
+      body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+      .paper-container { background: #fff !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+      .print-bar { display: none !important; }
+      p, li { color: #111 !important; }
+      h1, h2, h3 { color: #000 !important; }
+      .exec-quote { background: #f9f9f9 !important; color: #000 !important; border-left-color: #333 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="paper-container">
+    <div class="print-bar">
+      <a href="https://powert.unykorn.ai/#whitepapers-section" class="btn-back">← Back to Powerteam Passport</a>
+      <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <span class="header-badge">SECURITY & INFRASTRUCTURE BRIEF</span>
+    <h1>BitGo Enterprise Custody & Non-Custodial Liquidity Architecture</h1>
+    <div class="meta-line">
+      Author: Unykorn Multi-Sig Security Team • Platform Integration: BitGo Enterprise API
+    </div>
+
+    <div class="exec-quote">
+      “Unykorn operates strictly as a technology software provider—never as an unregulated custodian. Digital asset custody is secured via our Enterprise BitGo Account, providing qualified MPC cold storage, $250M+ insurance, and client-tailored segregated sub-accounts.”
+    </div>
+
+    <h2>1. Multi-Party Computation (MPC) Governance</h2>
+    <p>
+      Every critical fund movement—including venue escrow releases, high-ticket coach settlements, and corporate treasury sweeps—is governed by strict multi-signature policies:
+    </p>
+    <ul>
+      <li><strong>Zero Single Point of Failure:</strong> No individual employee or single API key can initiate or execute fund movements.</li>
+      <li><strong>Deterministic Threshold Signing:</strong> Transactions require cryptographic approval across designated client officers and Unykorn compliance controllers.</li>
+      <li><strong>Hardware Security Isolation:</strong> Key shards are stored across geographically dispersed Hardware Security Modules (HSMs).</li>
+    </ul>
+
+    <h2>2. Client-Tailored Segregated Sub-Accounts</h2>
+    <p>
+      Unlike centralized exchanges that co-mingle customer balances into opaque hot wallets, Unykorn provisions isolated on-chain descriptors for each client organization:
+    </p>
+    <ul>
+      <li><strong>Dedicated Event Escrow Sub-Accounts:</strong> Lock incoming attendee credit lots 60–90 days prior to summits to settle hotel banquet orders (BEOs) directly with venue vendors.</li>
+      <li><strong>Faculty Royalty Sub-Accounts:</strong> Programmatic execution of 50% Host / 40% Keynote Speaker / 10% Tech Rails splits with zero intermediary delay.</li>
+      <li><strong>Corporate Treasury Sub-Accounts:</strong> Automated daily sweeps into USVI private banking and qualified commercial merchant rails.</li>
+    </ul>
+
+    <h2>3. Proof of Reserves & Zero Balance Discrepancy</h2>
+    <p>
+      Unykorn couples BitGo MPC storage with daily cryptographic reconciliation engines:
+    </p>
+    <ul>
+      <li>100% on-chain visibility across all asset contracts.</li>
+      <li>Cryptographic hash-chained audit trails tracking every issuance, redemption, and split.</li>
+      <li>Enterprise exportable accounting reports compatible with standard GAAP and IFRS ledgers.</li>
+    </ul>
+  </div>
+</body>
+</html>

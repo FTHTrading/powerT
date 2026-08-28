@@ -14,12 +14,18 @@ async function deploy() {
   const html = fs.readFileSync(path.join(__dirname, '../apps/portal/index.html'), 'utf8');
   const css = fs.readFileSync(path.join(__dirname, '../apps/portal/styles.css'), 'utf8');
   const js = fs.readFileSync(path.join(__dirname, '../apps/portal/app.js'), 'utf8');
+  const wpRwa = fs.readFileSync(path.join(__dirname, '../apps/portal/whitepapers/rwa-utility.html'), 'utf8');
+  const wpBitgo = fs.readFileSync(path.join(__dirname, '../apps/portal/whitepapers/bitgo-custody.html'), 'utf8');
+  const wpDignity = fs.readFileSync(path.join(__dirname, '../apps/portal/whitepapers/dignity-gold.html'), 'utf8');
 
   // Create standalone worker bundling HTML, CSS, JS with direct media streaming proxy
   const workerScript = `
 const HTML_CONTENT = ${JSON.stringify(html)};
 const CSS_CONTENT = ${JSON.stringify(css)};
 const JS_CONTENT = ${JSON.stringify(js)};
+const WP_RWA_HTML = ${JSON.stringify(wpRwa)};
+const WP_BITGO_HTML = ${JSON.stringify(wpBitgo)};
+const WP_DIGNITY_HTML = ${JSON.stringify(wpDignity)};
 
 const RAW_BASE = "https://raw.githubusercontent.com/FTHTrading/powerT/main/apps/portal/assets";
 
@@ -27,6 +33,23 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const pathname = url.pathname;
+
+    // Whitepaper direct printable HTML routes
+    if (pathname === '/whitepapers/rwa-utility' || pathname === '/whitepapers/rwa-utility.html') {
+      return new Response(WP_RWA_HTML, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+      });
+    }
+    if (pathname === '/whitepapers/bitgo-custody' || pathname === '/whitepapers/bitgo-custody.html') {
+      return new Response(WP_BITGO_HTML, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+      });
+    }
+    if (pathname === '/whitepapers/dignity-gold' || pathname === '/whitepapers/dignity-gold.html') {
+      return new Response(WP_DIGNITY_HTML, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' }
+      });
+    }
 
     // 1. Direct matchers for video & image media assets
     const mediaMap = {

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institutional Case Study: Dignity Gold × Unykorn | Digital Gold Infrastructure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #060913;
+      --bg-card: #0d1326;
+      --gold: #a855f7;
+      --gold-light: #d8b4fe;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: rgba(168, 85, 247, 0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-main);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      padding: 3rem 1.5rem;
+    }
+    .paper-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3.5rem;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .meta-line {
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .exec-quote {
+      background: rgba(168, 85, 247, 0.08);
+      border-left: 4px solid var(--gold);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 10px 10px 0;
+      margin: 2rem 0;
+      font-style: italic;
+      color: #f3e8ff;
+      font-size: 1.05rem;
+    }
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      margin: 2.5rem 0 1rem;
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      padding-bottom: 0.5rem;
+    }
+    p { margin-bottom: 1.25rem; color: #cbd5e1; font-size: 0.95rem; }
+    ul { margin: 1rem 0 1.5rem 1.5rem; }
+    li { margin-bottom: 0.6rem; color: #cbd5e1; font-size: 0.95rem; }
+    .leader-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .leader-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.25rem;
+      border-radius: 10px;
+    }
+    .leader-card h4 { color: #fff; font-size: 1.05rem; margin-bottom: 0.25rem; }
+    .leader-card .role { color: var(--gold-light); font-size: 0.78rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .leader-card p { font-size: 0.82rem; margin-bottom: 0; }
+    .print-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .btn-print {
+      background: linear-gradient(135deg, #a855f7, #c084fc);
+      color: #000;
+      border: none;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+    .btn-back {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    @media print {
+      body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+      .paper-container { background: #fff !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+      .print-bar { display: none !important; }
+      p, li { color: #111 !important; }
+      h1, h2, h3 { color: #000 !important; }
+      .exec-quote { background: #f9f9f9 !important; color: #000 !important; border-left-color: #333 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="paper-container">
+    <div class="print-bar">
+      <a href="https://powert.unykorn.ai/#whitepapers-section" class="btn-back">← Back to Powerteam Passport</a>
+      <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <span class="header-badge">OFFICIAL STRATEGIC CASE STUDY</span>
+    <h1>Dignity Gold × Unykorn: Multi-Billion Dollar Gold Infrastructure</h1>
+    <div class="meta-line">
+      Subject: Institutional Infrastructure Partnership • Official Announcement: dignitygold.com/blogs/news
+    </div>
+
+    <div class="exec-quote">
+      “Dignity Gold LLC announced a strategic partnership with UnyKorn LLC to power the institutional technology, compliance, and settlement infrastructure behind Dignity Gold's gold-backed digital asset ecosystem.”
+    </div>
+
+    <h2>1. Executive Summary</h2>
+    <p>
+      Dignity Gold LLC—the issuer of <strong>Dignity Gold (DIGau)</strong>, an SEC-compliant digital security backed by verified physical gold reserves held in certified depositories—selected UnyKorn LLC to build and operate its institutional multi-chain framework.
+    </p>
+
+    <h2>2. Wall Street Board & Leadership Pedigree</h2>
+    <div class="leader-grid">
+      <div class="leader-card">
+        <h4>Stephen A. Braverman</h4>
+        <div class="role">President & CEO, Dignity Gold</div>
+        <p>30+ year Wall Street executive with senior trading leadership roles at Knight Capital Group and Citadel Execution Services.</p>
+      </div>
+      <div class="leader-card">
+        <h4>Kent M. Swig</h4>
+        <div class="role">Co-Founder, Dignity Gold</div>
+        <p>President of Swig Equities, renowned commercial real estate investor overseeing multi-billion dollar institutional transformations.</p>
+      </div>
+    </div>
+
+    <h2>3. The Unykorn Institutional Framework</h2>
+    <ul>
+      <li><strong>Multi-Chain Architecture:</strong> Scalable smart contracts across EVM, Polygon, XRPL, and Stellar to guarantee deep institutional liquidity and cross-chain execution.</li>
+      <li><strong>Deterministic Depository Audits:</strong> Real-time reconciliation matching digital security supply to certified gold depository reports.</li>
+      <li><strong>BitGo MPC Integration:</strong> Enterprise-grade cold storage protecting digital assets with institutional multi-sig governance.</li>
+    </ul>
+
+    <h2>4. What This Demonstrates for Enterprise Partners</h2>
+    <p>
+      Unykorn is a proven infrastructure builder entrusted by veteran Wall Street executives to manage audited, physical asset-backed digital tokens. We bring that exact institutional rigor, zero-variance accounting, and sovereign security to event organizers, authors, and corporate mastermind ecosystems.
+    </p>
+  </div>
+</body>
+</html>
