@@ -345,6 +345,103 @@ function closeConciergeModal() {
   document.getElementById("modal-concierge").classList.remove("active");
 }
 
+const whitepapersData = {
+  rwa_utility: {
+    tag: "EXECUTIVE PLAYBOOK",
+    tagClass: "gold",
+    title: "Real-World Asset (RWA) Utility vs. Speculative Meme Tokens",
+    content: `
+      <h2>The Institutional Case for Non-Custodial Software Rails & Soulbound Identity</h2>
+      <p><strong>Author:</strong> Unykorn LLC Enterprise Architecture Group • <strong>Distribution:</strong> Confidential Institutional Briefing</p>
+      
+      <blockquote>
+        “Unykorn builds deterministic software rails designed exclusively for verified Real-World Assets (RWAs), contractual service entitlements, non-transferable member identity, and corporate cash-flow optimization—never speculative meme coins.”
+      </blockquote>
+
+      <h3>1. Soulbound Tokens (SBTs) vs. Speculative NFTs</h3>
+      <p>Traditional event ticketing relies on static PDF barcodes easily screenshotted, duplicated, and scalped on secondary markets. Unykorn implements the <strong>ERC-5192 Soulbound standard</strong>:</p>
+      <ul>
+        <li><strong>Non-Transferable Credentials:</strong> Digital Passports cannot be sold or transferred to secondary speculators.</li>
+        <li><strong>Rotating 15-Minute QR Badges:</strong> Generates a dynamic cryptographic token verified by venue scanners in sub-seconds with zero PII exposed.</li>
+        <li><strong>Admin Account Recovery:</strong> Multi-sig recovery allows reissue to verified members without compromising historical ledger audits.</li>
+      </ul>
+
+      <h3>2. Closed-Loop Prepaid Service Credits</h3>
+      <p>Member credits operate strictly under closed-loop service rules redeemable for approved summits, coaching, and masterclasses. There are zero floating exchange rates, zero secondary market speculation, and 100% deterministic reconciliation.</p>
+
+      <h3>3. Multi-Chain Interoperability</h3>
+      <p>Hardened across EVM, Polygon, XRPL, and Stellar, backed by qualified BitGo Enterprise MPC cold storage.</p>
+    `
+  },
+  bitgo_custody: {
+    tag: "INFRASTRUCTURE BRIEF",
+    tagClass: "blue",
+    title: "BitGo Enterprise Custody & Non-Custodial Liquidity Architecture",
+    content: `
+      <h2>The Non-Custodial Security Topology & Client-Segregated Vault Architecture</h2>
+      <p><strong>Author:</strong> Unykorn Multi-Sig Security Team • <strong>Platform Integration:</strong> BitGo Enterprise API</p>
+
+      <blockquote>
+        “Unykorn operates strictly as a software provider. Digital asset custody is secured via our Enterprise BitGo Account, providing qualified MPC cold storage and 100% client-segregated sub-accounts.”
+      </blockquote>
+
+      <h3>1. Multi-Party Computation (MPC) Governance</h3>
+      <p>Every fund movement—including hotel escrow releases and coaching splits—requires M-of-N multi-signature approval across designated client officers and compliance controllers. There is zero single-point-of-failure or rogue API risk.</p>
+
+      <h3>2. Client-Tailored Segregated Sub-Accounts</h3>
+      <ul>
+        <li><strong>Venue Escrow Sub-Accounts:</strong> Locks incoming credit pre-funding to settle hotel room blocks and BEOs directly.</li>
+        <li><strong>Faculty Royalty Sub-Accounts:</strong> Programmatic execution of 50% Host / 40% Keynote / 10% Tech Rails deterministic splits.</li>
+        <li><strong>Corporate Treasury Sub-Accounts:</strong> Automated sweeps into USVI private banking and commercial merchant rails.</li>
+      </ul>
+
+      <h3>3. Proof of Reserves & GAAP Alignment</h3>
+      <p>Cryptographic hash-chained audit trails guarantee zero accounting variance across daily financial audits.</p>
+    `
+  },
+  dignity_gold: {
+    tag: "INSTITUTIONAL CASE STUDY",
+    tagClass: "purple",
+    title: "Dignity Gold × Unykorn: Multi-Billion Dollar Gold Infrastructure",
+    content: `
+      <h2>Powering the Institutional Infrastructure for Digital Gold (DIGau)</h2>
+      <p><strong>Partnership:</strong> Dignity Gold LLC & UnyKorn LLC • <strong>Official Reference:</strong> dignitygold.com/blogs/news</p>
+
+      <blockquote>
+        “Dignity Gold selected UnyKorn LLC to power the institutional technology, compliance, and settlement infrastructure behind Dignity Gold's gold-backed digital asset ecosystem.”
+      </blockquote>
+
+      <h3>1. Wall Street Board & Leadership Pedigree</h3>
+      <ul>
+        <li><strong>Stephen A. Braverman (President & CEO, Dignity Gold):</strong> Seasoned Wall Street executive with 30+ years of capital markets leadership, formerly senior trading executive at Knight Capital Group and Citadel Execution Services.</li>
+        <li><strong>Kent M. Swig (Co-Founder, Dignity Gold):</strong> Renowned commercial real estate investor, President of Swig Equities, overseeing multi-billion dollar institutional portfolios.</li>
+        <li><strong>Gary Nerlinger & Oliver B. Swig:</strong> Pioneers in asset-backed security tokenization and compliant precious metals capital formation.</li>
+      </ul>
+
+      <h3>2. What This Proves for Unykorn Partners</h3>
+      <p>Unykorn is not a theoretical startup. Our technology rails are trusted by veteran Wall Street executives to power audited, depository-backed digital gold assets. We deliver that exact institutional pedigree, zero-variance accounting, and BitGo security to live events and member publishing ecosystems.</p>
+    `
+  }
+};
+
+function openWhitepaperModal(type) {
+  const data = whitepapersData[type];
+  if (!data) return;
+
+  const tagEl = document.getElementById("wp-modal-tag");
+  tagEl.className = "whitepaper-tag " + data.tagClass;
+  tagEl.innerText = data.tag;
+
+  document.getElementById("wp-modal-title").innerText = data.title;
+  document.getElementById("wp-modal-content").innerHTML = data.content;
+
+  document.getElementById("modal-whitepaper").classList.add("active");
+}
+
+function closeWhitepaperModal() {
+  document.getElementById("modal-whitepaper").classList.remove("active");
+}
+
 function sendConciergeMessage() {
   const input = document.getElementById("concierge-input");
   const text = input.value.trim();
@@ -366,20 +463,28 @@ function sendConciergeMessage() {
     aiB.className = "chat-bubble ai";
 
     const lower = text.toLowerCase();
-    if (lower.includes("hotel") || lower.includes("float") || lower.includes("black card") || lower.includes("deposit") || lower.includes("venue")) {
+    if (lower.includes("dignity") || lower.includes("gold") || lower.includes("braverman") || lower.includes("swig")) {
+      aiB.innerText = "Dignity Gold LLC selected UnyKorn LLC to power the institutional compliance, technology, and multi-chain settlement behind Dignity Gold (DIGau)—an SEC-compliant digital asset backed by physical gold reserves. Dignity Gold is led by Stephen A. Braverman (former senior trading executive at Knight Capital and Citadel) and Kent M. Swig (President of Swig Equities), demonstrating our institutional credibility.";
+    } else if (lower.includes("pdf") || lower.includes("whitepaper") || lower.includes("download") || lower.includes("playbook")) {
+      aiB.innerText = "You can review and download our 3 executive whitepapers directly on this portal under the 'Whitepapers & RWA' section: (1) RWA Utility vs Speculative Meme Tokens, (2) BitGo Enterprise Custody & Liquidity, and (3) Dignity Gold × Unykorn Infrastructure Case Study.";
+    } else if (lower.includes("meme") || lower.includes("nft") || lower.includes("crypto") || lower.includes("speculat")) {
+      aiB.innerText = "Unykorn builds deterministic enterprise software rails for Real-World Assets (RWAs) and closed-loop service credits—never speculative meme coins. Our Soulbound Passports (ERC-5192) are non-transferable identity credentials that permanently eliminate ticket scalping and counterfeit fraud.";
+    } else if (lower.includes("bitgo") || lower.includes("custody") || lower.includes("mpc") || lower.includes("cold storage")) {
+      aiB.innerText = "Unykorn provides software rails while asset custody is secured via our Enterprise BitGo Account. We provision client-segregated cold storage sub-accounts with M-of-N multi-sig governance and bankruptcy-remote segregation, ensuring zero exchange counterparty risk.";
+    } else if (lower.includes("hotel") || lower.includes("float") || lower.includes("black card") || lower.includes("deposit") || lower.includes("venue")) {
       aiB.innerText = "The platform eliminates upfront personal float by restructuring attendee cash-flow timing: (1) Early VIP attendees and sponsors purchase credit packages 60–90 days in advance, (2) Funds flow directly into a dedicated venue escrow sub-account, and (3) As hotel room block attrition deadlines and catering BEO invoices mature, the escrow settles the vendor directly from incoming receipts—eliminating six-figure personal credit debt.";
     } else if (lower.includes("deal") || lower.includes("pitch") || lower.includes("syndicat") || lower.includes("submit") || lower.includes("harrington")) {
       aiB.innerText = "Enterprise deal submissions and product evaluations route directly through our institutional intake hub at bd.unykorn.ai. The workflow executes a standardized digital NDA, ingests your unit economics and distribution footprint using Kevin Harrington's 'Tease, Please, Seize' evaluation model, and routes the dossier directly to the deal team for syndication review.";
     } else if (lower.includes("coaching") || lower.includes("bill walsh") || lower.includes("session") || lower.includes("1-on-1")) {
       aiB.innerText = "An Executive Tier package provisions 5,000 prepaid service credits to the member Passport. A private 1-on-1 venture scaling session with Bill Walsh utilizes 2,500 credits and includes an operational growth audit based on 'The Obvious' framework. In production, sessions can be scheduled across live summits or virtual executive breakout rooms.";
     } else if (lower.includes("book") || lower.includes("vault") || lower.includes("curriculum") || lower.includes("playbook")) {
-      aiB.innerText = "The resource vault houses our 5-pillar master curriculum: (1) Scaling & Venture ('The Obvious', 'Scaling Up'), (2) Sales & Marketing ('Act Now', 'Pitch Perfection', '$100M Offers'), (3) Wealth & Assets ('Think and Grow Rich for Women', 'Principles'), (4) Peak Performance ('Eat That Frog!', 'Chicken Soup for the Soul'), and (5) Web3/RWA standards.";
+      aiB.innerText = "The resource vault houses our 5-pillar master curriculum: (1) Scaling & Venture ('The Obvious', 'America First', 'Scaling Up'), (2) Sales & Marketing ('Act Now', 'Pitch Perfection', '$100M Offers'), (3) Wealth & Assets ('Think and Grow Rich for Women', 'Principles'), (4) Peak Performance ('Eat That Frog!', 'Chicken Soup for the Soul'), and (5) Web3/RWA standards.";
     } else if (lower.includes("capability") || lower.includes("built") || lower.includes("modules") || lower.includes("what is built")) {
       aiB.innerText = "This sandbox demonstrates four modular capabilities: (1) Member Experience portals & Passport credentials, (2) Event Operations with dynamic QR check-in patterns, (3) Program Operations for service credits and course entitlements, and (4) Operational Intelligence for daily reconciliation and AI concierge assistance.";
     } else if (lower.includes("credit") || lower.includes("balance") || lower.includes("ledger")) {
       aiB.innerText = "The service credit model demonstrates a centralized entitlement and prepaid service ledger. In production, credits operate under client-approved refund rules, inventory limits, and daily finance reconciliation.";
     } else {
-      aiB.innerText = "I am the Powerteam Executive Concierge prototype. I can guide you through our demonstrated platform capabilities, event schedules, the 5-pillar playbook vault, hotel float escrow mechanics, or deal syndication workflows at bd.unykorn.ai. How may I assist your exploration?";
+      aiB.innerText = "I am the Powerteam Executive Concierge prototype. I can guide you through our demonstrated platform capabilities, event schedules, the 5-pillar playbook vault, Dignity Gold infrastructure case studies, BitGo custody rails, or deal syndication workflows at bd.unykorn.ai. How may I assist your exploration?";
     }
 
     chatArea.appendChild(aiB);

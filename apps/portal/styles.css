@@ -629,6 +629,195 @@ body {
 .mechanic-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.45rem; }
 .mechanic-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
+/* Institutional Whitepapers & Playbooks */
+.whitepapers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.whitepaper-card {
+  background: var(--card-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(16px);
+  transition: all 0.35s ease;
+  position: relative;
+}
+.whitepaper-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-gold);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+.whitepaper-card.featured-border {
+  border-color: rgba(168, 85, 247, 0.4);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.06), rgba(13, 19, 38, 0.85));
+}
+.whitepaper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.whitepaper-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.whitepaper-tag.gold {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--gold-main);
+  color: var(--gold-light);
+}
+.whitepaper-tag.blue {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid #3b82f6;
+  color: #93c5fd;
+}
+.whitepaper-tag.purple {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid #a855f7;
+  color: #d8b4fe;
+}
+.whitepaper-pages {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.whitepaper-body h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  margin-bottom: 0.45rem;
+  line-height: 1.35;
+}
+.whitepaper-author {
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+.whitepaper-summary {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+.whitepaper-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+.wp-pill {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+.whitepaper-footer {
+  margin-top: auto;
+}
+
+/* Whitepaper Reader Modal */
+.modal-whitepaper-box {
+  max-width: 900px;
+  width: 90%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+.whitepaper-reader-body {
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: calc(85vh - 90px);
+  color: #e2e8f0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.whitepaper-reader-body h1, .whitepaper-reader-body h2, .whitepaper-reader-body h3 {
+  color: #ffffff;
+  font-family: var(--font-display);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.whitepaper-reader-body h2 {
+  color: var(--gold-light);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.4rem;
+}
+.whitepaper-reader-body p {
+  margin-bottom: 1rem;
+  color: #cbd5e1;
+}
+.whitepaper-reader-body ul {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.whitepaper-reader-body li {
+  margin-bottom: 0.45rem;
+}
+.whitepaper-reader-body blockquote {
+  background: rgba(245, 158, 11, 0.08);
+  border-left: 3px solid var(--gold-main);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.25rem 0;
+  font-style: italic;
+  color: #fef08a;
+}
+.whitepaper-reader-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+}
+.whitepaper-reader-body th, .whitepaper-reader-body td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-subtle);
+  text-align: left;
+}
+.whitepaper-reader-body th {
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--gold-light);
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #modal-whitepaper, #modal-whitepaper * {
+    visibility: visible;
+  }
+  #modal-whitepaper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .whitepaper-reader-body {
+    color: #000 !important;
+  }
+  .whitepaper-reader-body p, .whitepaper-reader-body li {
+    color: #111 !important;
+  }
+  .whitepaper-reader-body h1, .whitepaper-reader-body h2, .whitepaper-reader-body h3 {
+    color: #000 !important;
+  }
+  .btn-close, .btn-sm {
+    display: none !important;
+  }
+}
+
 /* Vault Filter Tabs */
 .vault-tabs-row {
   display: flex;

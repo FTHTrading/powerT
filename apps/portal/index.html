@@ -43,9 +43,9 @@
         <a href="#passport-section" class="nav-link">Passport</a>
         <a href="#speakers-section" class="nav-link">Speakers</a>
         <a href="#capabilities-section" class="nav-link">Capabilities</a>
-        <a href="#schedule-section" class="nav-link">Schedule</a>
-        <a href="#books-section" class="nav-link">Books & Media</a>
-        <a href="#web3-diff-section" class="nav-link">Comparison</a>
+        <a href="#publishing-spotlight" class="nav-link">Publishing</a>
+        <a href="#books-section" class="nav-link">Resource Vault</a>
+        <a href="#whitepapers-section" class="nav-link">Whitepapers & RWA</a>
         <a href="#credits-section" class="nav-link">Credit Model</a>
       </nav>
 
@@ -523,6 +523,92 @@
     </div>
   </section>
 
+  <!-- Institutional Whitepapers & RWA Playbooks Section -->
+  <section id="whitepapers-section" class="section-container bg-darker">
+    <div class="section-badge">INSTITUTIONAL PLAYBOOKS & WHITEPAPERS</div>
+    <h2 class="section-title">Real-World Asset Utility vs. <span class="gold-gradient-text">Speculative Crypto</span></h2>
+    <p class="section-subtitle">
+      Why Unykorn builds non-custodial enterprise software rails, qualified BitGo multi-sig custody, and audited physical asset tokenization—never speculative meme tokens or unregulated liquidity pools.
+    </p>
+
+    <div class="whitepapers-grid">
+      <!-- Whitepaper 1: RWA Utility vs Meme Tokens -->
+      <div class="whitepaper-card">
+        <div class="whitepaper-header">
+          <span class="whitepaper-tag gold">EXECUTIVE PLAYBOOK</span>
+          <span class="whitepaper-pages">8-Page PDF</span>
+        </div>
+        <div class="whitepaper-body">
+          <h3>Real-World Asset (RWA) Utility vs. Speculative Meme Tokens</h3>
+          <p class="whitepaper-author">By Unykorn Enterprise Architecture Group</p>
+          <p class="whitepaper-summary">
+            The institutional guide to real-world asset tokenization, non-transferable Soulbound Passports (SBTs), and why blockchain is for contractual entitlement—not speculative hype.
+          </p>
+          <div class="whitepaper-highlights">
+            <span class="wp-pill">• Non-Custodial Software Rails</span>
+            <span class="wp-pill">• Soulbound Identity (SBTs)</span>
+            <span class="wp-pill">• 0% Accounting Variance</span>
+          </div>
+        </div>
+        <div class="whitepaper-footer">
+          <button class="btn btn-gold btn-full shadow-gold" onclick="openWhitepaperModal('rwa_utility')">
+            Read & Download PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Whitepaper 2: BitGo Enterprise Custody -->
+      <div class="whitepaper-card">
+        <div class="whitepaper-header">
+          <span class="whitepaper-tag blue">INFRASTRUCTURE BRIEF</span>
+          <span class="whitepaper-pages">6-Page PDF</span>
+        </div>
+        <div class="whitepaper-body">
+          <h3>BitGo Enterprise Custody & Non-Custodial Liquidity Routing</h3>
+          <p class="whitepaper-author">By Unykorn Multi-Sig Security Team</p>
+          <p class="whitepaper-summary">
+            How client-segregated MPC cold storage sub-accounts, 0x deterministic liquidity routing, and bankruptcy-remote segregation protect partner funds and event escrows.
+          </p>
+          <div class="whitepaper-highlights">
+            <span class="wp-pill">• BitGo Qualified MPC Storage</span>
+            <span class="wp-pill">• Client-Segregated Sub-Accounts</span>
+            <span class="wp-pill">• Multi-Sig Governance</span>
+          </div>
+        </div>
+        <div class="whitepaper-footer">
+          <button class="btn btn-gold btn-full shadow-gold" onclick="openWhitepaperModal('bitgo_custody')">
+            Read & Download PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Whitepaper 3: Dignity Gold Case Study -->
+      <div class="whitepaper-card featured-border">
+        <div class="whitepaper-header">
+          <span class="whitepaper-tag purple">INSTITUTIONAL CASE STUDY</span>
+          <span class="whitepaper-pages">Case Study PDF</span>
+        </div>
+        <div class="whitepaper-body">
+          <h3>Dignity Gold × Unykorn: Multi-Billion Dollar Gold Infrastructure</h3>
+          <p class="whitepaper-author">Official Strategic Technology Partnership</p>
+          <p class="whitepaper-summary">
+            Dignity Gold (DIGau) selects UnyKorn LLC to power the institutional technology, compliance, and multi-chain settlement behind its gold-backed digital asset ecosystem.
+          </p>
+          <div class="whitepaper-highlights">
+            <span class="wp-pill">• Stephen A. Braverman (Knight/Citadel)</span>
+            <span class="wp-pill">• Kent M. Swig (Swig Equities)</span>
+            <span class="wp-pill">• Depository-Audited Gold Rails</span>
+          </div>
+        </div>
+        <div class="whitepaper-footer">
+          <button class="btn btn-gold btn-full shadow-gold" onclick="openWhitepaperModal('dignity_gold')">
+            Read & Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Prepaid Access & Member Credit Program -->
   <section id="credits-section" class="section-container bg-darker">
     <div class="section-badge">SIMULATED SERVICE CREDIT MODEL</div>
@@ -695,6 +781,27 @@
         <p class="qr-timer-text">DEMO QR — NOT VALID FOR EVENT ENTRY</p>
       </div>
       <button class="btn btn-outline btn-full" onclick="closeQRModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Executive Whitepaper & PDF Reader Modal -->
+  <div class="modal-overlay" id="modal-whitepaper">
+    <div class="modal-card modal-whitepaper-box">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="whitepaper-tag gold" id="wp-modal-tag">EXECUTIVE PLAYBOOK</span>
+          <h3 id="wp-modal-title" style="margin-top: 0.25rem;">Executive Playbook Title</h3>
+        </div>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button class="btn btn-gold btn-sm" onclick="window.print()" title="Print or Save as PDF">
+            Print / Save as PDF
+          </button>
+          <button class="btn-close" onclick="closeWhitepaperModal()">✕</button>
+        </div>
+      </div>
+      <div class="whitepaper-reader-body" id="wp-modal-content">
+        <!-- Injected dynamically by app.js -->
+      </div>
     </div>
   </div>
 
