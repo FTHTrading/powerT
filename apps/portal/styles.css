@@ -18,24 +18,52 @@
   --font-serif: 'Cinzel', serif;
 }
 
-/* Persistent Sandbox Top Banner */
+/* Persistent Sandbox Top Banner (Color-Coded, High-Contrast & Clear) */
 .sandbox-top-banner {
-  background: rgba(15, 23, 42, 0.95);
-  border-bottom: 1px solid rgba(245, 158, 11, 0.25);
-  padding: 0.5rem 1.5rem;
-  text-align: center;
+  background: linear-gradient(90deg, #0a0f24 0%, #151a36 50%, #0a0f24 100%);
+  border-bottom: 1.5px solid rgba(245, 158, 11, 0.4);
+  padding: 0.55rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 .sandbox-banner-content {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
-  font-size: 0.76rem;
-  color: #cbd5e1;
-  line-height: 1.4;
-  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  text-align: center;
 }
-.sandbox-banner-content strong {
+.sandbox-pill-tag {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid var(--gold-main);
   color: var(--gold-light);
-  letter-spacing: 0.04em;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.sandbox-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.sandbox-divider {
+  color: rgba(245, 158, 11, 0.5);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.sandbox-text {
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

@@ -339,20 +339,26 @@ function sendConciergeMessage() {
 
   input.value = "";
 
-  // AI response simulation
+  // AI response simulation with high-EQ Executive Chief of Staff reasoning
   setTimeout(() => {
     const aiB = document.createElement("div");
     aiB.className = "chat-bubble ai";
 
     const lower = text.toLowerCase();
-    if (lower.includes("capability") || lower.includes("built") || lower.includes("modules") || lower.includes("what is built")) {
+    if (lower.includes("hotel") || lower.includes("float") || lower.includes("black card") || lower.includes("deposit") || lower.includes("venue")) {
+      aiB.innerText = "The platform eliminates upfront personal float by restructuring attendee cash-flow timing: (1) Early VIP attendees and sponsors purchase credit packages 60–90 days in advance, (2) Funds flow directly into a dedicated venue escrow sub-account, and (3) As hotel room block attrition deadlines and catering BEO invoices mature, the escrow settles the vendor directly from incoming receipts—eliminating six-figure personal credit debt.";
+    } else if (lower.includes("deal") || lower.includes("pitch") || lower.includes("syndicat") || lower.includes("submit") || lower.includes("harrington")) {
+      aiB.innerText = "Enterprise deal submissions and product evaluations route directly through our institutional intake hub at bd.unykorn.ai. The workflow executes a standardized digital NDA, ingests your unit economics and distribution footprint using Kevin Harrington's 'Tease, Please, Seize' evaluation model, and routes the dossier directly to the deal team for syndication review.";
+    } else if (lower.includes("coaching") || lower.includes("bill walsh") || lower.includes("session") || lower.includes("1-on-1")) {
+      aiB.innerText = "An Executive Tier package provisions 5,000 prepaid service credits to the member Passport. A private 1-on-1 venture scaling session with Bill Walsh utilizes 2,500 credits and includes an operational growth audit based on 'The Obvious' framework. In production, sessions can be scheduled across live summits or virtual executive breakout rooms.";
+    } else if (lower.includes("book") || lower.includes("vault") || lower.includes("curriculum") || lower.includes("playbook")) {
+      aiB.innerText = "The resource vault houses our 5-pillar master curriculum: (1) Scaling & Venture ('The Obvious', 'Scaling Up'), (2) Sales & Marketing ('Act Now', 'Pitch Perfection', '$100M Offers'), (3) Wealth & Assets ('Think and Grow Rich for Women', 'Principles'), (4) Peak Performance ('Eat That Frog!', 'Chicken Soup for the Soul'), and (5) Web3/RWA standards.";
+    } else if (lower.includes("capability") || lower.includes("built") || lower.includes("modules") || lower.includes("what is built")) {
       aiB.innerText = "This sandbox demonstrates four modular capabilities: (1) Member Experience portals & Passport credentials, (2) Event Operations with dynamic QR check-in patterns, (3) Program Operations for service credits and course entitlements, and (4) Operational Intelligence for daily reconciliation and AI concierge assistance.";
-    } else if (lower.includes("pilot") || lower.includes("configure") || lower.includes("how to start")) {
-      aiB.innerText = "A pilot begins with one approved program or event SKU (e.g. 50–100 participants). Unykorn configures the member portal, check-in rules, and reconciliation reporting around your organization's real data and policies.";
     } else if (lower.includes("credit") || lower.includes("balance") || lower.includes("ledger")) {
       aiB.innerText = "The service credit model demonstrates a centralized entitlement and prepaid service ledger. In production, credits operate under client-approved refund rules, inventory limits, and daily finance reconciliation.";
     } else {
-      aiB.innerText = "I am the Powerteam Member Concierge sandbox prototype. I can explain our demonstrated platform capabilities, simulated schedule concepts, educational resource gating, and pilot configuration options. How may I help you?";
+      aiB.innerText = "I am the Powerteam Executive Concierge prototype. I can guide you through our demonstrated platform capabilities, event schedules, the 5-pillar playbook vault, hotel float escrow mechanics, or deal syndication workflows at bd.unykorn.ai. How may I assist your exploration?";
     }
 
     chatArea.appendChild(aiB);
