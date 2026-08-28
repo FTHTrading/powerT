@@ -73,8 +73,8 @@ const booksList = [
     category: "scaling",
     image: "assets/book_the_obvious.jpg",
     desc: "The definitive playbook for business acceleration, venture scaling, and converting ideas into high-ticket enterprise revenue.",
-    web3Utility: "Demonstration of authorized digital edition access and member curriculum gating.",
-    status: "ILLUSTRATIVE CURRICULUM"
+    web3Utility: "Configurable Multi-Party Royalty Smart Contract & Digital Access",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   },
   {
     title: "Act Now: Turn Ideas into Millions",
@@ -82,8 +82,8 @@ const booksList = [
     category: "marketing",
     image: "assets/book_act_now.jpg",
     desc: "How the Original Shark spots billion-dollar opportunities, negotiates deal terms, and structures massive consumer distribution.",
-    web3Utility: "Demonstration of deal-intake gating and verified reader entitlement records.",
-    status: "ILLUSTRATIVE CURRICULUM"
+    web3Utility: "Deal-Intake Gating & Verified Reader Participation Record",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   },
   {
     title: "Chicken Soup for the Soul",
@@ -91,8 +91,8 @@ const booksList = [
     category: "leadership",
     image: "assets/book_chicken_soup.jpg",
     desc: "The record-breaking global publishing phenomenon with over 500 million copies sold and timeless wisdom on human potential.",
-    web3Utility: "Demonstration of digital library rights tracking and global community pass access.",
-    status: "ILLUSTRATIVE CURRICULUM"
+    web3Utility: "Digital Rights Architecture & Global Reader Community Access",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   },
   {
     title: "Eat That Frog! & Sales Psychology",
@@ -100,8 +100,8 @@ const booksList = [
     category: "leadership",
     image: "assets/book_eat_that_frog.jpg",
     desc: "The premier systems for high-output time management, peak performance habits, and closing high-ticket transactions.",
-    web3Utility: "Demonstration of course-progress tracking and verified completion credentials.",
-    status: "ILLUSTRATIVE CURRICULUM"
+    web3Utility: "Programmatic Course-Progress Tracking & Completion Credential",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   },
   {
     title: "Think and Grow Rich for Women",
@@ -109,8 +109,8 @@ const booksList = [
     category: "wealth",
     image: "assets/book_sharon_lechter.jpg",
     desc: "Mastering financial independence, building asset portfolios, and applying Napoleonic wealth principles to modern enterprise.",
-    web3Utility: "Demonstration of financial cohort access and verified mastermind entitlements.",
-    status: "ILLUSTRATIVE CURRICULUM"
+    web3Utility: "Token-Gated Financial Cohort & Mastermind Entitlement",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   },
   {
     title: "Pitch Perfection: The Art of Influence",
@@ -118,8 +118,8 @@ const booksList = [
     category: "marketing",
     image: "assets/book_pitch_perfection.jpg",
     desc: "The communication blueprint that generated $2.5 Billion in sales across television and live keynote stages.",
-    web3Utility: "Demonstration of pitch-training workshop gating and broadcast studio scheduling.",
-    status: "ILLUSTRATIVE CURRICULUM"
+    web3Utility: "Studio Workshop Gating & Keynote Communication Credential",
+    status: "ILLUSTRATIVE CURRICULUM PREVIEW"
   }
 ];
 
@@ -242,6 +242,9 @@ function renderBooks() {
         <div class="book-status">
           ${b.status}
         </div>
+        <button class="btn btn-gold btn-full shadow-gold" style="margin-top: 1rem;" onclick="openWaitlistModal('${b.title}')">
+          Explore Curriculum Preview
+        </button>
       </div>
     `;
     container.appendChild(card);
