@@ -33,6 +33,14 @@ export default {
       '/assets/miami_flamingos.mp4': { file: 'miami_flamingos.mp4', type: 'video/mp4' },
       '/assets/video_hero.mp4': { file: 'video_hero.mp4', type: 'video/mp4' },
       '/assets/hero_bg.jpg': { file: 'hero_bg.jpg', type: 'image/jpeg' },
+      '/assets/bill_walsh.jpg': { file: 'bill_walsh.jpg', type: 'image/jpeg' },
+      '/assets/kevin_harrington.jpg': { file: 'kevin_harrington.jpg', type: 'image/jpeg' },
+      '/assets/les_brown.jpg': { file: 'les_brown.jpg', type: 'image/jpeg' },
+      '/assets/brian_tracy.jpg': { file: 'brian_tracy.jpg', type: 'image/jpeg' },
+      '/assets/mark_victor_hansen.jpg': { file: 'mark_victor_hansen.jpg', type: 'image/jpeg' },
+      '/assets/sharon_lechter.jpg': { file: 'sharon_lechter.jpg', type: 'image/jpeg' },
+      '/assets/forbes_riley.jpg': { file: 'forbes_riley.jpg', type: 'image/jpeg' },
+      '/assets/austin_walsh.jpg': { file: 'austin_walsh.jpg', type: 'image/jpeg' },
       '/assets/unykorn_logo.png': { file: 'unykorn_logo.png', type: 'image/png' },
       '/assets/fth_logo.png': { file: 'fth_logo.png', type: 'image/png' }
     };
@@ -66,7 +74,7 @@ export default {
       return new Response(upstream.body, {
         status: upstream.status,
         headers: {
-          'Content-Type': cleanName.endsWith('.mp4') ? 'video/mp4' : 'image/jpeg',
+          'Content-Type': cleanName.endsWith('.mp4') ? 'video/mp4' : (cleanName.endsWith('.png') ? 'image/png' : 'image/jpeg'),
           'Cache-Control': 'public, max-age=86400',
           'Access-Control-Allow-Origin': '*'
         }
@@ -102,7 +110,7 @@ export default {
 };
 `;
 
-  console.log('1. Uploading Worker script: powert-portal with Direct Media Map...');
+  console.log('1. Uploading Worker script: powert-portal with Speaker Headshots & Convergence...');
   const formData = new FormData();
   const metadata = {
     main_module: 'worker.js',

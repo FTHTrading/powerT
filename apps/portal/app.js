@@ -2,59 +2,59 @@
 const speakersList = [
   {
     name: "Bill Walsh",
-    role: "Global Business Strategist & Venture Capitalist",
-    initials: "BW",
-    bio: "Founder of Powerteam International, bestselling author of 'The Obvious', venture architect behind 500+ scalable enterprise programs.",
-    tokenBadge: "👑 Host Passports & Rainmaker Coaching"
+    role: "Founder & CEO, Powerteam International",
+    image: "assets/bill_walsh.jpg",
+    bio: "Bestselling author of 'The Obvious', venture architect behind 500+ scalable enterprise scaling programs.",
+    tokenBadge: "👑 Rainmaker Credit Host"
   },
   {
     name: "Kevin Harrington",
     role: "Original Shark on Shark Tank & Pioneer of As Seen On TV",
-    initials: "KH",
+    image: "assets/kevin_harrington.jpg",
     bio: "Launched 500+ products totaling $6B+ in sales. Bestselling author of 'Act Now' and 'Key to the Vault'.",
-    tokenBadge: "🦈 Venture Routing & Mastermind Advisor"
+    tokenBadge: "🦈 Deal Syndication Rail"
   },
   {
     name: "Les Brown",
     role: "Legendary Motivational Speaker & Speaker Coach",
-    initials: "LB",
+    image: "assets/les_brown.jpg",
     bio: "World-renowned keynote master, coach to top platform speakers, and icon of personal achievement.",
-    tokenBadge: "🎤 Keynote Masterclass Contributor"
+    tokenBadge: "🎤 Mentorship Badging SBT"
+  },
+  {
+    name: "Brian Tracy",
+    role: "Chairman & CEO, Brian Tracy International",
+    image: "assets/brian_tracy.jpg",
+    bio: "Consulted for 1,000+ companies, author of 80+ bestsellers including 'Eat That Frog!' and 'Psychology of Selling'.",
+    tokenBadge: "📈 Sales Certification SBT"
   },
   {
     name: "Mark Victor Hansen",
     role: "Co-Creator of 'Chicken Soup for the Soul'",
-    initials: "MVH",
+    image: "assets/mark_victor_hansen.jpg",
     bio: "500M+ books sold globally, Guinness World Record holder, co-author of 'Ask!' and publishing titan.",
-    tokenBadge: "📚 Publishing & Media Co-Author"
-  },
-  {
-    name: "Brian Tracy",
-    role: "Global Sales Mastery & Peak Performance Authority",
-    initials: "BT",
-    bio: "Consulted for 1,000+ companies, author of 80+ bestsellers including 'Eat That Frog!' and 'Psychology of Selling'.",
-    tokenBadge: "📈 Executive Sales Curriculum"
+    tokenBadge: "📚 Publishing & Media Vault"
   },
   {
     name: "Sharon Lechter",
-    role: "Co-Author of 'Rich Dad Poor Dad' & Financial Literacy Leader",
-    initials: "SL",
+    role: "Co-Author of 'Rich Dad Poor Dad' & Financial Authority",
+    image: "assets/sharon_lechter.jpg",
     bio: "Presidential Advisor on Financial Literacy, CPA, and co-author of 'Think and Grow Rich for Women'.",
-    tokenBadge: "💼 Cashflow Mastermind Contributor"
+    tokenBadge: "💼 Cashflow Mastermind SBT"
   },
   {
     name: "Forbes Riley",
     role: "Infomercial Queen & Pitch Communication Master",
-    initials: "FR",
+    image: "assets/forbes_riley.jpg",
     bio: "National Fitness Hall of Fame inductee, $2.5B+ in TV product sales, and creator of the Pitch Perfection method.",
     tokenBadge: "⚡ Pitch Perfection Masterclass"
   },
   {
     name: "Austin Walsh",
     role: "Digital Marketing Expert & Funnel Architect",
-    initials: "AW",
+    image: "assets/austin_walsh.jpg",
     bio: "Direct-response conversion strategist and architect of multimillion-dollar automated traffic funnels.",
-    tokenBadge: "🚀 Digital Funnel Training Modules"
+    tokenBadge: "🚀 Digital Funnel Modules"
   }
 ];
 
@@ -170,7 +170,9 @@ function renderSpeakers() {
     card.className = "speaker-card-luxe";
     card.innerHTML = `
       <div>
-        <div class="speaker-avatar-circle">${spk.initials}</div>
+        <div class="speaker-avatar-frame">
+          <img src="${spk.image}" alt="${spk.name}" class="speaker-avatar-img" onerror="this.src='assets/hero_bg.jpg'">
+        </div>
         <div class="speaker-name">${spk.name}</div>
         <div class="speaker-role">${spk.role}</div>
         <div class="speaker-bio">${spk.bio}</div>
@@ -303,7 +305,9 @@ function sendConciergeMessage() {
     aiB.className = "chat-bubble ai";
 
     const lower = text.toLowerCase();
-    if (lower.includes("ceo") || lower.includes("dania") || lower.includes("fort lauderdale")) {
+    if (lower.includes("convergence") || lower.includes("bitgo") || lower.includes("atomic") || lower.includes("wallet") || lower.includes("blockchain")) {
+      aiB.innerText = "Our system converges four pillars: (1) MCP AI Agents for 24/7 routing, (2) Atomic Wallets with 15-min rotating QR badges, (3) Blockchain smart rails for automated 50/50 stage splits, and (4) BitGo Qualified Custody for institutional MPC multi-sig cold storage.";
+    } else if (lower.includes("ceo") || lower.includes("dania") || lower.includes("fort lauderdale")) {
       aiB.innerText = "The Fort Lauderdale CEO Success Summit is listed as a proposed pilot event. Final dates, venue capacity, and participation terms will be published upon approved pilot launch.";
     } else if (lower.includes("harrington") || lower.includes("shark")) {
       aiB.innerText = "Kevin Harrington is featured across our keynote educational materials and strategic advisory framework. Check the media section to view his recorded discussions on customer acquisition and business structuring.";
@@ -312,7 +316,7 @@ function sendConciergeMessage() {
     } else if (lower.includes("credit") || lower.includes("balance")) {
       aiB.innerText = "PTI Credits, if offered, are prepaid service credits for approved Powerteam events and coaching programs. They are not cash, deposits, stablecoins, or investment products.";
     } else {
-      aiB.innerText = "As your Powerteam Concierge prototype, I can assist with reviewing proposed summit schedules, faculty biographies, and pilot program waitlist details. How may I help you?";
+      aiB.innerText = "As your Powerteam Concierge prototype, I can assist with reviewing proposed summit schedules, faculty biographies, technological convergence details, and pilot program waitlist details. How may I help you?";
     }
 
     chatArea.appendChild(aiB);

@@ -92,8 +92,8 @@ body {
 .brand-titles .brand-name { font-size: 1.05rem; font-weight: 700; font-family: var(--font-display); letter-spacing: 0.05em; }
 .brand-titles .brand-sub { font-size: 0.72rem; color: var(--text-muted); }
 
-.nav-links { display: flex; gap: 1.25rem; }
-.nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+.nav-links { display: flex; gap: 1.15rem; }
+.nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.2s; }
 .nav-link:hover, .nav-link.active { color: #fff; }
 
 .nav-actions { display: flex; align-items: center; gap: 1rem; }
@@ -386,19 +386,22 @@ body {
   display: flex; flex-direction: column; justify-content: space-between;
   transition: all 0.3s ease;
   backdrop-filter: blur(12px);
+  text-align: center;
 }
 .speaker-card-luxe:hover {
   border-color: var(--border-gold);
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
-.speaker-avatar-circle {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #000; font-weight: 800; font-size: 1.4rem;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+.speaker-avatar-frame {
+  width: 90px; height: 90px; border-radius: 50%;
+  margin: 0 auto 1.25rem;
+  overflow: hidden;
+  border: 2px solid var(--border-gold);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+.speaker-avatar-img {
+  width: 100%; height: 100%; object-fit: cover;
 }
 .speaker-name { font-size: 1.2rem; font-weight: 700; font-family: var(--font-display); margin-bottom: 0.3rem; }
 .speaker-role { font-size: 0.82rem; color: var(--gold-main); font-weight: 600; margin-bottom: 0.85rem; }
@@ -407,6 +410,42 @@ body {
   padding: 0.4rem 0.8rem; background: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 6px;
   font-size: 0.72rem; color: var(--accent-blue); font-weight: 600;
+}
+
+/* Technological Convergence Grid */
+.convergence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+.convergence-card {
+  background: var(--card-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+.convergence-card:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+.conv-icon-box {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 1.25rem;
+}
+.bg-indigo-glow { background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); }
+.bg-cyan-glow { background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.3); }
+.bg-emerald-glow { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
+.bg-amber-glow { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); }
+.convergence-card h4 { font-size: 1.15rem; font-weight: 700; font-family: var(--font-display); margin-bottom: 0.6rem; color: #fff; }
+.convergence-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem; }
+.conv-tag {
+  font-size: 0.72rem; font-weight: 600; color: var(--gold-light);
+  padding-top: 0.75rem; border-top: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 /* Books Grid */
