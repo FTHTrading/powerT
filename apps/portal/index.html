@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Powerteam Passport Portal — Pilot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-badge">PTI</div>
+        <div>
+          <h2>Powerteam</h2>
+          <span class="subtext">Passport Pilot</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="home">
+          <span class="nav-icon">🏠</span> Home
+        </button>
+        <button class="nav-item" data-tab="explore">
+          <span class="nav-icon">🧭</span> Explore Catalog
+        </button>
+        <button class="nav-item" data-tab="passport">
+          <span class="nav-icon">🪪</span> My Passport
+        </button>
+        <button class="nav-item" data-tab="activity">
+          <span class="nav-icon">📜</span> Activity & Logs
+        </button>
+        <button class="nav-item" data-tab="support">
+          <span class="nav-icon">🛡️</span> Support & Policy
+        </button>
+      </nav>
+
+      <div class="pilot-badge-box">
+        <span class="dot"></span>
+        <span>Pilot v0.1.0 Beta</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="top-header">
+        <div class="page-title-area">
+          <h1 id="page-title">Member Dashboard</h1>
+          <p id="page-desc">Manage your Powerteam Passport, prepaid credits, and upcoming summits.</p>
+        </div>
+        <div class="member-chip">
+          <span class="member-tier-tag" id="header-tier">Founder Tier</span>
+          <span class="member-email" id="header-email">member@example.com</span>
+        </div>
+      </header>
+
+      <!-- Section: Home -->
+      <section id="tab-home" class="tab-pane active">
+        <div class="metrics-grid">
+          <div class="metric-card gold-card">
+            <span class="metric-label">Available Credit Balance</span>
+            <div class="metric-val" id="home-credit-bal">2,500 <span class="unit">Credits</span></div>
+            <span class="metric-sub">$1.00 USD equivalent value per credit</span>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Passport Status</span>
+            <div class="metric-val status-active" id="home-passport-status">ACTIVE</div>
+            <span class="metric-sub" id="home-passport-expiry">Valid through Aug 28, 2027</span>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Next Eligible Pilot Event</span>
+            <div class="metric-val event-name">CEO Success Summit</div>
+            <span class="metric-sub">Fort Lauderdale • Aug 30–31, 2026</span>
+          </div>
+        </div>
+
+        <div class="action-banner">
+          <div class="banner-text">
+            <h3>Redeem Your VIP Seat for CEO Success Summit</h3>
+            <p>Use 250 PTI Credits for full access including keynotes, VIP networking, and session materials.</p>
+          </div>
+          <button class="btn btn-primary" onclick="switchTab('explore')">View Catalog & Redeem</button>
+        </div>
+      </section>
+
+      <!-- Section: Explore Catalog -->
+      <section id="tab-explore" class="tab-pane">
+        <div class="section-header">
+          <h2>Active Pilot Service Catalog</h2>
+          <p>Redeem your fixed-value credits for approved 2026 event inventory.</p>
+        </div>
+        <div class="catalog-grid" id="catalog-list">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- Section: My Passport -->
+      <section id="tab-passport" class="tab-pane">
+        <div class="passport-container">
+          <div class="digital-passport-card">
+            <div class="pass-header">
+              <div class="pass-logo">POWERTEAM PASSPORT</div>
+              <div class="pass-tier" id="pass-card-tier">FOUNDER PASS</div>
+            </div>
+            <div class="pass-body">
+              <div class="pass-row">
+                <div>
+                  <span class="pass-lbl">CREDENTIAL ID</span>
+                  <span class="pass-val" id="pass-card-id">PTI-2026-000001</span>
+                </div>
+                <div>
+                  <span class="pass-lbl">STATUS</span>
+                  <span class="pass-val text-green" id="pass-card-status">ACTIVE</span>
+                </div>
+              </div>
+              <div class="pass-row">
+                <div>
+                  <span class="pass-lbl">DISCOUNT BENEFIT</span>
+                  <span class="pass-val">10% Lifetime</span>
+                </div>
+                <div>
+                  <span class="pass-lbl">AI CONCIERGE</span>
+                  <span class="pass-val">ENABLED</span>
+                </div>
+              </div>
+            </div>
+            <div class="pass-qr-box">
+              <div class="qr-mock">[ QR CODE CHECK-IN PROOF ]</div>
+              <span class="qr-sub">Scan at event registration desk for attendance badge</span>
+            </div>
+          </div>
+
+          <div class="recovery-box">
+            <h3>Credential & Account Recovery</h3>
+            <p>If you lose access to your primary wallet, our 2-of-3 Safe multisig administrative workflow can revoke and reissue your non-transferable credential.</p>
+            <button class="btn btn-outline" onclick="triggerRecoveryModal()">Initiate Account Recovery</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Activity & Logs -->
+      <section id="tab-activity" class="tab-pane">
+        <div class="section-header">
+          <h2>Member Activity & Ledger History</h2>
+          <p>Immutable record of credit issuances, catalog redemptions, and event check-ins.</p>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Activity Type</th>
+                <th>SKU / Reference</th>
+                <th>Credit Delta</th>
+                <th>Receipt Hash</th>
+              </tr>
+            </thead>
+            <tbody id="activity-table-body">
+              <!-- Populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section: Support & Policy -->
+      <section id="tab-support" class="tab-pane">
+        <div class="support-card">
+          <h2>Pilot Terms & Consumer Notice</h2>
+          <blockquote class="policy-quote">
+            “PTI Credits are prepaid credits for eligible Powerteam products and events. They are not cash, a bank account, a stablecoin, or an investment. They cannot be transferred or redeemed for cash during this pilot.”
+          </blockquote>
+          <p>All redemption items are subject to capacity, organizer confirmation, and published refund policies.</p>
+          <div class="contact-box">
+            <h3>Need Assistance?</h3>
+            <p>Contact the pilot concierge team at <code>support@powert.io</code></p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

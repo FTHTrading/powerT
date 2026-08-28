@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "hardhat test",
-    "compile": "hardhat compile"
+    "compile": "hardhat compile",
+    "start:api": "node services/ledger-api/src/server.js",
+    "start:reconciliation": "node services/reconciliation-worker/index.js"
   },
   "keywords": [
     "rwa",
@@ -18,6 +20,11 @@
   ],
   "author": "FTHTrading",
   "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.22.0"
