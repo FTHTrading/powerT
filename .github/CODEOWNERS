@@ -1,0 +1,18 @@
+# Default repository review owner
+* @FTHTrading
+
+# Smart-contract and deployment-sensitive areas
+/contracts/ @FTHTrading
+/hardhat.config.js @FTHTrading
+/package.json @FTHTrading
+/package-lock.json @FTHTrading
+
+# Ledger, payment, credential, and agent services
+/services/ @FTHTrading
+/apps/admin/ @FTHTrading
+/apps/portal/ @FTHTrading
+
+# Commercial, privacy, security, and compliance material
+/config/ @FTHTrading
+/docs/ @FTHTrading
+/SECURITY.md @FTHTrading
