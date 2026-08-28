@@ -41,6 +41,7 @@ export default {
       '/assets/sharon_lechter.jpg': { file: 'sharon_lechter.jpg', type: 'image/jpeg' },
       '/assets/forbes_riley.jpg': { file: 'forbes_riley.jpg', type: 'image/jpeg' },
       '/assets/austin_walsh.jpg': { file: 'austin_walsh.jpg', type: 'image/jpeg' },
+      '/assets/book_unykorn_sovereign.jpg': { file: 'book_unykorn_sovereign.jpg', type: 'image/jpeg' },
       '/assets/book_the_obvious.jpg': { file: 'book_the_obvious.jpg', type: 'image/jpeg' },
       '/assets/book_act_now.jpg': { file: 'book_act_now.jpg', type: 'image/jpeg' },
       '/assets/book_chicken_soup.jpg': { file: 'book_chicken_soup.jpg', type: 'image/jpeg' },

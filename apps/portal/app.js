@@ -68,6 +68,15 @@ const speakersList = [
 
 const booksList = [
   {
+    title: "UNYKORN: The Sovereign Enterprise OS",
+    author: "Kevan Burns (Forewords: Kevin Harrington & Bill Walsh)",
+    category: "scaling",
+    image: "assets/book_unykorn_sovereign.jpg",
+    desc: "The definitive architecture of non-custodial capital, token-gated publishing, and eliminating middleman platform taxes through pure code.",
+    web3Utility: "NFC Hardcover Tap • Soulbound Reader Passport • $500 BD Credit Rail",
+    status: "OCTOBER 2027 GLOBAL LAUNCH"
+  },
+  {
     title: "The Obvious",
     author: "Bill Walsh",
     category: "scaling",
