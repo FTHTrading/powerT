@@ -746,9 +746,111 @@ body {
 .footer-col a:hover { color: #fff; }
 .footer-bottom { max-width: 1320px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border-subtle); text-align: center; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
 
-/* Responsive */
-@media (max-width: 960px) {
-  .hero-title { font-size: 2.5rem; }
-  .passport-showcase-grid, .media-showcase-grid, .vault-panel-grid, .footer-wrapper { grid-template-columns: 1fr; }
+/* Responsive Layout Engine: Desktop, iPad/Tablet, and Mobile */
+@media (max-width: 1200px) {
+  .navbar-wrapper, .section-container, .footer-wrapper {
+    max-width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .hero-title { font-size: 3.2rem; }
+}
+
+@media (max-width: 1024px) {
+  /* iPad / Tablet Layout */
+  .hero-section { padding: 7rem 1.5rem 3.5rem; }
+  .hero-title { font-size: 2.8rem; }
+  .passport-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .card-3d {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .convergence-grid, .speakers-grid, .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .pricing-tiers-grid {
+    grid-template-columns: 1fr;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .media-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .vault-panel-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Small Tablet & Large Phones */
+  .navbar-wrapper {
+    padding: 0.85rem 1.25rem;
+  }
   .nav-links { display: none; }
+  .hero-title { font-size: 2.3rem; }
+  .hero-description { font-size: 1rem; }
+  .hero-stats-strip {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+    width: 100%;
+  }
+  .stat-divider { display: none; }
+  .convergence-grid, .speakers-grid, .books-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile Phones (iPhone / Android) */
+  .hero-section { padding: 6rem 1rem 3rem; }
+  .hero-title { font-size: 1.9rem; line-height: 1.2; }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-large {
+    width: 100%;
+    padding: 0.9rem 1.25rem;
+    font-size: 0.95rem;
+  }
+  .card-3d {
+    height: auto;
+    min-height: 310px;
+    padding: 1.25rem;
+  }
+  .card-details-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .section-container {
+    padding: 4rem 1rem;
+  }
+  .section-title {
+    font-size: 1.85rem;
+  }
+  .pricing-card {
+    padding: 2rem 1.25rem;
+  }
+  .vault-metrics-card, .vault-info-card {
+    padding: 1.75rem 1.25rem;
+  }
+  .vault-big-num {
+    font-size: 2.2rem;
+  }
+  .modal-card {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
 }
