@@ -367,7 +367,20 @@ body {
   background: var(--card-glass); border: 1px solid var(--border-subtle);
   border-radius: 12px; backdrop-filter: blur(10px);
 }
-.benefit-icon { font-size: 1.4rem; }
+.benefit-bullet {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
 .benefit-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; }
 .benefit-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
 .cta-box-glass { margin-top: 1rem; }

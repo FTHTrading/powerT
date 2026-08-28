@@ -5,56 +5,56 @@ const speakersList = [
     role: "Founder & CEO, Powerteam International",
     image: "assets/bill_walsh.jpg",
     bio: "Bestselling author of 'The Obvious', venture architect behind 500+ scalable enterprise scaling programs.",
-    tokenBadge: "👑 Rainmaker Credit Host"
+    tokenBadge: "Rainmaker Credit Host"
   },
   {
     name: "Kevin Harrington",
     role: "Original Shark on Shark Tank & Pioneer of As Seen On TV",
     image: "assets/kevin_harrington.jpg",
     bio: "Launched 500+ products totaling $6B+ in sales. Bestselling author of 'Act Now' and 'Key to the Vault'.",
-    tokenBadge: "🦈 Deal Syndication Rail"
+    tokenBadge: "Deal Syndication Rail"
   },
   {
     name: "Les Brown",
     role: "Legendary Motivational Speaker & Speaker Coach",
     image: "assets/les_brown.jpg",
     bio: "World-renowned keynote master, coach to top platform speakers, and icon of personal achievement.",
-    tokenBadge: "🎤 Mentorship Badging SBT"
+    tokenBadge: "Mentorship Badging SBT"
   },
   {
     name: "Brian Tracy",
     role: "Chairman & CEO, Brian Tracy International",
     image: "assets/brian_tracy.jpg",
     bio: "Consulted for 1,000+ companies, author of 80+ bestsellers including 'Eat That Frog!' and 'Psychology of Selling'.",
-    tokenBadge: "📈 Sales Certification SBT"
+    tokenBadge: "Sales Certification SBT"
   },
   {
     name: "Mark Victor Hansen",
     role: "Co-Creator of 'Chicken Soup for the Soul'",
     image: "assets/mark_victor_hansen.jpg",
     bio: "500M+ books sold globally, Guinness World Record holder, co-author of 'Ask!' and publishing titan.",
-    tokenBadge: "📚 Publishing & Media Vault"
+    tokenBadge: "Publishing & Media Vault"
   },
   {
     name: "Sharon Lechter",
     role: "Co-Author of 'Rich Dad Poor Dad' & Financial Authority",
     image: "assets/sharon_lechter.jpg",
     bio: "Presidential Advisor on Financial Literacy, CPA, and co-author of 'Think and Grow Rich for Women'.",
-    tokenBadge: "💼 Cashflow Mastermind SBT"
+    tokenBadge: "Cashflow Mastermind SBT"
   },
   {
     name: "Forbes Riley",
     role: "Infomercial Queen & Pitch Communication Master",
     image: "assets/forbes_riley.jpg",
     bio: "National Fitness Hall of Fame inductee, $2.5B+ in TV product sales, and creator of the Pitch Perfection method.",
-    tokenBadge: "⚡ Pitch Perfection Masterclass"
+    tokenBadge: "Pitch Perfection Masterclass"
   },
   {
     name: "Austin Walsh",
     role: "Digital Marketing Expert & Funnel Architect",
     image: "assets/austin_walsh.jpg",
     bio: "Direct-response conversion strategist and architect of multimillion-dollar automated traffic funnels.",
-    tokenBadge: "🚀 Digital Funnel Modules"
+    tokenBadge: "Digital Funnel Modules"
   }
 ];
 
@@ -62,44 +62,38 @@ const booksList = [
   {
     title: "The Obvious",
     author: "Bill Walsh",
-    icon: "📘",
     desc: "The definitive playbook for business acceleration, venture scaling, and converting ideas into high-ticket enterprise revenue.",
-    status: "● PROPOSED MEMBER ACCESS"
+    status: "PROPOSED MEMBER ACCESS"
   },
   {
     title: "Act Now: Turn Ideas into Millions",
     author: "Kevin Harrington",
-    icon: "🦈",
     desc: "How the Original Shark spots billion-dollar opportunities, negotiates deal terms, and structures massive consumer distribution.",
-    status: "● PROPOSED MEMBER ACCESS"
+    status: "PROPOSED MEMBER ACCESS"
   },
   {
     title: "Chicken Soup for the Soul",
     author: "Mark Victor Hansen",
-    icon: "📕",
     desc: "The record-breaking global publishing phenomenon with over 500 million copies sold and timeless wisdom on human potential.",
-    status: "● PROPOSED MEMBER ACCESS"
+    status: "PROPOSED MEMBER ACCESS"
   },
   {
     title: "Eat That Frog! & Sales Psychology",
     author: "Brian Tracy",
-    icon: "📗",
     desc: "The premier systems for high-output time management, peak performance habits, and closing high-ticket transactions.",
-    status: "● PROPOSED MEMBER ACCESS"
+    status: "PROPOSED MEMBER ACCESS"
   },
   {
     title: "Think and Grow Rich for Women",
     author: "Sharon Lechter",
-    icon: "📙",
     desc: "Mastering financial independence, building asset portfolios, and applying Napoleonic wealth principles to modern enterprise.",
-    status: "● PROPOSED MEMBER ACCESS"
+    status: "PROPOSED MEMBER ACCESS"
   },
   {
     title: "Pitch Perfection: The Art of Influence",
     author: "Forbes Riley",
-    icon: "🎙️",
     desc: "The communication blueprint that generated $2.5 Billion in sales across television and live keynote stages.",
-    status: "● PROPOSED MEMBER ACCESS"
+    status: "PROPOSED MEMBER ACCESS"
   }
 ];
 
@@ -195,13 +189,12 @@ function renderBooks() {
     card.className = "book-card-luxe";
     card.innerHTML = `
       <div>
-        <div class="book-icon">${b.icon}</div>
         <div class="book-title">${b.title}</div>
         <div class="book-author">By ${b.author}</div>
         <div class="book-desc">${b.desc}</div>
       </div>
       <div class="book-status">
-        <span>📖</span> ${b.status}
+        ${b.status}
       </div>
     `;
     container.appendChild(card);
@@ -223,8 +216,8 @@ function renderCatalog() {
           <span style="font-size: 0.75rem; color: #94a3b8;">SKU: ${item.sku}</span>
         </div>
         <h3>${item.title}</h3>
-        <div class="venue-line">📍 ${item.venue}</div>
-        <div class="venue-line" style="color: #60a5fa; font-weight: 500;">📅 ${item.date}</div>
+        <div class="venue-line">Venue: ${item.venue}</div>
+        <div class="venue-line" style="color: #60a5fa; font-weight: 500;">Date: ${item.date}</div>
         <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin-bottom: 1.5rem;">${item.description}</p>
       </div>
 
@@ -262,12 +255,12 @@ function submitWaitlistForm(e) {
   e.preventDefault();
   const name = document.getElementById("waitlist-name").value;
   const email = document.getElementById("waitlist-email").value;
-  alert(`Thank you, ${name}! Your interest has been recorded.\n\nWe will notify ${email} with confirmed program dates, terms, and pilot invitation details.`);
+  alert(`Thank you, ${name}. Your interest has been recorded.\n\nWe will notify ${email} with confirmed program dates, terms, and pilot invitation details.`);
   closeWaitlistModal();
 }
 
 function openActivityModal() {
-  alert("📜 PILOT ACTIVITY RECORDS (DEMO):\n\n• Demo Record #REC-001: Sample 2,500 Credits Initialized\n• Status: Controlled Demonstration State\n• Cryptographic Verification: In Staging Development");
+  alert("PILOT ACTIVITY RECORDS (DEMO):\n\n• Demo Record #REC-001: Sample 2,500 Credits Initialized\n• Status: Controlled Demonstration State\n• Cryptographic Verification: In Staging Development");
 }
 
 function showFullQRModal() {
@@ -306,7 +299,7 @@ function sendConciergeMessage() {
 
     const lower = text.toLowerCase();
     if (lower.includes("convergence") || lower.includes("bitgo") || lower.includes("atomic") || lower.includes("wallet") || lower.includes("blockchain")) {
-      aiB.innerText = "Our system converges four pillars: (1) MCP AI Agents for 24/7 routing, (2) Atomic Wallets with 15-min rotating QR badges, (3) Blockchain smart rails for automated 50/50 stage splits, and (4) BitGo Qualified Custody for institutional MPC multi-sig cold storage.";
+      aiB.innerText = "Our system converges four pillars: (1) MCP AI Agents for 24/7 routing, (2) Atomic Wallets with 15-minute rotating QR badges, (3) Blockchain smart rails for automated 50/50 stage splits, and (4) BitGo Qualified Custody for institutional MPC multi-signature cold storage.";
     } else if (lower.includes("ceo") || lower.includes("dania") || lower.includes("fort lauderdale")) {
       aiB.innerText = "The Fort Lauderdale CEO Success Summit is listed as a proposed pilot event. Final dates, venue capacity, and participation terms will be published upon approved pilot launch.";
     } else if (lower.includes("harrington") || lower.includes("shark")) {
