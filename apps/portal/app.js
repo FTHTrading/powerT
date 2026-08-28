@@ -70,6 +70,7 @@ const booksList = [
   {
     title: "The Obvious",
     author: "Bill Walsh",
+    category: "scaling",
     image: "assets/book_the_obvious.jpg",
     desc: "The definitive playbook for business acceleration, venture scaling, and converting ideas into high-ticket enterprise revenue.",
     web3Utility: "Demonstration of authorized digital edition access and member curriculum gating.",
@@ -78,6 +79,7 @@ const booksList = [
   {
     title: "Act Now: Turn Ideas into Millions",
     author: "Kevin Harrington",
+    category: "marketing",
     image: "assets/book_act_now.jpg",
     desc: "How the Original Shark spots billion-dollar opportunities, negotiates deal terms, and structures massive consumer distribution.",
     web3Utility: "Demonstration of deal-intake gating and verified reader entitlement records.",
@@ -86,6 +88,7 @@ const booksList = [
   {
     title: "Chicken Soup for the Soul",
     author: "Mark Victor Hansen",
+    category: "leadership",
     image: "assets/book_chicken_soup.jpg",
     desc: "The record-breaking global publishing phenomenon with over 500 million copies sold and timeless wisdom on human potential.",
     web3Utility: "Demonstration of digital library rights tracking and global community pass access.",
@@ -94,6 +97,7 @@ const booksList = [
   {
     title: "Eat That Frog! & Sales Psychology",
     author: "Brian Tracy",
+    category: "leadership",
     image: "assets/book_eat_that_frog.jpg",
     desc: "The premier systems for high-output time management, peak performance habits, and closing high-ticket transactions.",
     web3Utility: "Demonstration of course-progress tracking and verified completion credentials.",
@@ -102,6 +106,7 @@ const booksList = [
   {
     title: "Think and Grow Rich for Women",
     author: "Sharon Lechter",
+    category: "wealth",
     image: "assets/book_sharon_lechter.jpg",
     desc: "Mastering financial independence, building asset portfolios, and applying Napoleonic wealth principles to modern enterprise.",
     web3Utility: "Demonstration of financial cohort access and verified mastermind entitlements.",
@@ -110,12 +115,23 @@ const booksList = [
   {
     title: "Pitch Perfection: The Art of Influence",
     author: "Forbes Riley",
+    category: "marketing",
     image: "assets/book_pitch_perfection.jpg",
     desc: "The communication blueprint that generated $2.5 Billion in sales across television and live keynote stages.",
     web3Utility: "Demonstration of pitch-training workshop gating and broadcast studio scheduling.",
     status: "ILLUSTRATIVE CURRICULUM"
   }
 ];
+
+let activeBookFilter = 'all';
+
+function filterBooks(cat) {
+  activeBookFilter = cat;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(`tab-${cat}`);
+  if (btn) btn.classList.add('active');
+  renderBooks();
+}
 
 const catalogItems = [
   {
@@ -205,7 +221,11 @@ function renderBooks() {
   if (!container) return;
   container.innerHTML = "";
 
-  booksList.forEach(b => {
+  const filtered = activeBookFilter === 'all'
+    ? booksList
+    : booksList.filter(b => b.category === activeBookFilter);
+
+  filtered.forEach(b => {
     const card = document.createElement("div");
     card.className = "book-card-luxe";
     card.innerHTML = `

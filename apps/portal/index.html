@@ -307,6 +307,15 @@
       Demonstration of how client-approved publications, training materials, and masterclasses could be token-gated or distributed in a modern portal.
     </p>
 
+    <!-- Resource Filter Tabs -->
+    <div class="vault-tabs-row">
+      <button class="tab-btn active" id="tab-all" onclick="filterBooks('all')">ALL RESOURCES</button>
+      <button class="tab-btn" id="tab-scaling" onclick="filterBooks('scaling')">SCALING & VENTURE</button>
+      <button class="tab-btn" id="tab-marketing" onclick="filterBooks('marketing')">SALES & MARKETING</button>
+      <button class="tab-btn" id="tab-wealth" onclick="filterBooks('wealth')">WEALTH & ASSETS</button>
+      <button class="tab-btn" id="tab-leadership" onclick="filterBooks('leadership')">LEADERSHIP & MASTERY</button>
+    </div>
+
     <div class="books-grid" id="books-grid-container">
       <!-- Populated dynamically by app.js -->
     </div>
