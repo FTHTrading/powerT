@@ -1,0 +1,29 @@
+{
+  "pilotName": "Powerteam Passport Pilot",
+  "release": "v0.1.0-passport-pilot",
+  "status": "internal",
+  "maxMembers": 100,
+  "allowedCatalogSkus": [
+    "CEO-SUMMIT-2026-FTL"
+  ],
+  "enabledFeatures": {
+    "passportIssuance": true,
+    "creditPurchases": true,
+    "creditRedemptions": true,
+    "attendanceCredentials": true,
+    "aiConciergeReadOnly": true,
+    "walletTransfers": false,
+    "cashRedemptions": false,
+    "stablecoinConversion": false,
+    "secondaryMarket": false,
+    "investorPortal": false,
+    "revenueNotes": false,
+    "automatedPayouts": false
+  },
+  "approvalPolicy": {
+    "manualCreditAdjustmentRequires": 2,
+    "refundRequires": 2,
+    "catalogChangeRequires": 2,
+    "credentialRecoveryRequires": 1
+  }
+}
