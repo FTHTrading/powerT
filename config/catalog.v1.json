@@ -5,39 +5,58 @@
   "items": [
     {
       "sku": "CEO-SUMMIT-2026-FTL",
-      "title": "CEO Success Summit — Fort Lauderdale",
+      "title": "CEO Success Summit — Fort Lauderdale (Aug 31, 2026)",
+      "venue": "Le Méridien Dania Beach (12:00 PM - 3:00 PM)",
       "creditPrice": 250,
       "cashPrice": 250,
       "inventory": 100,
-      "redeemableUntil": "2026-08-30T23:59:59-04:00",
-      "refundPolicyId": "EVENT_STANDARD_V1"
+      "redeemableUntil": "2026-08-31T12:00:00-04:00",
+      "refundPolicyId": "EVENT_STANDARD_V1",
+      "requiresOrganizerConfirmation": true
     },
     {
       "sku": "DIGITAL-SUCCESS-2026-SEP",
-      "title": "Digital Success Summit — September",
+      "title": "Digital Success Summit (Sep 7, 2026)",
+      "venue": "Online Virtual Access & Interactive Sessions",
       "creditPrice": 99,
       "cashPrice": 99,
       "inventory": 1000,
-      "redeemableUntil": "2026-09-06T23:59:59-04:00",
-      "refundPolicyId": "DIGITAL_STANDARD_V1"
+      "redeemableUntil": "2026-09-07T23:59:59-04:00",
+      "refundPolicyId": "DIGITAL_STANDARD_V1",
+      "requiresOrganizerConfirmation": false
     },
     {
-      "sku": "RAINMAKER-SUMMIT-2026",
-      "title": "Rainmaker Business Summit — General Admission",
+      "sku": "RAINMAKER-SUMMIT-2026-ORL",
+      "title": "Rainmaker Business Summit — Orlando (Sep 18–20, 2026)",
+      "venue": "Orlando Convention Center / Host Hotel",
       "creditPrice": 495,
       "cashPrice": 495,
       "inventory": 250,
-      "redeemableUntil": "2026-10-15T23:59:59-04:00",
-      "refundPolicyId": "EVENT_STANDARD_V1"
+      "redeemableUntil": "2026-09-18T09:00:00-04:00",
+      "refundPolicyId": "EVENT_MULTI_DAY_V1",
+      "requiresOrganizerConfirmation": true
     },
     {
-      "sku": "ICON-SPEAKER-PROGRAM-2026",
-      "title": "Icon Speaker Accelerator — Cohort Access",
+      "sku": "ICON-SPEAKER-2026-ORL",
+      "title": "Icon Speaker Program — Orlando (Sep 23, 2026)",
+      "venue": "Powerteam Mastery Studio & Stage",
       "creditPrice": 1500,
       "cashPrice": 1500,
       "inventory": 30,
-      "redeemableUntil": "2026-11-01T23:59:59-04:00",
-      "refundPolicyId": "TRAINING_COHORT_V1"
+      "redeemableUntil": "2026-09-23T09:00:00-04:00",
+      "refundPolicyId": "TRAINING_COHORT_V1",
+      "requiresOrganizerConfirmation": true
+    },
+    {
+      "sku": "GLOBAL-MILLIONAIRES-2026-ORL",
+      "title": "Global Millionaires Summit — Orlando (Oct 22–25, 2026)",
+      "venue": "Orlando Executive Resort & Convention Arena",
+      "creditPrice": 995,
+      "cashPrice": 995,
+      "inventory": 500,
+      "redeemableUntil": "2026-10-22T09:00:00-04:00",
+      "refundPolicyId": "EVENT_MULTI_DAY_V1",
+      "requiresOrganizerConfirmation": true
     }
   ]
 }

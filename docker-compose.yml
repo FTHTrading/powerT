@@ -10,7 +10,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./services/ledger-api/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./services/ledger-api/migrations:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U powert_app -d powert"]
       interval: 5s

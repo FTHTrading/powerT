@@ -1,10 +1,15 @@
 {
   "pilotName": "Powerteam Passport Pilot",
   "release": "v0.1.0-passport-pilot",
-  "status": "internal",
+  "status": "internal-rehearsal",
   "maxMembers": 100,
+  "primaryPilotSku": "CEO-SUMMIT-2026-FTL",
   "allowedCatalogSkus": [
-    "CEO-SUMMIT-2026-FTL"
+    "CEO-SUMMIT-2026-FTL",
+    "DIGITAL-SUCCESS-2026-SEP",
+    "RAINMAKER-SUMMIT-2026-ORL",
+    "ICON-SPEAKER-2026-ORL",
+    "GLOBAL-MILLIONAIRES-2026-ORL"
   ],
   "enabledFeatures": {
     "passportIssuance": true,

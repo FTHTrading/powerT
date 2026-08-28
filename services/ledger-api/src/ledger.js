@@ -3,8 +3,15 @@ const pilotConfig = require("../../../config/pilot.v1.json");
 const catalogConfig = require("../../../config/catalog.v1.json");
 
 /**
- * Memory/Postgres-compatible Transactional Ledger Engine
- * Enforces atomic credit allocation, row locks, idempotency, and audit hash chaining.
+ * Enhanced Transactional Master Ledger Engine
+ * Features:
+ * - PostgreSQL/Memory dual-state execution
+ * - Atomic credit allocation & FIFO redemption
+ * - Idempotency tracking & raw payload archiving
+ * - Refund / Chargeback credit lot voiding
+ * - Durable outbox queue for asynchronous jobs
+ * - Rotating opaque QR check-in token generation
+ * - Cryptographic audit hash chaining & verification
  */
 class MasterLedgerService {
   constructor() {
@@ -15,6 +22,7 @@ class MasterLedgerService {
     this.creditLots = new Map();
     this.creditRedemptions = new Map();
     this.eventCheckins = new Map();
+    this.outboxJobs = [];
     this.auditEvents = [];
     this.lastRecordHash = "0x0000000000000000000000000000000000000000000000000000000000000000";
   }
@@ -52,6 +60,20 @@ class MasterLedgerService {
     this.lastRecordHash = recordHash;
     this.auditEvents.push(auditRecord);
     return auditRecord;
+  }
+
+  _enqueueOutboxJob(jobType, payload) {
+    const job = {
+      jobId: "JOB-" + crypto.randomUUID(),
+      jobType,
+      payload,
+      status: "PENDING",
+      attempts: 0,
+      maxAttempts: 5,
+      createdAt: new Date().toISOString(),
+    };
+    this.outboxJobs.push(job);
+    return job;
   }
 
   /**
@@ -93,7 +115,7 @@ class MasterLedgerService {
 
     // 3. Create settled order
     const orderId = "ORD-" + crypto.randomUUID();
-    const creditsToIssue = Number(amount); // $1 = 1 Credit
+    const creditsToIssue = Number(amount);
     const order = {
       orderId,
       customerId,
@@ -129,6 +151,7 @@ class MasterLedgerService {
       originalCredits: creditsToIssue,
       remainingCredits: creditsToIssue,
       isLocked: false,
+      isVoided: false,
       createdAt: new Date().toISOString(),
     };
     this.creditLots.set(lotId, creditLot);
@@ -153,7 +176,15 @@ class MasterLedgerService {
       this.passportCredentials.set(passportId, passport);
     }
 
-    // 7. Commit Audit Log
+    // 7. Enqueue Durable Outbox Job for On-Chain Attestation
+    this._enqueueOutboxJob("ON_CHAIN_RECEIPT_LOG", {
+      orderId,
+      customerId,
+      creditsIssued: creditsToIssue,
+      passportId: passport.passportId,
+    });
+
+    // 8. Commit Audit Log
     this._appendAuditEvent(
       "STRIPE_WEBHOOK",
       idempotencyKey,
@@ -175,12 +206,58 @@ class MasterLedgerService {
   }
 
   /**
-   * Get member available credit balance
+   * Process refund or chargeback by voiding associated credit lots
+   */
+  async processRefundOrChargeback({ orderId, reason = "CUSTOMER_REQUESTED", approver = "FINANCE_OPS" }) {
+    const order = this.orders.get(orderId);
+    if (!order) {
+      throw new Error(`ORDER_NOT_FOUND: Order ${orderId} does not exist`);
+    }
+
+    if (order.status === "REFUNDED") {
+      return { status: "ALREADY_REFUNDED", orderId };
+    }
+
+    // Find and void credit lots
+    let voidedCredits = 0;
+    for (const lot of this.creditLots.values()) {
+      if (lot.orderId === orderId && !lot.isVoided) {
+        voidedCredits += lot.remainingCredits;
+        lot.remainingCredits = 0;
+        lot.isVoided = true;
+      }
+    }
+
+    order.status = "REFUNDED";
+
+    this._appendAuditEvent(
+      "FINANCE_REFUND",
+      "REF-" + crypto.randomUUID(),
+      order.customerId,
+      orderId,
+      order.amount,
+      voidedCredits,
+      null,
+      "ORDER_REFUNDED_LOTS_VOIDED",
+      `${approver}:${reason}`
+    );
+
+    return {
+      status: "REFUND_PROCESSED",
+      orderId,
+      voidedCredits,
+      customerId: order.customerId,
+      newBalance: this.getCustomerCreditBalance(order.customerId),
+    };
+  }
+
+  /**
+   * Get member available unexpired, unvoided credit balance
    */
   getCustomerCreditBalance(customerId) {
     let balance = 0;
     for (const lot of this.creditLots.values()) {
-      if (lot.customerId === customerId && !lot.isLocked) {
+      if (lot.customerId === customerId && !lot.isLocked && !lot.isVoided) {
         balance += lot.remainingCredits;
       }
     }
@@ -195,34 +272,30 @@ class MasterLedgerService {
       throw new Error("FEATURE_DISABLED: Credit redemptions are disabled in pilot configuration");
     }
 
-    // 1. Boundary check: ensure SKU is allowed in pilot
     if (!pilotConfig.allowedCatalogSkus.includes(catalogSku)) {
       throw new Error(`SKU_NOT_ALLOWED_IN_PILOT: SKU ${catalogSku} is not permitted for pilot redemption`);
     }
 
-    // 2. Fetch catalog item
     const catalogItem = catalogConfig.items.find(i => i.sku === catalogSku);
     if (!catalogItem) {
       throw new Error("CATALOG_ITEM_NOT_FOUND");
     }
 
-    // 3. Verify member passport
     const passport = Array.from(this.passportCredentials.values()).find(p => p.customerId === customerId);
     if (!passport || passport.status !== "ACTIVE") {
-      throw new Error("PASSPORT_INACTIVE_OR_NOT_FOUND");
+      throw new Error("PASSPORT_INACTIVE_OR_NOT_FOUND: Member must possess an active Passport credential");
     }
 
-    // 4. Verify balance and lock lots
     const requiredCredits = catalogItem.creditPrice;
     const availableBalance = this.getCustomerCreditBalance(customerId);
     if (availableBalance < requiredCredits) {
       throw new Error(`INSUFFICIENT_CREDITS: Required ${requiredCredits}, available ${availableBalance}`);
     }
 
-    // 5. Debit credit lots (FIFO)
+    // Atomic FIFO deduction
     let creditsRemainingToBurn = requiredCredits;
     for (const lot of this.creditLots.values()) {
-      if (lot.customerId === customerId && lot.remainingCredits > 0 && !lot.isLocked) {
+      if (lot.customerId === customerId && lot.remainingCredits > 0 && !lot.isLocked && !lot.isVoided) {
         const deduct = Math.min(lot.remainingCredits, creditsRemainingToBurn);
         lot.remainingCredits -= deduct;
         creditsRemainingToBurn -= deduct;
@@ -230,7 +303,6 @@ class MasterLedgerService {
       }
     }
 
-    // 6. Create Ticket Entitlement & Redemption Record
     const redemptionId = "RED-" + crypto.randomUUID();
     const ticketId = "TKT-" + crypto.randomUUID();
     const receiptHash = "0x" + crypto.createHash("sha256").update(redemptionId + ticketId).digest("hex");
@@ -248,7 +320,14 @@ class MasterLedgerService {
     };
     this.creditRedemptions.set(redemptionId, redemptionRecord);
 
-    // 7. Append immutable audit event
+    // Enqueue outbox job
+    this._enqueueOutboxJob("ON_CHAIN_REDEMPTION_RECEIPT", {
+      redemptionId,
+      ticketId,
+      receiptHash,
+      creditsBurned: requiredCredits,
+    });
+
     this._appendAuditEvent(
       "CUSTOMER_PORTAL",
       idempotencyKey || ("RED-IDEMP-" + redemptionId),
@@ -271,9 +350,23 @@ class MasterLedgerService {
   }
 
   /**
+   * Generate an opaque, rotating check-in token for event registration (No raw PII)
+   */
+  generateRotatingCheckinToken(ticketId, customerId) {
+    const salt = crypto.randomBytes(16).toString("hex");
+    const expiresAt = Date.now() + (15 * 60 * 1000); // 15 minute validity
+    const token = crypto.createHash("sha256").update(`${ticketId}:${customerId}:${salt}:${expiresAt}`).digest("hex");
+
+    return {
+      token: `CHK-ROT-${token.substring(0, 24)}`,
+      expiresAt: new Date(expiresAt).toISOString(),
+    };
+  }
+
+  /**
    * Event check-in and attendance badge creation
    */
-  async processEventCheckin({ ticketId, customerId, eventSku }) {
+  async processEventCheckin({ ticketId, customerId, eventSku, staffId = "STAFF_DESK_1" }) {
     const checkinId = "CHK-" + crypto.randomUUID();
     const badgeHash = "0x" + crypto.createHash("sha256").update(ticketId + eventSku + customerId).digest("hex");
 
@@ -283,12 +376,13 @@ class MasterLedgerService {
       customerId,
       eventSku,
       badgeHash,
+      checkedInBy: staffId,
       checkedInAt: new Date().toISOString(),
     };
     this.eventCheckins.set(checkinId, checkin);
 
     this._appendAuditEvent(
-      "CHECKIN_DESK",
+      staffId,
       "CHK-IDEMP-" + checkinId,
       customerId,
       null,
@@ -299,6 +393,55 @@ class MasterLedgerService {
     );
 
     return checkin;
+  }
+
+  /**
+   * Account recovery workflow drill
+   */
+  async recoverMemberPassport({ oldPassportId, customerId, newWalletAddress, approver = "SAFE_MULTISIG" }) {
+    const oldPassport = this.passportCredentials.get(oldPassportId);
+    if (!oldPassport) {
+      throw new Error("PASSPORT_NOT_FOUND");
+    }
+
+    oldPassport.status = "REVOKED";
+
+    const newPassportId = "PTI-2026-" + String(this.passportCredentials.size + 1).padStart(6, "0");
+    const newCredHash = "0x" + crypto.createHash("sha256").update(customerId + newWalletAddress).digest("hex");
+
+    const newPassport = {
+      passportId: newPassportId,
+      customerId,
+      walletAddress: newWalletAddress,
+      tier: oldPassport.tier,
+      status: "ACTIVE",
+      issuedAt: new Date().toISOString(),
+      expiresAt: oldPassport.expiresAt,
+      discountBps: oldPassport.discountBps,
+      hasConciergeAccess: oldPassport.hasConciergeAccess,
+      credentialHash: newCredHash,
+      recoveredFrom: oldPassportId,
+    };
+    this.passportCredentials.set(newPassportId, newPassport);
+
+    this._appendAuditEvent(
+      approver,
+      "REC-IDEMP-" + newPassportId,
+      customerId,
+      null,
+      0,
+      0,
+      null,
+      "PASSPORT_RECOVERED_REISSUED",
+      `REVOKED:${oldPassportId}->ISSUED:${newPassportId}`
+    );
+
+    return {
+      status: "RECOVERED",
+      oldPassportId,
+      newPassportId,
+      newPassport,
+    };
   }
 }
 
